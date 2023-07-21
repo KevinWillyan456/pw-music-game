@@ -93,6 +93,8 @@ body {
   display: flex;
   align-items: flex-end;
   justify-content: center;
+  position: relative;
+  overflow: hidden;
 }
 .main-container .container .trails {
   width: 460px;
@@ -128,4 +130,28 @@ body {
   border-radius: 5px;
   border: 2px solid #000;
   background: #442ae2;
+}
+.main-container .container .target {
+  position: absolute;
+  width: 100px;
+  height: 70px;
+  border-radius: 5px;
+  border: 2px solid #000;
+  top: 0px;
+}
+.main-container .container .target.target-1 {
+  background: #4be951;
+  left: 50px;
+}
+.main-container .container .target.target-2 {
+  background: #f54141;
+  left: 170px;
+}
+.main-container .container .target.target-3 {
+  background: #e6f445;
+  left: 290px;
+}
+.main-container .container .target.target-4 {
+  background: #5c43f8;
+  left: 410px;
 }

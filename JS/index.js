@@ -8,12 +8,81 @@ let target2 = document.querySelectorAll(".target-2");
 let target3 = document.querySelectorAll(".target-3");
 let target4 = document.querySelectorAll(".target-4");
 
+let targets = document.querySelectorAll(".target");
+
 let livePoints = 100;
 
 const containerTarget = document.querySelector(".main-container .container");
 const livePointer = document.querySelector(
   ".container-info .box .live .pointer-live"
 );
+
+const song = document.querySelector("#song");
+
+// Dados temporários
+const data = [
+  {
+    songTitle: "Nightcore - abcdefu (rock version)",
+    songUrl:
+      "https://pw-music-game-database.kevinsouza456.repl.co/Nightcore%20-%20abcdefu%20(rock%20version).mp3",
+    notes: [
+      {
+        type: "target-1",
+        time: 2,
+      },
+      {
+        type: "target-2",
+        time: 2.2,
+      },
+      {
+        type: "target-3",
+        time: 2.4,
+      },
+      {
+        type: "target-4",
+        time: 2.6,
+      },
+      {
+        type: "target-2",
+        time: 2.8,
+      },
+    ],
+  },
+];
+
+const totalTime = 200; // Tempo total em segundos
+let currentTime = 2.8; // Inicializando o tempo a partir do último valor
+let aux = 1;
+
+while (currentTime < totalTime) {
+  currentTime += 0.2; // Incremento de 0.2 segundos
+  // Adicionando um novo objeto ao array de targets
+  data[0].notes.push({
+    type: `target-${aux}`,
+    time: currentTime,
+  });
+
+  function gerarNumeroAleatorio() {
+    // Gera um número decimal aleatório entre 0 (inclusive) e 1 (exclusivo)
+    const numeroDecimalAleatorio = Math.random();
+
+    // Multiplica por 4 e arredonda para baixo para obter um número inteiro entre 0 e 3
+    const numeroInteiroAleatorio = Math.floor(numeroDecimalAleatorio * 4);
+
+    // Adiciona 1 para obter um número entre 1 e 4
+    const numeroAleatorioDeUmAQuatro = numeroInteiroAleatorio + 1;
+
+    return numeroAleatorioDeUmAQuatro;
+  }
+
+  // Exemplo de uso
+  aux = gerarNumeroAleatorio();
+  // if (aux >= 4) {
+  //   aux = 1;
+  // } else {
+  //   aux=3;
+  // }
+}
 
 function isElementOverlapping(element1, element2) {
   const rect1 = element1.getBoundingClientRect();
@@ -41,18 +110,6 @@ function isElementOverlapping(element1, element2) {
   // Se não houver sobreposição com nenhum dos elementos em element2, retornamos false
   return false;
 }
-
-setInterval(() => {
-  const ele = document.createElement("div");
-  ele.classList = "target target-1";
-  containerTarget.appendChild(ele);
-  elementosAnimados = document.querySelectorAll(".target");
-  target1 = document.querySelectorAll(".target-1");
-  target2 = document.querySelectorAll(".target-2");
-  target3 = document.querySelectorAll(".target-3");
-  target4 = document.querySelectorAll(".target-4");
-  animateElementDown(elementosAnimados, window.innerHeight);
-}, 500);
 
 function animateElementDown(element, distance) {
   for (let i = 0; i < element.length; i++) {
@@ -86,12 +143,36 @@ function animateElementDown(element, distance) {
   }
 }
 
-// Exemplo de uso:
-let elementosAnimados = document.querySelectorAll(".target");
-animateElementDown(elementosAnimados, window.innerHeight); // Desce 200 pixels
+function createElementAtTime(type) {
+  const element = document.createElement("div");
+  element.classList = `target ${type}`;
+  containerTarget.appendChild(element);
 
-// seu_script.js
-const teclasPermitidas = ["d", "f", "j", "k"];
+  targets = document.querySelectorAll(".target");
+  target1 = document.querySelectorAll(".target-1");
+  target2 = document.querySelectorAll(".target-2");
+  target3 = document.querySelectorAll(".target-3");
+  target4 = document.querySelectorAll(".target-4");
+  animateElementDown(targets, window.innerHeight + 70);
+}
+
+song.addEventListener("timeupdate", function () {
+  const currentTime = song.currentTime;
+
+  data[0].notes.forEach((moment) => {
+    if (currentTime >= moment.time && !moment.created) {
+      createElementAtTime(moment.type);
+      moment.created = true;
+    }
+  });
+});
+
+function setSong() {
+  song.src = data[0].songUrl;
+  song.play();
+}
+
+const teclasPermitidas = ["d", "f", "j", "k", "enter"];
 let teclaJaPressionada = {}; // Armazenar o estado de cada tecla
 
 document.addEventListener("keydown", function (event) {
@@ -102,14 +183,12 @@ document.addEventListener("keydown", function (event) {
     teclasPermitidas.includes(teclaPressionada) &&
     !teclaJaPressionada[teclaPressionada]
   ) {
-    console.log("Tecla pressionada: " + teclaPressionada);
-
     // Coloque aqui o código que você deseja executar quando uma das teclas for pressionada.
     if (teclaPressionada == "d") {
       if (isElementOverlapping(trail1, target1)) {
         // alert("acertou");
       } else {
-        console.log("Errou");
+        // console.log("Errou");
         livePoints--;
         livePointerEvents();
       }
@@ -118,7 +197,7 @@ document.addEventListener("keydown", function (event) {
       if (isElementOverlapping(trail2, target2)) {
         // alert("acertou");
       } else {
-        console.log("Errou");
+        // console.log("Errou");
         livePoints--;
         livePointerEvents();
       }
@@ -127,7 +206,7 @@ document.addEventListener("keydown", function (event) {
       if (isElementOverlapping(trail3, target3)) {
         // alert("acertou");
       } else {
-        console.log("Errou");
+        // console.log("Errou");
         livePoints--;
         livePointerEvents();
       }
@@ -136,10 +215,13 @@ document.addEventListener("keydown", function (event) {
       if (isElementOverlapping(trail4, target4)) {
         // alert("acertou");
       } else {
-        console.log("Errou");
+        // console.log("Errou");
         livePoints--;
         livePointerEvents();
       }
+    }
+    if (teclaPressionada == "enter") {
+      setSong();
     }
 
     teclaJaPressionada[teclaPressionada] = true; // Define a tecla como pressionada para evitar repetições

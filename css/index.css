@@ -139,7 +139,7 @@ body {
   height: 70px;
   border-radius: 5px;
   border: 2px solid #000;
-  top: 0px;
+  top: -70px;
 }
 .main-container .container .target.target-1 {
   background: #4be951;

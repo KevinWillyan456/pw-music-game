@@ -8,7 +8,12 @@ let target2 = document.querySelectorAll(".target-2");
 let target3 = document.querySelectorAll(".target-3");
 let target4 = document.querySelectorAll(".target-4");
 
+let livePoints = 100;
+
 const containerTarget = document.querySelector(".main-container .container");
+const livePointer = document.querySelector(
+  ".container-info .box .live .pointer-live"
+);
 
 function isElementOverlapping(element1, element2) {
   const rect1 = element1.getBoundingClientRect();
@@ -26,6 +31,9 @@ function isElementOverlapping(element1, element2) {
 
     // Retorna true se houver sobreposição tanto na horizontal quanto na vertical
     if (horizontalOverlap && verticalOverlap) {
+      element2[i].remove();
+      livePoints++;
+      livePointerEvents();
       return true;
     }
   }
@@ -35,8 +43,8 @@ function isElementOverlapping(element1, element2) {
 }
 
 setInterval(() => {
-  const ele = document.createElement('div')
-  ele.classList = "target target-4"
+  const ele = document.createElement("div");
+  ele.classList = "target target-1";
   containerTarget.appendChild(ele);
   elementosAnimados = document.querySelectorAll(".target");
   target1 = document.querySelectorAll(".target-1");
@@ -65,6 +73,8 @@ function animateElementDown(element, distance) {
 
       if (element[i].offsetTop >= targetPosition) {
         element[i].remove();
+        livePoints--;
+        livePointerEvents();
       }
 
       if (progress < duration) {
@@ -97,30 +107,38 @@ document.addEventListener("keydown", function (event) {
     // Coloque aqui o código que você deseja executar quando uma das teclas for pressionada.
     if (teclaPressionada == "d") {
       if (isElementOverlapping(trail1, target1)) {
-        alert("acertou");
+        // alert("acertou");
       } else {
         console.log("Errou");
+        livePoints--;
+        livePointerEvents();
       }
     }
     if (teclaPressionada == "f") {
       if (isElementOverlapping(trail2, target2)) {
-        alert("acertou");
+        // alert("acertou");
       } else {
         console.log("Errou");
+        livePoints--;
+        livePointerEvents();
       }
     }
     if (teclaPressionada == "j") {
       if (isElementOverlapping(trail3, target3)) {
-        alert("acertou");
+        // alert("acertou");
       } else {
         console.log("Errou");
+        livePoints--;
+        livePointerEvents();
       }
     }
     if (teclaPressionada == "k") {
       if (isElementOverlapping(trail4, target4)) {
-        alert("acertou");
+        // alert("acertou");
       } else {
         console.log("Errou");
+        livePoints--;
+        livePointerEvents();
       }
     }
 
@@ -134,3 +152,10 @@ document.addEventListener("keyup", function (event) {
   // Quando a tecla é liberada, a marcação é removida, permitindo que ela seja pressionada novamente no futuro
   teclaJaPressionada[teclaPressionada] = false;
 });
+
+function livePointerEvents() {
+  if (livePoints > 100) {
+    livePoints = 100;
+  }
+  livePointer.style.left = livePoints + "%";
+}

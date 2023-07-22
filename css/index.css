@@ -62,6 +62,7 @@ body {
   height: 60px;
   display: flex;
   position: relative;
+  overflow: hidden;
 }
 .container-info .box .live .live-part-red {
   width: 100px;
@@ -83,7 +84,8 @@ body {
   height: 60px;
   background: #1a0081;
   position: absolute;
-  right: 0;
+  transform: translateX(-6px);
+  left: 100%;
 }
 .main-container .container {
   width: 570px;

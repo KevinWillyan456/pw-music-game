@@ -11,11 +11,15 @@ let target4 = document.querySelectorAll(".target-4");
 let targets = document.querySelectorAll(".target");
 
 let livePoints = 51;
+let totalPoints = 0;
+let multiplicatorPoints = 1;
 
 const containerTarget = document.querySelector(".main-container .container");
 const livePointer = document.querySelector(
   ".container-info .box .live .pointer-live"
 );
+const songCover = document.querySelector(".main-container");
+const songTitle = document.querySelector(".container-info .box .name");
 
 const song = document.querySelector("#song");
 
@@ -96,7 +100,9 @@ function isElementOverlapping(element1, element2) {
         }
       });
       livePoints++;
+      totalPoints += 50 * multiplicatorPoints;
       livePointerEvents();
+      totalPointsEvents();
       return true;
     }
   }
@@ -164,6 +170,11 @@ song.addEventListener("timeupdate", function () {
 function setSong() {
   song.src = data[0].songUrl;
   song.play();
+  songCover.style.setProperty(
+    "background-image",
+    `url("${data[0].songCover}")`
+  );
+  songTitle.textContent = data[0].songTitle;
 }
 
 const teclasPermitidas = ["d", "f", "j", "k", "enter"];
@@ -251,4 +262,46 @@ function livePointerEvents() {
     livePoints = 100;
   }
   livePointer.style.left = livePoints + "%";
+
+  if (livePoints <= 33) {
+    document
+      .querySelector(".container-info .box .live .live-part-green")
+      .classList.remove("hovered");
+    document
+      .querySelector(".container-info .box .live .live-part-yellow")
+      .classList.remove("hovered");
+    document
+      .querySelector(".container-info .box .live .live-part-red")
+      .classList.add("hovered");
+  } else if (livePoints >= 66) {
+    document
+      .querySelector(".container-info .box .live .live-part-red")
+      .classList.remove("hovered");
+    document
+      .querySelector(".container-info .box .live .live-part-yellow")
+      .classList.remove("hovered");
+    document
+      .querySelector(".container-info .box .live .live-part-green")
+      .classList.add("hovered");
+  } else {
+    document
+      .querySelector(".container-info .box .live .live-part-red")
+      .classList.remove("hovered");
+    document
+      .querySelector(".container-info .box .live .live-part-green")
+      .classList.remove("hovered");
+    document
+      .querySelector(".container-info .box .live .live-part-yellow")
+      .classList.add("hovered");
+  }
+  if (livePoints <= 20) {
+    livePointer.classList.add("almost-failing");
+  } else {
+    livePointer.classList.remove("almost-failing");
+  }
+}
+
+function totalPointsEvents() {
+  document.querySelector(".container-info .box .score").textContent =
+    totalPoints;
 }

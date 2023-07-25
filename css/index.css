@@ -10,8 +10,21 @@ body {
   width: 100%;
   min-height: 100vh;
   background: linear-gradient(180deg, #140623 0%, #101010 50%, #000 100%);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   display: flex;
   justify-content: center;
+  position: relative;
+}
+
+.main-container .main-container-cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 .container-info {
   position: absolute;
@@ -27,6 +40,7 @@ body {
   border: 2px solid #c3c3c3;
   background: #0d0e26;
   padding: 10px;
+  box-shadow: 0 0 10px black;
 }
 .container-info .box .title {
   color: #fff;
@@ -41,13 +55,24 @@ body {
   border: 2px solid #000;
   background: #d3d8ff;
   margin-bottom: 10px;
+  padding-left: 4px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 12px;
 }
 .container-info .box .score {
   width: 300px;
   height: 25px;
   border: 2px solid #000;
+  padding-right: 4px;
   background: #d3d8ff;
   margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 .container-info .box .title-big {
   color: #fff;
@@ -99,11 +124,23 @@ body {
   transform: translateX(-6px);
   left: 100%;
 }
+.container-info .box .live .pointer-live.almost-failing {
+  animation: animation-almost-failing 80ms infinite alternate linear;
+}
+@keyframes animation-almost-failing {
+  0% {
+    background: white;
+  }
+  100% {
+    background: #e22a2a;
+  }
+}
 .main-container .container {
   width: 570px;
   height: 100vh;
   border: 5px solid #000;
-  background: linear-gradient(180deg, #260f84 0%, #000 96.35%);
+  background-color: rgba(0, 0, 0, 0.85);
+  box-shadow: 0 0 10px black;
   display: flex;
   align-items: flex-end;
   justify-content: center;

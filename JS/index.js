@@ -10,7 +10,7 @@ let target4 = document.querySelectorAll(".target-4");
 
 let targets = document.querySelectorAll(".target");
 
-let livePoints = 100;
+let livePoints = 51;
 
 const containerTarget = document.querySelector(".main-container .container");
 const livePointer = document.querySelector(
@@ -19,70 +19,52 @@ const livePointer = document.querySelector(
 
 const song = document.querySelector("#song");
 
+let data;
 // Dados temporários
-const data = [
-  {
-    songTitle: "Nightcore - abcdefu (rock version)",
-    songUrl:
-      "https://pw-music-game-database.kevinsouza456.repl.co/Nightcore%20-%20abcdefu%20(rock%20version).mp3",
-    notes: [
-      {
-        type: "target-1",
-        time: 2,
-      },
-      {
-        type: "target-2",
-        time: 2.2,
-      },
-      {
-        type: "target-3",
-        time: 2.4,
-      },
-      {
-        type: "target-4",
-        time: 2.6,
-      },
-      {
-        type: "target-2",
-        time: 2.8,
-      },
-    ],
-  },
-];
+async function init() {
+  const response = await fetch(
+    "https://pw-music-game-database.kevinsouza456.repl.co/data.json"
+  );
+  const responseJson = await response.json();
+  data = responseJson;
 
-const totalTime = 200; // Tempo total em segundos
-let currentTime = 2.8; // Inicializando o tempo a partir do último valor
-let aux = 1;
+  const totalTime = 200; // Tempo total em segundos
+  let currentTime = 2.8; // Inicializando o tempo a partir do último valor
+  let aux = 1;
 
-while (currentTime < totalTime) {
-  currentTime += 0.2; // Incremento de 0.2 segundos
-  // Adicionando um novo objeto ao array de targets
-  data[0].notes.push({
-    type: `target-${aux}`,
-    time: currentTime,
-  });
+  while (currentTime < totalTime) {
+    currentTime += 0.2; // Incremento de 0.2 segundos
+    // Adicionando um novo objeto ao array de targets
+    data[0].notes.push({
+      type: `target-${aux}`,
+      time: currentTime,
+    });
 
-  function gerarNumeroAleatorio() {
-    // Gera um número decimal aleatório entre 0 (inclusive) e 1 (exclusivo)
-    const numeroDecimalAleatorio = Math.random();
+    function gerarNumeroAleatorio() {
+      // Gera um número decimal aleatório entre 0 (inclusive) e 1 (exclusivo)
+      const numeroDecimalAleatorio = Math.random();
 
-    // Multiplica por 4 e arredonda para baixo para obter um número inteiro entre 0 e 3
-    const numeroInteiroAleatorio = Math.floor(numeroDecimalAleatorio * 4);
+      // Multiplica por 4 e arredonda para baixo para obter um número inteiro entre 0 e 3
+      const numeroInteiroAleatorio = Math.floor(numeroDecimalAleatorio * 4);
 
-    // Adiciona 1 para obter um número entre 1 e 4
-    const numeroAleatorioDeUmAQuatro = numeroInteiroAleatorio + 1;
+      // Adiciona 1 para obter um número entre 1 e 4
+      const numeroAleatorioDeUmAQuatro = numeroInteiroAleatorio + 1;
 
-    return numeroAleatorioDeUmAQuatro;
+      return numeroAleatorioDeUmAQuatro;
+    }
+
+    // Exemplo de uso
+    aux = gerarNumeroAleatorio();
+    // if (aux >= 4) {
+    //   aux = 1;
+    // } else {
+    //   aux=3;
+    // }
   }
-
-  // Exemplo de uso
-  aux = gerarNumeroAleatorio();
-  // if (aux >= 4) {
-  //   aux = 1;
-  // } else {
-  //   aux=3;
-  // }
+  livePointerEvents();
 }
+
+init();
 
 function isElementOverlapping(element1, element2) {
   const rect1 = element1.getBoundingClientRect();
@@ -101,6 +83,18 @@ function isElementOverlapping(element1, element2) {
     // Retorna true se houver sobreposição tanto na horizontal quanto na vertical
     if (horizontalOverlap && verticalOverlap) {
       element2[i].remove();
+      element1.classList.add("hit");
+      element1.addEventListener("animationend", (event) => {
+        if (
+          event.animationName === "animation-hit-1" ||
+          event.animationName === "animation-hit-2" ||
+          event.animationName === "animation-hit-3" ||
+          event.animationName === "animation-hit-4"
+        ) {
+          const elemento = event.target;
+          elemento.classList.remove("hit");
+        }
+      });
       livePoints++;
       livePointerEvents();
       return true;
@@ -153,7 +147,7 @@ function createElementAtTime(type) {
   target2 = document.querySelectorAll(".target-2");
   target3 = document.querySelectorAll(".target-3");
   target4 = document.querySelectorAll(".target-4");
-  animateElementDown(targets, window.innerHeight + 70);
+  animateElementDown(targets, window.innerHeight + 140);
 }
 
 song.addEventListener("timeupdate", function () {
@@ -185,6 +179,7 @@ document.addEventListener("keydown", function (event) {
   ) {
     // Coloque aqui o código que você deseja executar quando uma das teclas for pressionada.
     if (teclaPressionada == "d") {
+      trail1.classList.add("pressed");
       if (isElementOverlapping(trail1, target1)) {
         // alert("acertou");
       } else {
@@ -194,6 +189,7 @@ document.addEventListener("keydown", function (event) {
       }
     }
     if (teclaPressionada == "f") {
+      trail2.classList.add("pressed");
       if (isElementOverlapping(trail2, target2)) {
         // alert("acertou");
       } else {
@@ -203,6 +199,7 @@ document.addEventListener("keydown", function (event) {
       }
     }
     if (teclaPressionada == "j") {
+      trail3.classList.add("pressed");
       if (isElementOverlapping(trail3, target3)) {
         // alert("acertou");
       } else {
@@ -212,6 +209,7 @@ document.addEventListener("keydown", function (event) {
       }
     }
     if (teclaPressionada == "k") {
+      trail4.classList.add("pressed");
       if (isElementOverlapping(trail4, target4)) {
         // alert("acertou");
       } else {
@@ -230,6 +228,19 @@ document.addEventListener("keydown", function (event) {
 
 document.addEventListener("keyup", function (event) {
   const teclaPressionada = event.key.toLowerCase();
+
+  if (teclaPressionada == "d") {
+    trail1.classList.remove("pressed");
+  }
+  if (teclaPressionada == "f") {
+    trail2.classList.remove("pressed");
+  }
+  if (teclaPressionada == "j") {
+    trail3.classList.remove("pressed");
+  }
+  if (teclaPressionada == "k") {
+    trail4.classList.remove("pressed");
+  }
 
   // Quando a tecla é liberada, a marcação é removida, permitindo que ela seja pressionada novamente no futuro
   teclaJaPressionada[teclaPressionada] = false;

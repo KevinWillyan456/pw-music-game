@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create the song sequence</title>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f8f8;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      main {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        width: 1000px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+      }
+
+      label {
+        font-size: 14px;
+        margin-bottom: 5px;
+      }
+
+      input[type="text"] {
+        padding: 5px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      button {
+        padding: 10px 15px;
+        font-size: 14px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      .display,
+      .display-2 {
+        font-size: 16px;
+        margin-bottom: 10px;
+        color: #0056b3;
+        font-weight: bold;
+      }
+
+      .controllers {
+        display: flex;
+        justify-content: space-between;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <audio id="song"></audio>
+      <h1>Feature Development Page</h1>
+      <form id="form">
+        <label for="song-src">Song Src</label>
+        <input
+          type="text"
+          placeholder="Paste the song URL here"
+          id="song-src"
+        />
+        <button type="submit">Send</button>
+      </form>
+
+      <div class="display"></div>
+      <div class="display-2"></div>
+
+      <div class="controllers">
+        <button id="a30sn">-30s</button>
+        <button id="a15sn">-15s</button>
+        <button id="a10sn">-10s</button>
+        <button id="a5sn">-5s</button>
+        <button id="a3sn">-3s</button>
+        <button id="slow-down">Slow</button>
+        <button id="normal">Normal</button>
+        <button id="speed-up">Fast</button>
+        <button id="play">Play</button>
+        <button id="pause">Pause</button>
+        <button id="a3sp">+3s</button>
+        <button id="a5sp">+5s</button>
+        <button id="a10sp">+10s</button>
+        <button id="a15sp">+15s</button>
+        <button id="a30sp">+30s</button>
+      </div>
+    </main>
+
+    <script>
+      const form = document.querySelector("#form");
+      const songInput = document.querySelector("#song-src");
+      const song = document.querySelector("#song");
+      const display = document.querySelector(".display");
+      const display2 = document.querySelector(".display-2");
+      const play = document.querySelector("#play");
+      const pause = document.querySelector("#pause");
+      const normal = document.querySelector("#normal");
+      const slowDown = document.querySelector("#slow-down");
+      const speedUp = document.querySelector("#speed-up");
+      const a30sn = document.querySelector("#a30sn");
+      const a15sn = document.querySelector("#a15sn");
+      const a10sn = document.querySelector("#a10sn");
+      const a5sn = document.querySelector("#a5sn");
+      const a3sn = document.querySelector("#a3sn");
+      const a3sp = document.querySelector("#a3sp");
+      const a5sp = document.querySelector("#a5sp");
+      const a10sp = document.querySelector("#a10sp");
+      const a15sp = document.querySelector("#a15sp");
+      const a30sp = document.querySelector("#a30sp");
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        song.src = songInput.value;
+        songInput.value = "";
+        song.addEventListener("timeupdate", () => {
+          display.textContent = `CurrentTime: ${song.currentTime}`;
+        });
+        play.addEventListener("click", () => {
+          song.play();
+          display2.textContent = `Duration: ${song.duration}`;
+        });
+        pause.addEventListener("click", () => {
+          song.pause();
+        });
+        normal.addEventListener("click", () => {
+          song.playbackRate = 1;
+        });
+        slowDown.addEventListener("click", () => {
+          song.playbackRate = 0.5;
+        });
+        speedUp.addEventListener("click", () => {
+          song.playbackRate = 1.5;
+        });
+
+        a30sn.addEventListener("click", () => {
+          song.currentTime = song.currentTime - 30;
+        });
+        a15sn.addEventListener("click", () => {
+          song.currentTime = song.currentTime - 15;
+        });
+        a10sn.addEventListener("click", () => {
+          song.currentTime = song.currentTime - 10;
+        });
+        a5sn.addEventListener("click", () => {
+          song.currentTime = song.currentTime - 5;
+        });
+        a3sn.addEventListener("click", () => {
+          song.currentTime = song.currentTime - 3;
+        });
+        a3sp.addEventListener("click", () => {
+          song.currentTime = song.currentTime + 3;
+        });
+        a5sp.addEventListener("click", () => {
+          song.currentTime = song.currentTime + 5;
+        });
+        a10sp.addEventListener("click", () => {
+          song.currentTime = song.currentTime + 10;
+        });
+        a15sp.addEventListener("click", () => {
+          song.currentTime = song.currentTime + 15;
+        });
+        a30sp.addEventListener("click", () => {
+          song.currentTime = song.currentTime + 30;
+        });
+      });
+    </script>
+  </body>
+</html>

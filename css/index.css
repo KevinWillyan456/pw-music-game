@@ -63,26 +63,38 @@ body {
   display: flex;
   position: relative;
   overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 0 10px black;
 }
 .container-info .box .live .live-part-red {
   width: 100px;
   height: 60px;
+  background: #5a1111;
+}
+.container-info .box .live .live-part-red.hovered {
   background: #e22a2a;
 }
 .container-info .box .live .live-part-yellow {
   width: 100px;
   height: 60px;
+  background: #5c5e0d;
+}
+.container-info .box .live .live-part-yellow.hovered {
   background: #e7eb21;
 }
 .container-info .box .live .live-part-green {
   width: 100px;
   height: 60px;
+  background: #125714;
+}
+.container-info .box .live .live-part-green.hovered {
   background: #2cd933;
 }
 .container-info .box .live .pointer-live {
   width: 6px;
   height: 60px;
-  background: #1a0081;
+  background: white;
+  box-shadow: 0 0 2px 1px black;
   position: absolute;
   transform: translateX(-6px);
   left: 100%;
@@ -106,32 +118,96 @@ body {
   margin-bottom: 20px;
 }
 .main-container .container .trails .trail-1 {
+  transition: 100ms;
   width: 100px;
   height: 70px;
   border-radius: 5px;
   border: 2px solid #000;
+  background: #125714;
+}
+.main-container .container .trails .trail-1.pressed {
+  border: 5px solid #000;
   background: #2cd933;
 }
 .main-container .container .trails .trail-2 {
+  transition: 100ms;
   width: 100px;
   height: 70px;
   border-radius: 5px;
   border: 2px solid #000;
+  background: #5a1111;
+}
+.main-container .container .trails .trail-2.pressed {
+  border: 5px solid #000;
   background: #e22a2a;
 }
 .main-container .container .trails .trail-3 {
+  transition: 100ms;
   width: 100px;
   height: 70px;
   border-radius: 5px;
   border: 2px solid #000;
+  background: #555a11;
+}
+.main-container .container .trails .trail-3.pressed {
+  border: 5px solid #000;
   background: #d4e22a;
 }
 .main-container .container .trails .trail-4 {
+  transition: 100ms;
   width: 100px;
   height: 70px;
   border-radius: 5px;
   border: 2px solid #000;
+  background: #1b115a;
+}
+.main-container .container .trails .trail-4.pressed {
+  border: 5px solid #000;
   background: #442ae2;
+}
+.main-container .container .trails .trail-1.hit {
+  animation: animation-hit-1 150ms;
+}
+.main-container .container .trails .trail-2.hit {
+  animation: animation-hit-2 150ms;
+}
+.main-container .container .trails .trail-3.hit {
+  animation: animation-hit-3 150ms;
+}
+.main-container .container .trails .trail-4.hit {
+  animation: animation-hit-4 150ms;
+}
+@keyframes animation-hit-1 {
+  0% {
+  }
+  100% {
+    box-shadow: 0 0 5px white, 0 0 10px #125714, 0 0 15px #16991a,
+      0 0 20px #2cd933, 0 0 30px #24f82c;
+  }
+}
+@keyframes animation-hit-2 {
+  0% {
+  }
+  100% {
+    box-shadow: 0 0 5px white, 0 0 10px #5a1111, 0 0 15px #7e1111,
+      0 0 20px #e22a2a, 0 0 30px #fd2121;
+  }
+}
+@keyframes animation-hit-3 {
+  0% {
+  }
+  100% {
+    box-shadow: 0 0 5px white, 0 0 10px #555a11, 0 0 15px #7a8111,
+      0 0 20px #d4e22a, 0 0 30px #e5f720;
+  }
+}
+@keyframes animation-hit-4 {
+  0% {
+  }
+  100% {
+    box-shadow: 0 0 5px white, 0 0 10px #1b115a, 0 0 15px #201180,
+      0 0 20px #442ae2, 0 0 30px #3c1ff7;
+  }
 }
 .main-container .container .target {
   position: absolute;

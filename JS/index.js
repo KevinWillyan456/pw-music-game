@@ -13,6 +13,7 @@ let targets = document.querySelectorAll(".target");
 let livePoints = 51;
 let totalPoints = 0;
 let multiplicatorPoints = 1;
+let canActions = true
 
 const containerTarget = document.querySelector(".main-container .container");
 const livePointer = document.querySelector(
@@ -186,7 +187,7 @@ document.addEventListener("keydown", function (event) {
   // Verifica se a tecla pressionada está na lista de teclas permitidas e se já não foi pressionada antes
   if (
     teclasPermitidas.includes(teclaPressionada) &&
-    !teclaJaPressionada[teclaPressionada]
+    !teclaJaPressionada[teclaPressionada] && canActions
   ) {
     // Coloque aqui o código que você deseja executar quando uma das teclas for pressionada.
     if (teclaPressionada == "d") {
@@ -230,7 +231,7 @@ document.addEventListener("keydown", function (event) {
       }
     }
     if (teclaPressionada == "enter") {
-      setSong();
+      startCounting();
     }
 
     teclaJaPressionada[teclaPressionada] = true; // Define a tecla como pressionada para evitar repetições
@@ -299,9 +300,34 @@ function livePointerEvents() {
   } else {
     livePointer.classList.remove("almost-failing");
   }
+  if (livePoints <= 0) {
+    controllerFailed()
+  }
 }
 
 function totalPointsEvents() {
   document.querySelector(".container-info .box .score").textContent =
     totalPoints;
+}
+function startCounting() {
+  document.querySelector(".counter-to-start").style.display = "flex";
+
+  setTimeout(() => {
+    document.querySelector(".counter-to-start").textContent = 3;
+    setTimeout(() => {
+      document.querySelector(".counter-to-start").textContent = 2;
+      setTimeout(() => {
+        document.querySelector(".counter-to-start").textContent = 1;
+        setTimeout(() => {
+          document.querySelector(".counter-to-start").textContent = "Ready?";
+          document.querySelector(".counter-to-start").style.display = "none";
+          setSong();
+        }, 800);
+      }, 800);
+    }, 800);
+  }, 1500);
+}
+function controllerFailed() {
+  song.pause()
+  canActions = false
 }

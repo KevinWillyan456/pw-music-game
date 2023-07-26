@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 body {
-  font-family: "Holtwood One SC", serif;
+  font-family: "Hind Vadodara", sans-serif;
 }
 .main-container {
   width: 100%;
@@ -61,7 +61,8 @@ body {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  font-size: 12px;
+  font-size: 14px;
+  font-weight: 500;
 }
 .container-info .box .score {
   width: 300px;
@@ -73,6 +74,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  font-weight: 700;
 }
 .container-info .box .title-big {
   color: #fff;
@@ -269,4 +271,17 @@ body {
 .main-container .container .target.target-4 {
   background: #5c43f8;
   left: 410px;
+}
+.main-container .counter-to-start {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  align-items: center;
+  justify-content: center;
+  font-size: 54px;
+  display: none;
 }

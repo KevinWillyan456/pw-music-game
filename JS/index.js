@@ -13,7 +13,7 @@ let targets = document.querySelectorAll(".target");
 let livePoints = 51;
 let totalPoints = 0;
 let multiplicatorPoints = 1;
-let canActions = true
+let canActions = true;
 
 const containerTarget = document.querySelector(".main-container .container");
 const livePointer = document.querySelector(
@@ -187,7 +187,8 @@ document.addEventListener("keydown", function (event) {
   // Verifica se a tecla pressionada está na lista de teclas permitidas e se já não foi pressionada antes
   if (
     teclasPermitidas.includes(teclaPressionada) &&
-    !teclaJaPressionada[teclaPressionada] && canActions
+    !teclaJaPressionada[teclaPressionada] &&
+    canActions
   ) {
     // Coloque aqui o código que você deseja executar quando uma das teclas for pressionada.
     if (teclaPressionada == "d") {
@@ -301,7 +302,7 @@ function livePointerEvents() {
     livePointer.classList.remove("almost-failing");
   }
   if (livePoints <= 0) {
-    controllerFailed()
+    controllerFailed();
   }
 }
 
@@ -328,6 +329,26 @@ function startCounting() {
   }, 1500);
 }
 function controllerFailed() {
-  song.pause()
-  canActions = false
+  song.pause();
+  canActions = false;
 }
+
+document
+  .querySelector(".main-container .container-home .logo")
+  .addEventListener("click", () => {
+    document.querySelector(".main-container .container-home").style.display =
+      "none";
+    document.querySelector(
+      ".main-container .main-container-flashlight"
+    ).style.display = "block";
+
+    document
+      .querySelector(".main-container .main-container-flashlight")
+      .addEventListener("animationend", (event) => {
+        if (event.animationName === "animation-main-container-flashlight") {
+          document.querySelector(
+            ".main-container .main-container-flashlight"
+          ).style.display = "none";
+        }
+      });
+  });

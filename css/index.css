@@ -9,8 +9,8 @@ body {
 .main-container {
   width: 100%;
   min-height: 100vh;
-  background: linear-gradient(180deg, #140623 0%, #101010 50%, #000 100%);
-  background-position: center;
+  background: linear-gradient(135deg, #0c0922 0%, #5f0909 100%);
+  background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
   display: flex;
@@ -25,6 +25,24 @@ body {
   width: 100%;
   min-height: 100vh;
   background-color: rgba(0, 0, 0, 0.4);
+}
+.main-container .main-container-flashlight {
+  animation: animation-main-container-flashlight 400ms linear;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100vh;
+  background-color: rgba(255, 255, 255, 0.08);
+  display: none;
+}
+@keyframes animation-main-container-flashlight {
+  0% {
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+  100% {
+    background-color: transparent;
+  }
 }
 .container-info {
   position: absolute;
@@ -45,9 +63,7 @@ body {
 .container-info .box .title {
   color: #fff;
   font-size: 14px;
-  font-style: normal;
   font-weight: 400;
-  line-height: normal;
 }
 .container-info .box .name {
   width: 300px;
@@ -79,9 +95,7 @@ body {
 .container-info .box .title-big {
   color: #fff;
   font-size: 24px;
-  font-style: normal;
   font-weight: 400;
-  line-height: normal;
   margin-bottom: 10px;
 }
 .container-info .box .live {
@@ -284,4 +298,169 @@ body {
   justify-content: center;
   font-size: 54px;
   display: none;
+}
+.main-container .container-home {
+  width: 100%;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  /* display: flex; */
+  display: none;
+}
+.main-container .container-home .logo {
+  display: flex;
+  cursor: pointer;
+}
+.main-container .container-home .logo img {
+  pointer-events: none;
+  width: 100%;
+}
+.main-container .container-songs {
+  width: 100%;
+}
+.main-container .container-songs .content-songs .select-song {
+  color: #fff;
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin-left: 65px;
+  margin-top: 60px;
+  margin-bottom: 40px;
+}
+.main-container .container-songs .content-songs .song {
+  margin: 0 auto;
+  width: calc(100% - 130px);
+  background-image: url("https://img.youtube.com/vi/Gl0IPvyYZnY/maxresdefault.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 120px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.main-container .container-songs .content-songs .song .preview {
+  transition: 200ms;
+  width: 100px;
+  height: 120px;
+  background: #d9d9d966;
+  cursor: pointer;
+}
+.main-container .container-songs .content-songs .song .preview:hover {
+  box-shadow: 0 0 5px white inset, 0 0 40px white inset;
+}
+
+.main-container .container-songs .content-songs .song .division {
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 250px);
+  padding-left: 40px;
+  padding-top: 10px;
+}
+.main-container .container-songs .content-songs .song .division .title {
+  color: #fff;
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.main-container
+  .container-songs
+  .content-songs
+  .song
+  .division
+  .content-difficulty {
+  display: flex;
+  gap: 10px;
+}
+.main-container
+  .container-songs
+  .content-songs
+  .song
+  .division
+  .content-difficulty
+  .difficulty-easy {
+  width: 120px;
+  height: 40px;
+  background: #d3d8ff;
+  color: #000;
+  font-size: 24px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.main-container
+  .container-songs
+  .content-songs
+  .song
+  .division
+  .content-difficulty
+  .difficulty-medium {
+  width: 120px;
+  height: 40px;
+  background: #11c718;
+  color: #000;
+  font-size: 24px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.main-container
+  .container-songs
+  .content-songs
+  .song
+  .division
+  .content-difficulty
+  .difficulty-hard {
+  width: 120px;
+  height: 40px;
+  background: #e7eb21;
+  color: #000;
+  font-size: 24px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.main-container
+  .container-songs
+  .content-songs
+  .song
+  .division
+  .content-difficulty
+  .difficulty-expert {
+  width: 120px;
+  height: 40px;
+  background: #e22a2a;
+  color: #000;
+  font-size: 24px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.main-container .container-songs .content-songs .song .song-play {
+  transition: 200ms;
+  width: 150px;
+  height: 120px;
+  background: #e22a2a66;
+  color: #fff;
+  font-size: 36px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.main-container .container-songs .content-songs .song .song-play:hover {
+  box-shadow: 0 0 5px #e22a2a inset, 0 0 40px #e22a2a inset;
 }

@@ -19,6 +19,7 @@ body {
 }
 
 .main-container .main-container-cover {
+  display: none;
   position: absolute;
   top: 0;
   left: 0;
@@ -45,6 +46,7 @@ body {
   }
 }
 .container-info {
+  display: none;
   position: absolute;
   left: 40px;
   bottom: 40px;
@@ -66,13 +68,11 @@ body {
   font-weight: 400;
 }
 .container-info .box .name {
-  width: 300px;
   height: 25px;
   border: 2px solid #000;
   background: #d3d8ff;
   margin-bottom: 10px;
   padding-left: 4px;
-  display: flex;
   align-items: center;
   overflow: hidden;
   white-space: nowrap;
@@ -81,7 +81,6 @@ body {
   font-weight: 500;
 }
 .container-info .box .score {
-  width: 300px;
   height: 25px;
   border: 2px solid #000;
   padding-right: 4px;
@@ -157,7 +156,7 @@ body {
   border: 5px solid #000;
   background-color: rgba(0, 0, 0, 0.85);
   box-shadow: 0 0 10px black;
-  display: flex;
+  display: none;
   align-items: flex-end;
   justify-content: center;
   position: relative;
@@ -304,8 +303,7 @@ body {
   min-height: 100vh;
   align-items: center;
   justify-content: center;
-  /* display: flex; */
-  display: none;
+  display: flex;
 }
 .main-container .container-home .logo {
   display: flex;
@@ -317,6 +315,7 @@ body {
 }
 .main-container .container-songs {
   width: 100%;
+  display: none;
 }
 .main-container .container-songs .content-songs .select-song {
   color: #fff;
@@ -329,9 +328,10 @@ body {
   margin-bottom: 40px;
 }
 .main-container .container-songs .content-songs .song {
+  transition: 200ms;
   margin: 0 auto;
   width: calc(100% - 130px);
-  background-image: url("https://img.youtube.com/vi/Gl0IPvyYZnY/maxresdefault.jpg");
+  background-color: #1b115a;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -339,6 +339,10 @@ body {
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
+  filter: brightness(0.6);
+}
+.main-container .container-songs .content-songs .song:hover {
+  filter: brightness(1);
 }
 .main-container .container-songs .content-songs .song .preview {
   transition: 200ms;
@@ -357,6 +361,7 @@ body {
   width: calc(100% - 250px);
   padding-left: 40px;
   padding-top: 10px;
+  overflow: hidden;
 }
 .main-container .container-songs .content-songs .song .division .title {
   color: #fff;
@@ -373,8 +378,18 @@ body {
   .song
   .division
   .content-difficulty {
+  transition: 200ms;
   display: flex;
   gap: 10px;
+  transform: translateY(50px);
+}
+.main-container
+  .container-songs
+  .content-songs
+  .song:hover
+  .division
+  .content-difficulty {
+  transform: translateY(0px);
 }
 .main-container
   .container-songs

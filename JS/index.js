@@ -13,7 +13,8 @@ let targets = document.querySelectorAll(".target");
 let livePoints = 51;
 let totalPoints = 0;
 let multiplicatorPoints = 1;
-let canActions = true;
+let selectDifficulty = 2;
+let canActions = false;
 
 const containerTarget = document.querySelector(".main-container .container");
 const livePointer = document.querySelector(
@@ -21,6 +22,7 @@ const livePointer = document.querySelector(
 );
 const songCover = document.querySelector(".main-container");
 const songTitle = document.querySelector(".container-info .box .name");
+const contentSongs = document.querySelector(".content-songs");
 
 const song = document.querySelector("#song");
 
@@ -67,6 +69,7 @@ async function init() {
     // }
   }
   livePointerEvents();
+  generatorContentSongs();
 }
 
 init();
@@ -116,7 +119,14 @@ function animateElementDown(element, distance) {
   for (let i = 0; i < element.length; i++) {
     const startPosition = element[i].offsetTop;
     const targetPosition = startPosition + distance;
-    const duration = 1000; // Duração da animação em milissegundos (1 segundo no exemplo)
+    const duration =
+      selectDifficulty === 1
+        ? 1200
+        : selectDifficulty === 2
+        ? 1000
+        : selectDifficulty === 3
+        ? 800
+        : 600;
 
     let startTime = null;
 
@@ -131,7 +141,13 @@ function animateElementDown(element, distance) {
 
       if (element[i].offsetTop >= targetPosition) {
         element[i].remove();
-        livePoints--;
+        // livePoints--;
+        livePoints =
+          selectDifficulty === 1
+            ? (livePoints -= 1)
+            : selectDifficulty === 2
+            ? (livePoints -= 3)
+            : (livePoints -= 5);
         livePointerEvents();
       }
 
@@ -168,17 +184,17 @@ song.addEventListener("timeupdate", function () {
   });
 });
 
-function setSong() {
-  song.src = data[0].songUrl;
+function setSong(songChange) {
+  song.src = songChange.songUrl;
   song.play();
   songCover.style.setProperty(
     "background-image",
-    `url("${data[0].songCover}")`
+    `url("${songChange.songCover}")`
   );
-  songTitle.textContent = data[0].songTitle;
+  songTitle.textContent = songChange.songTitle;
 }
 
-const teclasPermitidas = ["d", "f", "j", "k", "enter"];
+const teclasPermitidas = ["d", "f", "j", "k"];
 let teclaJaPressionada = {}; // Armazenar o estado de cada tecla
 
 document.addEventListener("keydown", function (event) {
@@ -193,49 +209,55 @@ document.addEventListener("keydown", function (event) {
     // Coloque aqui o código que você deseja executar quando uma das teclas for pressionada.
     if (teclaPressionada == "d") {
       trail1.classList.add("pressed");
-      if (isElementOverlapping(trail1, target1)) {
-        // alert("acertou");
-      } else {
-        // console.log("Errou");
-        livePoints--;
+      if (!isElementOverlapping(trail1, target1)) {
+        livePoints =
+          selectDifficulty === 1
+            ? (livePoints -= 1)
+            : selectDifficulty === 2
+            ? (livePoints -= 3)
+            : (livePoints -= 5);
+
         livePointerEvents();
       }
     }
     if (teclaPressionada == "f") {
       trail2.classList.add("pressed");
-      if (isElementOverlapping(trail2, target2)) {
-        // alert("acertou");
-      } else {
-        // console.log("Errou");
-        livePoints--;
+      if (!isElementOverlapping(trail2, target2)) {
+        livePoints =
+          selectDifficulty === 1
+            ? (livePoints -= 1)
+            : selectDifficulty === 2
+            ? (livePoints -= 3)
+            : (livePoints -= 5);
         livePointerEvents();
       }
     }
     if (teclaPressionada == "j") {
       trail3.classList.add("pressed");
-      if (isElementOverlapping(trail3, target3)) {
-        // alert("acertou");
-      } else {
-        // console.log("Errou");
-        livePoints--;
+      if (!isElementOverlapping(trail3, target3)) {
+        livePoints =
+          selectDifficulty === 1
+            ? (livePoints -= 1)
+            : selectDifficulty === 2
+            ? (livePoints -= 3)
+            : (livePoints -= 5);
         livePointerEvents();
       }
     }
     if (teclaPressionada == "k") {
       trail4.classList.add("pressed");
-      if (isElementOverlapping(trail4, target4)) {
-        // alert("acertou");
-      } else {
-        // console.log("Errou");
-        livePoints--;
+      if (!isElementOverlapping(trail4, target4)) {
+        livePoints =
+          selectDifficulty === 1
+            ? (livePoints -= 1)
+            : selectDifficulty === 2
+            ? (livePoints -= 3)
+            : (livePoints -= 5);
         livePointerEvents();
       }
     }
-    if (teclaPressionada == "enter") {
-      startCounting();
-    }
 
-    teclaJaPressionada[teclaPressionada] = true; // Define a tecla como pressionada para evitar repetições
+    teclaJaPressionada[teclaPressionada] = true;
   }
 });
 
@@ -255,7 +277,6 @@ document.addEventListener("keyup", function (event) {
     trail4.classList.remove("pressed");
   }
 
-  // Quando a tecla é liberada, a marcação é removida, permitindo que ela seja pressionada novamente no futuro
   teclaJaPressionada[teclaPressionada] = false;
 });
 
@@ -310,8 +331,14 @@ function totalPointsEvents() {
   document.querySelector(".container-info .box .score").textContent =
     totalPoints;
 }
-function startCounting() {
+function startCounting(song) {
   document.querySelector(".counter-to-start").style.display = "flex";
+  document.querySelector(".container-songs").style.display = "none";
+  document.querySelector(".main-container .container").style.display = "flex";
+  document.querySelector(".container-info").style.display = "block";
+  document.querySelector(
+    ".main-container .main-container-cover"
+  ).style.display = "block";
 
   setTimeout(() => {
     document.querySelector(".counter-to-start").textContent = 3;
@@ -322,7 +349,8 @@ function startCounting() {
         setTimeout(() => {
           document.querySelector(".counter-to-start").textContent = "Ready?";
           document.querySelector(".counter-to-start").style.display = "none";
-          setSong();
+          setSong(song);
+          canActions = true;
         }, 800);
       }, 800);
     }, 800);
@@ -351,4 +379,75 @@ document
           ).style.display = "none";
         }
       });
+    document.querySelector(".container-songs").style.display = "block";
   });
+
+function generatorContentSongs() {
+  data.forEach((song) => {
+    const songDiv = document.createElement("div");
+    songDiv.classList.add("song");
+    songDiv.style.setProperty("background-image", `url("${song.songCover}")`);
+
+    const previewDiv = document.createElement("div");
+    previewDiv.classList.add("preview");
+
+    const divisionDiv = document.createElement("div");
+    divisionDiv.classList.add("division");
+
+    const titleDiv = document.createElement("div");
+    titleDiv.classList.add("title");
+    titleDiv.textContent = song.songTitle;
+
+    const contentDifficultyDiv = document.createElement("div");
+    contentDifficultyDiv.classList.add("content-difficulty");
+
+    const difficultyEasyDiv = document.createElement("div");
+    difficultyEasyDiv.classList.add("difficulty-easy");
+    difficultyEasyDiv.textContent = "Easy";
+    difficultyEasyDiv.addEventListener("click", () => {
+      selectDifficulty = 1;
+    });
+
+    const difficultyMediumDiv = document.createElement("div");
+    difficultyMediumDiv.classList.add("difficulty-medium");
+    difficultyMediumDiv.textContent = "Medium";
+    difficultyMediumDiv.addEventListener("click", () => {
+      selectDifficulty = 2;
+    });
+
+    const difficultyHardDiv = document.createElement("div");
+    difficultyHardDiv.classList.add("difficulty-hard");
+    difficultyHardDiv.textContent = "Hard";
+    difficultyHardDiv.addEventListener("click", () => {
+      selectDifficulty = 3;
+    });
+
+    const difficultyExpertDiv = document.createElement("div");
+    difficultyExpertDiv.classList.add("difficulty-expert");
+    difficultyExpertDiv.textContent = "Expert";
+    difficultyExpertDiv.addEventListener("click", () => {
+      selectDifficulty = 4;
+    });
+
+    const songPlayDiv = document.createElement("div");
+    songPlayDiv.classList.add("song-play");
+    songPlayDiv.textContent = "Play";
+    songPlayDiv.addEventListener("click", () => {
+      startCounting(song);
+    });
+
+    contentDifficultyDiv.appendChild(difficultyEasyDiv);
+    contentDifficultyDiv.appendChild(difficultyMediumDiv);
+    contentDifficultyDiv.appendChild(difficultyHardDiv);
+    contentDifficultyDiv.appendChild(difficultyExpertDiv);
+
+    divisionDiv.appendChild(titleDiv);
+    divisionDiv.appendChild(contentDifficultyDiv);
+
+    songDiv.appendChild(previewDiv);
+    songDiv.appendChild(divisionDiv);
+    songDiv.appendChild(songPlayDiv);
+
+    contentSongs.appendChild(songDiv);
+  });
+}

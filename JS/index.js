@@ -27,7 +27,8 @@ const contentSongs = document.querySelector(".content-songs");
 const song = document.querySelector("#song");
 
 let data;
-// Dados temporários
+let songNotes = [];
+
 async function init() {
   const response = await fetch(
     "https://pw-music-game-database.kevinsouza456.repl.co/data.json"
@@ -35,38 +36,40 @@ async function init() {
   const responseJson = await response.json();
   data = responseJson;
 
-  const totalTime = 200; // Tempo total em segundos
-  let currentTime = 2.8; // Inicializando o tempo a partir do último valor
+  function compareSongTitles(a, b) {
+    const songTitleA = a.songTitle.toUpperCase();
+    const songTitleB = b.songTitle.toUpperCase();
+
+    if (songTitleA < songTitleB) {
+      return -1;
+    }
+    if (songTitleA > songTitleB) {
+      return 1;
+    }
+    return 0;
+  }
+
+  data.sort(compareSongTitles);
+
+  const totalTime = 300; // Tempo total em segundos
+  let currentTime = 2;
   let aux = 1;
 
   while (currentTime < totalTime) {
-    currentTime += 0.2; // Incremento de 0.2 segundos
-    // Adicionando um novo objeto ao array de targets
-    data[0].notes.push({
+    currentTime += 0.25;
+    songNotes.push({
       type: `target-${aux}`,
       time: currentTime,
     });
 
     function gerarNumeroAleatorio() {
-      // Gera um número decimal aleatório entre 0 (inclusive) e 1 (exclusivo)
       const numeroDecimalAleatorio = Math.random();
-
-      // Multiplica por 4 e arredonda para baixo para obter um número inteiro entre 0 e 3
       const numeroInteiroAleatorio = Math.floor(numeroDecimalAleatorio * 4);
-
-      // Adiciona 1 para obter um número entre 1 e 4
       const numeroAleatorioDeUmAQuatro = numeroInteiroAleatorio + 1;
 
       return numeroAleatorioDeUmAQuatro;
     }
-
-    // Exemplo de uso
     aux = gerarNumeroAleatorio();
-    // if (aux >= 4) {
-    //   aux = 1;
-    // } else {
-    //   aux=3;
-    // }
   }
   livePointerEvents();
   generatorContentSongs();
@@ -141,13 +144,12 @@ function animateElementDown(element, distance) {
 
       if (element[i].offsetTop >= targetPosition) {
         element[i].remove();
-        // livePoints--;
         livePoints =
           selectDifficulty === 1
             ? (livePoints -= 1)
             : selectDifficulty === 2
-            ? (livePoints -= 3)
-            : (livePoints -= 5);
+            ? (livePoints -= 2)
+            : (livePoints -= 3);
         livePointerEvents();
       }
 
@@ -176,7 +178,7 @@ function createElementAtTime(type) {
 song.addEventListener("timeupdate", function () {
   const currentTime = song.currentTime;
 
-  data[0].notes.forEach((moment) => {
+  songNotes.forEach((moment) => {
     if (currentTime >= moment.time && !moment.created) {
       createElementAtTime(moment.type);
       moment.created = true;
@@ -214,8 +216,8 @@ document.addEventListener("keydown", function (event) {
           selectDifficulty === 1
             ? (livePoints -= 1)
             : selectDifficulty === 2
-            ? (livePoints -= 3)
-            : (livePoints -= 5);
+            ? (livePoints -= 2)
+            : (livePoints -= 3);
 
         livePointerEvents();
       }
@@ -227,8 +229,8 @@ document.addEventListener("keydown", function (event) {
           selectDifficulty === 1
             ? (livePoints -= 1)
             : selectDifficulty === 2
-            ? (livePoints -= 3)
-            : (livePoints -= 5);
+            ? (livePoints -= 2)
+            : (livePoints -= 3);
         livePointerEvents();
       }
     }
@@ -239,8 +241,8 @@ document.addEventListener("keydown", function (event) {
           selectDifficulty === 1
             ? (livePoints -= 1)
             : selectDifficulty === 2
-            ? (livePoints -= 3)
-            : (livePoints -= 5);
+            ? (livePoints -= 2)
+            : (livePoints -= 3);
         livePointerEvents();
       }
     }
@@ -251,8 +253,8 @@ document.addEventListener("keydown", function (event) {
           selectDifficulty === 1
             ? (livePoints -= 1)
             : selectDifficulty === 2
-            ? (livePoints -= 3)
-            : (livePoints -= 5);
+            ? (livePoints -= 2)
+            : (livePoints -= 3);
         livePointerEvents();
       }
     }

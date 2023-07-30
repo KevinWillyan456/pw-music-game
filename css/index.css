@@ -150,6 +150,124 @@ body {
     background: #e22a2a;
   }
 }
+.container-info-2 {
+  display: none;
+  position: absolute;
+  right: 40px;
+  bottom: 40px;
+}
+.container-info-2 .box {
+  width: 320px;
+  height: 160px;
+  border-radius: 5px;
+  border: 2px solid #c3c3c3;
+  background: #0d0e26;
+  padding: 10px;
+  box-shadow: 0 0 10px black;
+  position: relative;
+}
+.container-info-2 .box .title {
+  color: #fff;
+  font-size: 32px;
+  font-weight: 400;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+.container-info-2 .box .notes-count {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 400;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+.container-info-2 .box .multiplicator-x {
+  color: #fff;
+  font-size: 48px;
+  font-weight: 400;
+  position: absolute;
+  top: 54px;
+  right: 75px;
+}
+.container-info-2 .box .multiplicator-n {
+  color: #fff;
+  font-size: 70px;
+  font-weight: 400;
+  position: absolute;
+  top: 36px;
+  right: 32px;
+}
+.container-info-2 .box .bars {
+  position: absolute;
+  left: 15px;
+  bottom: 30px;
+  display: flex;
+  align-items: flex-end;
+  gap: 5px;
+}
+.container-info-2 .box .bars .bar:nth-child(1) {
+  width: 12px;
+  height: 20px;
+  background: #d3d8ff;
+}
+.container-info-2 .box .bars .bar:nth-child(2) {
+  width: 12px;
+  height: 25px;
+  background: #d3d8ff;
+}
+.container-info-2 .box .bars .bar:nth-child(3) {
+  width: 12px;
+  height: 30px;
+  background: #d3d8ff;
+}
+.container-info-2 .box .bars .bar:nth-child(4) {
+  width: 12px;
+  height: 35px;
+  background: #d3d8ff;
+}
+.container-info-2 .box .bars .bar:nth-child(5) {
+  width: 12px;
+  height: 40px;
+  background: #d3d8ff;
+}
+.container-info-2 .box .bars .bar:nth-child(6) {
+  width: 12px;
+  height: 45px;
+  background: #d3d8ff;
+}
+.container-info-2 .box .bars .bar:nth-child(7) {
+  width: 12px;
+  height: 50px;
+  background: #d3d8ff;
+}
+.container-info-2 .box .bars .bar:nth-child(8) {
+  width: 12px;
+  height: 55px;
+  background: #d3d8ff;
+}
+.container-info-2 .box .bars .bar:nth-child(9) {
+  width: 12px;
+  height: 60px;
+  background: #d3d8ff;
+}
+.container-info-2 .box .bars .bar:nth-child(10) {
+  width: 12px;
+  height: 65px;
+  background: #d3d8ff;
+}
+.container-info-2 .box .bars .bar.form-1 {
+  background-color: #5c43f8;
+}
+.container-info-2 .box .bars .bar.form-2 {
+  background-color: #11c718;
+}
+.container-info-2 .box .bars .bar.form-3 {
+  background-color: #d4e22a;
+}
+.container-info-2 .box .bars .bar.form-4 {
+  background-color: #e22a2a;
+}
 .main-container .container {
   width: 570px;
   height: 100vh;

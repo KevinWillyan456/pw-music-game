@@ -15,6 +15,8 @@ let totalPoints = 0;
 let multiplicatorPoints = 1;
 let selectDifficulty = 2;
 let canActions = false;
+let totalNotes = 0;
+let consecutiveHits = 0;
 
 const containerTarget = document.querySelector(".main-container .container");
 const livePointer = document.querySelector(
@@ -51,7 +53,7 @@ async function init() {
 
   data.sort(compareSongTitles);
 
-  const totalTime = 300; // Tempo total em segundos
+  const totalTime = 300;
   let currentTime = 2;
   let aux = 1;
 
@@ -108,8 +110,12 @@ function isElementOverlapping(element1, element2) {
       });
       livePoints++;
       totalPoints += 50 * multiplicatorPoints;
+      totalNotes++;
       livePointerEvents();
       totalPointsEvents();
+      totalNotesEvents();
+      controllerRateBars();
+      consecutiveHits++;
       return true;
     }
   }
@@ -151,6 +157,7 @@ function animateElementDown(element, distance) {
             ? (livePoints -= 2)
             : (livePoints -= 3);
         livePointerEvents();
+        controllerRateBarsMissed();
       }
 
       if (progress < duration) {
@@ -220,6 +227,7 @@ document.addEventListener("keydown", function (event) {
             : (livePoints -= 3);
 
         livePointerEvents();
+        controllerRateBarsMissed();
       }
     }
     if (teclaPressionada == "f") {
@@ -232,6 +240,7 @@ document.addEventListener("keydown", function (event) {
             ? (livePoints -= 2)
             : (livePoints -= 3);
         livePointerEvents();
+        controllerRateBarsMissed();
       }
     }
     if (teclaPressionada == "j") {
@@ -244,6 +253,7 @@ document.addEventListener("keydown", function (event) {
             ? (livePoints -= 2)
             : (livePoints -= 3);
         livePointerEvents();
+        controllerRateBarsMissed();
       }
     }
     if (teclaPressionada == "k") {
@@ -256,6 +266,7 @@ document.addEventListener("keydown", function (event) {
             ? (livePoints -= 2)
             : (livePoints -= 3);
         livePointerEvents();
+        controllerRateBarsMissed();
       }
     }
 
@@ -333,11 +344,18 @@ function totalPointsEvents() {
   document.querySelector(".container-info .box .score").textContent =
     totalPoints;
 }
+function totalNotesEvents() {
+  const formattedTotalNotes = String(totalNotes).padStart(3, "0");
+  document.querySelector(".container-info-2 .box .notes-count").textContent =
+    formattedTotalNotes;
+}
+
 function startCounting(song) {
   document.querySelector(".counter-to-start").style.display = "flex";
   document.querySelector(".container-songs").style.display = "none";
   document.querySelector(".main-container .container").style.display = "flex";
   document.querySelector(".container-info").style.display = "block";
+  document.querySelector(".container-info-2").style.display = "block";
   document.querySelector(
     ".main-container .main-container-cover"
   ).style.display = "block";
@@ -451,5 +469,82 @@ function generatorContentSongs() {
     songDiv.appendChild(songPlayDiv);
 
     contentSongs.appendChild(songDiv);
+  });
+}
+function controllerRateBars() {
+  const bars = document.querySelectorAll(".bars .bar");
+
+  function divideAndExecute(num) {
+    let numString = String(num);
+    const number = Number(numString);
+
+    if (number >= 39) {
+      numString = String(39);
+    }
+
+    const leftPart = numString.length === 1 ? 0 : Number(numString.charAt(0));
+    const rightPart =
+      numString.length === 1 ? Number(numString) : Number(numString.charAt(1));
+
+    switch (leftPart) {
+      case 0:
+        functionForZeroLeftPart(rightPart);
+        break;
+      case 1:
+        functionForOneLeftPart(rightPart);
+        break;
+      case 2:
+        functionForTwoLeftPart(rightPart);
+        break;
+      case 3:
+        functionForThreeLeftPart(rightPart);
+        break;
+    }
+  }
+
+  function functionForZeroLeftPart(rightPart) {
+    bars[rightPart].classList.add("form-1");
+    multiplicatorPoints = 1;
+    document.querySelector(
+      ".container-info-2 .box .multiplicator-n"
+    ).textContent = 1;
+  }
+
+  function functionForOneLeftPart(rightPart) {
+    bars[rightPart].classList.add("form-2");
+    multiplicatorPoints = 2;
+    document.querySelector(
+      ".container-info-2 .box .multiplicator-n"
+    ).textContent = 2;
+  }
+
+  function functionForTwoLeftPart(rightPart) {
+    bars[rightPart].classList.add("form-3");
+    multiplicatorPoints = 4;
+    document.querySelector(
+      ".container-info-2 .box .multiplicator-n"
+    ).textContent = 4;
+  }
+
+  function functionForThreeLeftPart(rightPart) {
+    bars[rightPart].classList.add("form-4");
+    multiplicatorPoints = 8;
+    document.querySelector(
+      ".container-info-2 .box .multiplicator-n"
+    ).textContent = 8;
+  }
+
+  divideAndExecute(consecutiveHits);
+}
+function controllerRateBarsMissed() {
+  const bars = document.querySelectorAll(".bars .bar");
+  consecutiveHits = 0;
+  multiplicatorPoints = 1;
+  document.querySelector(
+    ".container-info-2 .box .multiplicator-n"
+  ).textContent = 1;
+
+  bars.forEach((bar) => {
+    bar.classList.remove("form-1", "form-2", "form-3", "form-4");
   });
 }

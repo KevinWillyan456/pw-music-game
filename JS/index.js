@@ -359,6 +359,19 @@ function startCounting(song) {
   document.querySelector(
     ".main-container .main-container-cover"
   ).style.display = "block";
+  document.querySelector(
+    ".main-container .main-container-flashlight"
+  ).style.display = "block";
+
+  document
+    .querySelector(".main-container .main-container-flashlight")
+    .addEventListener("animationend", (event) => {
+      if (event.animationName === "animation-main-container-flashlight") {
+        document.querySelector(
+          ".main-container .main-container-flashlight"
+        ).style.display = "none";
+      }
+    });
 
   setTimeout(() => {
     document.querySelector(".counter-to-start").textContent = 3;
@@ -379,6 +392,9 @@ function startCounting(song) {
 function controllerFailed() {
   song.pause();
   canActions = false;
+  document.querySelector(
+    ".main-container .main-container-failed"
+  ).style.display = "flex";
 }
 
 document
@@ -400,6 +416,62 @@ document
         }
       });
     document.querySelector(".container-songs").style.display = "block";
+  });
+
+document
+  .querySelector(".main-container .main-container-failed .box .retry")
+  .addEventListener("click", () => {
+    document.querySelector(".counter-to-start").style.display = "flex";
+    document.querySelector(".main-container .container").style.display = "flex";
+    document.querySelector(".container-info").style.display = "block";
+    document.querySelector(".container-info-2").style.display = "block";
+    document.querySelector(
+      ".main-container .main-container-cover"
+    ).style.display = "block";
+    document.querySelector(
+      ".main-container .main-container-flashlight"
+    ).style.display = "block";
+
+    document
+      .querySelector(".main-container .main-container-flashlight")
+      .addEventListener("animationend", (event) => {
+        if (event.animationName === "animation-main-container-flashlight") {
+          document.querySelector(
+            ".main-container .main-container-flashlight"
+          ).style.display = "none";
+        }
+      });
+    document.querySelector(
+      ".main-container .main-container-failed"
+    ).style.display = "none";
+
+    livePoints = 51;
+    totalNotes = 0;
+    totalPoints = 0;
+    livePointerEvents();
+    totalNotesEvents();
+    totalPointsEvents();
+
+    for (let i = 0; i < songNotes.length; i++) {
+      delete songNotes[i].created;
+    }
+
+    setTimeout(() => {
+      document.querySelector(".counter-to-start").textContent = 3;
+      setTimeout(() => {
+        document.querySelector(".counter-to-start").textContent = 2;
+        setTimeout(() => {
+          document.querySelector(".counter-to-start").textContent = 1;
+          setTimeout(() => {
+            document.querySelector(".counter-to-start").textContent = "Ready?";
+            document.querySelector(".counter-to-start").style.display = "none";
+            song.currentTime = 0;
+            song.play();
+            canActions = true;
+          }, 800);
+        }, 800);
+      }, 800);
+    }, 1500);
   });
 
 function generatorContentSongs() {

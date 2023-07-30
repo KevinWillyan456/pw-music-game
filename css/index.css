@@ -597,3 +597,55 @@ body {
 .main-container .container-songs .content-songs .song .song-play:hover {
   box-shadow: 0 0 5px #e22a2a inset, 0 0 40px #e22a2a inset;
 }
+.main-container .main-container-failed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+.main-container .main-container-failed .box {
+  width: 400px;
+  height: 292px;
+  border-radius: 10px;
+  border: 2px solid #c3c3c3;
+  background: linear-gradient(180deg, #0c0922 25.03%, #5f0909 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.main-container .main-container-failed .box .title {
+  color: #fff;
+  font-size: 48px;
+  font-weight: 400;
+  margin-top: 20px;
+}
+.main-container .main-container-failed .box .retry {
+  width: 200px;
+  height: 60px;
+  background: #e7eb21;
+  color: #000;
+  font-size: 36px;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.main-container .main-container-failed .box .exit {
+  width: 200px;
+  height: 60px;
+  background: #e22a2a;
+  color: #000;
+  font-size: 36px;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}

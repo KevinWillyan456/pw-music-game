@@ -421,7 +421,8 @@ body {
   min-height: 100vh;
   align-items: center;
   justify-content: center;
-  display: flex;
+  /* display: flex; */
+  display: none;
 }
 .main-container .container-home .logo {
   display: flex;
@@ -648,4 +649,8 @@ body {
   align-items: center;
   justify-content: center;
   cursor: pointer;
+}
+.main-container .container-song-completed {
+  width: 100%;
+  /* display: none; */
 }

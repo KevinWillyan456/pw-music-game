@@ -6,13 +6,20 @@
 body {
   font-family: "Hind Vadodara", sans-serif;
 }
+body::-webkit-scrollbar {
+  width: 10px;
+}
+body::-webkit-scrollbar-track {
+  background: #5f0909;
+}
+body::-webkit-scrollbar-thumb {
+  background-color: #e22a2a;
+}
 .main-container {
   width: 100%;
   min-height: 100vh;
-  background: linear-gradient(135deg, #0c0922 0%, #5f0909 100%);
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  background: linear-gradient(135deg, #0c0922 0%, #5f0909 100%) center center /
+    cover no-repeat;
   display: flex;
   justify-content: center;
   position: relative;
@@ -421,8 +428,8 @@ body {
   min-height: 100vh;
   align-items: center;
   justify-content: center;
-  /* display: flex; */
-  display: none;
+  display: flex;
+  /* display: none; */
 }
 .main-container .container-home .logo {
   display: flex;
@@ -651,6 +658,56 @@ body {
   cursor: pointer;
 }
 .main-container .container-song-completed {
-  width: 100%;
-  /* display: none; */
+  width: calc(100% - 130px);
+  margin: 0 auto;
+  padding-top: 90px;
+  position: relative;
+  display: none;
+}
+.main-container .container-song-completed .title {
+  color: #fff;
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 40px;
+}
+.main-container .container-song-completed .points {
+  color: #fff;
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.main-container .container-song-completed .difficulty {
+  color: #fff;
+  font-size: 36px;
+  font-weight: 700;
+}
+.main-container .container-song-completed .retry {
+  position: absolute;
+  bottom: 60px;
+  right: 240px;
+  width: 200px;
+  height: 60px;
+  background: #e7eb21;
+  color: #000;
+  font-size: 36px;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.main-container .container-song-completed .exit {
+  position: absolute;
+  bottom: 60px;
+  right: 0;
+  width: 200px;
+  height: 60px;
+  background: #e22a2a;
+  color: #000;
+  font-size: 36px;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }

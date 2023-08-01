@@ -53,7 +53,7 @@ async function init() {
 
   data.sort(compareSongTitles);
 
-  const totalTime = 300;
+  const totalTime = 360;
   let currentTime = 2;
   let aux = 1;
 
@@ -201,7 +201,63 @@ function setSong(songChange) {
     `url("${songChange.songCover}")`
   );
   songTitle.textContent = songChange.songTitle;
+  livePoints = 51;
+  totalNotes = 0;
+  totalPoints = 0;
+  livePointerEvents();
+  totalNotesEvents();
+  totalPointsEvents();
 }
+
+song.addEventListener("ended", () => {
+  if (livePoints <= 0) {
+    return controllerFailed();
+  }
+
+  canActions = false;
+  document.querySelector(
+    ".main-container .container-song-completed"
+  ).style.display = "block";
+  document.querySelector(
+    ".main-container .container-song-completed .points"
+  ).textContent = `Points: ${totalPoints}`;
+
+  function getDifficulty(selectDifficulty) {
+    if (selectDifficulty === 1) {
+      return "Easy";
+    } else if (selectDifficulty === 2) {
+      return "Medium";
+    } else if (selectDifficulty === 3) {
+      return "Hard";
+    } else {
+      return "Expert";
+    }
+  }
+
+  const difficulty = getDifficulty(selectDifficulty);
+
+  document.querySelector(
+    ".main-container .container-song-completed .difficulty"
+  ).textContent = `Difficulty: ${difficulty}`;
+
+  document.querySelector(".main-container .container").style.display = "none";
+  document.querySelector(".container-info").style.display = "none";
+  document.querySelector(".container-info-2").style.display = "none";
+
+  document.querySelector(
+    ".main-container .main-container-flashlight"
+  ).style.display = "block";
+
+  document
+    .querySelector(".main-container .main-container-flashlight")
+    .addEventListener("animationend", (event) => {
+      if (event.animationName === "animation-main-container-flashlight") {
+        document.querySelector(
+          ".main-container .main-container-flashlight"
+        ).style.display = "none";
+      }
+    });
+});
 
 const teclasPermitidas = ["d", "f", "j", "k"];
 let teclaJaPressionada = {}; // Armazenar o estado de cada tecla
@@ -422,9 +478,6 @@ document
   .querySelector(".main-container .main-container-failed .box .retry")
   .addEventListener("click", () => {
     document.querySelector(".counter-to-start").style.display = "flex";
-    document.querySelector(".main-container .container").style.display = "flex";
-    document.querySelector(".container-info").style.display = "block";
-    document.querySelector(".container-info-2").style.display = "block";
     document.querySelector(
       ".main-container .main-container-cover"
     ).style.display = "block";
@@ -448,9 +501,11 @@ document
     livePoints = 51;
     totalNotes = 0;
     totalPoints = 0;
+    consecutiveHits = 0;
     livePointerEvents();
     totalNotesEvents();
     totalPointsEvents();
+    controllerRateBarsMissed();
 
     for (let i = 0; i < songNotes.length; i++) {
       delete songNotes[i].created;
@@ -472,6 +527,152 @@ document
         }, 800);
       }, 800);
     }, 1500);
+  });
+
+document
+  .querySelector(".main-container .container-song-completed .retry")
+  .addEventListener("click", () => {
+    document.querySelector(".counter-to-start").style.display = "flex";
+    document.querySelector(".main-container .container").style.display = "flex";
+    document.querySelector(".container-info").style.display = "block";
+    document.querySelector(".container-info-2").style.display = "block";
+    document.querySelector(
+      ".main-container .main-container-cover"
+    ).style.display = "block";
+    document.querySelector(
+      ".main-container .main-container-flashlight"
+    ).style.display = "block";
+
+    document
+      .querySelector(".main-container .main-container-flashlight")
+      .addEventListener("animationend", (event) => {
+        if (event.animationName === "animation-main-container-flashlight") {
+          document.querySelector(
+            ".main-container .main-container-flashlight"
+          ).style.display = "none";
+        }
+      });
+    document.querySelector(
+      ".main-container .container-song-completed"
+    ).style.display = "none";
+
+    livePoints = 51;
+    totalNotes = 0;
+    totalPoints = 0;
+    consecutiveHits = 0;
+    livePointerEvents();
+    totalNotesEvents();
+    totalPointsEvents();
+    controllerRateBarsMissed();
+
+    for (let i = 0; i < songNotes.length; i++) {
+      delete songNotes[i].created;
+    }
+
+    setTimeout(() => {
+      document.querySelector(".counter-to-start").textContent = 3;
+      setTimeout(() => {
+        document.querySelector(".counter-to-start").textContent = 2;
+        setTimeout(() => {
+          document.querySelector(".counter-to-start").textContent = 1;
+          setTimeout(() => {
+            document.querySelector(".counter-to-start").textContent = "Ready?";
+            document.querySelector(".counter-to-start").style.display = "none";
+            song.currentTime = 0;
+            song.play();
+            canActions = true;
+          }, 800);
+        }, 800);
+      }, 800);
+    }, 1500);
+  });
+
+document
+  .querySelector(".main-container .main-container-failed .box .exit")
+  .addEventListener("click", () => {
+    document.querySelector(".main-container .container").style.display = "none";
+    document.querySelector(".container-info").style.display = "none";
+    document.querySelector(".container-info-2").style.display = "none";
+    document.querySelector(
+      ".main-container .main-container-cover"
+    ).style.display = "none";
+    document.querySelector(
+      ".main-container .main-container-flashlight"
+    ).style.display = "block";
+
+    document
+      .querySelector(".main-container .main-container-flashlight")
+      .addEventListener("animationend", (event) => {
+        if (event.animationName === "animation-main-container-flashlight") {
+          document.querySelector(
+            ".main-container .main-container-flashlight"
+          ).style.display = "none";
+        }
+      });
+    document.querySelector(
+      ".main-container .main-container-failed"
+    ).style.display = "none";
+
+    document.querySelector(".main-container .container-songs").style.display =
+      "block";
+    songCover.style.background =
+      "linear-gradient(135deg, #0c0922 0%, #5f0909 100%) center center / cover no-repeat";
+
+    livePoints = 51;
+    totalNotes = 0;
+    totalPoints = 0;
+    consecutiveHits = 0;
+    livePointerEvents();
+    totalNotesEvents();
+    totalPointsEvents();
+    controllerRateBarsMissed();
+
+    for (let i = 0; i < songNotes.length; i++) {
+      delete songNotes[i].created;
+    }
+  });
+
+document
+  .querySelector(".main-container .container-song-completed .exit")
+  .addEventListener("click", () => {
+    document.querySelector(
+      ".main-container .main-container-cover"
+    ).style.display = "none";
+    document.querySelector(
+      ".main-container .main-container-flashlight"
+    ).style.display = "block";
+
+    document
+      .querySelector(".main-container .main-container-flashlight")
+      .addEventListener("animationend", (event) => {
+        if (event.animationName === "animation-main-container-flashlight") {
+          document.querySelector(
+            ".main-container .main-container-flashlight"
+          ).style.display = "none";
+        }
+      });
+
+    document.querySelector(
+      ".main-container .container-song-completed"
+    ).style.display = "none";
+
+    document.querySelector(".main-container .container-songs").style.display =
+      "block";
+    songCover.style.background =
+      "linear-gradient(135deg, #0c0922 0%, #5f0909 100%) center center / cover no-repeat";
+
+    livePoints = 51;
+    totalNotes = 0;
+    totalPoints = 0;
+    consecutiveHits = 0;
+    livePointerEvents();
+    totalNotesEvents();
+    totalPointsEvents();
+    controllerRateBarsMissed();
+
+    for (let i = 0; i < songNotes.length; i++) {
+      delete songNotes[i].created;
+    }
   });
 
 function generatorContentSongs() {

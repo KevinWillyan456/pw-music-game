@@ -130,9 +130,65 @@ function init() {
     }
     livePointerEvents()
     generatorContentSongs()
+    allEventsListeners()
 }
 
 init()
+
+function allEventsListeners() {
+    document
+        .querySelector('.main-container .container-home .logo')
+        .addEventListener('click', () => {
+            document.querySelector(
+                '.main-container .container-home'
+            ).style.display = 'none'
+            document.querySelector(
+                '.main-container .main-container-flashlight'
+            ).style.display = 'block'
+
+            document
+                .querySelector('.main-container .main-container-flashlight')
+                .addEventListener('animationend', (event) => {
+                    if (
+                        event.animationName ===
+                        'animation-main-container-flashlight'
+                    ) {
+                        document.querySelector(
+                            '.main-container .main-container-flashlight'
+                        ).style.display = 'none'
+                    }
+                })
+            document.querySelector('.container-songs').style.display = 'block'
+        })
+
+    document
+        .querySelector('.main-container .main-container-failed .box .retry')
+        .addEventListener('click', gameRetry)
+
+    document
+        .querySelector('.main-container-paused-option-retry')
+        .addEventListener('click', gameRetry)
+
+    document
+        .querySelector('.main-container .container-song-completed .retry')
+        .addEventListener('click', gamePostRetry)
+
+    document
+        .querySelector('.main-container .main-container-failed .box .exit')
+        .addEventListener('click', gameExit)
+
+    document
+        .querySelector('.main-container-paused-option-exit')
+        .addEventListener('click', gameExit)
+
+    document
+        .querySelector('.main-container .container-song-completed .exit')
+        .addEventListener('click', gamePostExit)
+
+    document
+        .querySelector('.main-container-paused-option-resume')
+        .addEventListener('click', gamePause)
+}
 
 function isElementOverlapping(element1, element2) {
     const rect1 = element1.getBoundingClientRect()
@@ -514,59 +570,6 @@ function controllerFailed() {
         '.main-container .main-container-failed'
     ).style.display = 'flex'
 }
-
-document
-    .querySelector('.main-container .container-home .logo')
-    .addEventListener('click', () => {
-        document.querySelector(
-            '.main-container .container-home'
-        ).style.display = 'none'
-        document.querySelector(
-            '.main-container .main-container-flashlight'
-        ).style.display = 'block'
-
-        document
-            .querySelector('.main-container .main-container-flashlight')
-            .addEventListener('animationend', (event) => {
-                if (
-                    event.animationName ===
-                    'animation-main-container-flashlight'
-                ) {
-                    document.querySelector(
-                        '.main-container .main-container-flashlight'
-                    ).style.display = 'none'
-                }
-            })
-        document.querySelector('.container-songs').style.display = 'block'
-    })
-
-document
-    .querySelector('.main-container .main-container-failed .box .retry')
-    .addEventListener('click', gameRetry)
-
-document
-    .querySelector('.main-container-paused-option-retry')
-    .addEventListener('click', gameRetry)
-
-document
-    .querySelector('.main-container .container-song-completed .retry')
-    .addEventListener('click', gamePostRetry)
-
-document
-    .querySelector('.main-container .main-container-failed .box .exit')
-    .addEventListener('click', gameExit)
-
-document
-    .querySelector('.main-container-paused-option-exit')
-    .addEventListener('click', gameExit)
-
-document
-    .querySelector('.main-container .container-song-completed .exit')
-    .addEventListener('click', gamePostExit)
-
-document
-    .querySelector('.main-container-paused-option-resume')
-    .addEventListener('click', gamePause)
 
 function generatorContentSongs() {
     data.forEach((song) => {

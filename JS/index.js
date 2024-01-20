@@ -28,16 +28,65 @@ const contentSongs = document.querySelector('.content-songs')
 
 const song = document.querySelector('#song')
 
-let data
+let data = [
+    {
+        songTitle: 'Akemi Homura AMV - Animal I Have Become',
+        songUrl:
+            'https://pw-music-game-db.netlify.app/resources/akemi%20homura%20amv%20-%20animal%20i%20have%20become.mp3',
+        songCover: 'https://img.youtube.com/vi/JYdAfeVR7Ck/sddefault.jpg',
+    },
+    {
+        songTitle: 'g3ox_em - GigaChad Theme (Phonk House Version)',
+        songUrl:
+            'https://pw-music-game-db.netlify.app/resources/g3ox_em%20-%20gigachad%20theme%20(phonk%20house%20version).mp3',
+        songCover: 'https://img.youtube.com/vi/OVh0bMNSFss/sddefault.jpg',
+    },
+    {
+        songTitle: 'Nightcore - abcdefu (rock version // lyrics)',
+        songUrl:
+            'https://pw-music-game-db.netlify.app/resources/nightcore%20-%20abcdefu%20(rock%20version)%20(lyrics).mp3',
+        songCover: 'https://img.youtube.com/vi/Gl0IPvyYZnY/maxresdefault.jpg',
+    },
+    {
+        songTitle: 'Nightcore - Bad boy',
+        songUrl:
+            'https://pw-music-game-db.netlify.app/resources/nightcore%20-%20bad%20boy.mp3',
+        songCover: 'https://img.youtube.com/vi/cmlCuzn_mqI/maxresdefault.jpg',
+    },
+    {
+        songTitle: 'Nightcore - MONEY (Rock Version) (Lyrics)',
+        songUrl:
+            'https://pw-music-game-db.netlify.app/resources/nightcore%20-%20money%20(rock%20version)%20(lyrics).mp3',
+        songCover: 'https://img.youtube.com/vi/mLo0B-KHKPo/maxresdefault.jpg',
+    },
+    {
+        songTitle: 'Nightcore - Toxic (Rock Version) (Lyrics)',
+        songUrl:
+            'https://pw-music-game-db.netlify.app/resources/nightcore%20-%20toxic%20(rock%20version)%20(lyrics).mp3',
+        songCover: 'https://img.youtube.com/vi/sfNUUtJSKKY/maxresdefault.jpg',
+    },
+    {
+        songTitle: 'Nightcore ↬ Just Dance [ROCK VERSION | sped up]',
+        songUrl:
+            'https://pw-music-game-db.netlify.app/resources/nightcore%20-%20just%20dance%20(rock%20version)%20(sped%20up).mp3',
+        songCover: 'https://img.youtube.com/vi/uXaExKJkP_g/maxresdefault.jpg',
+    },
+    {
+        songTitle: 'Pretty Rave Girl 2010 - S3RL',
+        songUrl:
+            'https://pw-music-game-db.netlify.app/resources/pretty%20rave%20girl%202010%20-%20s3rl.mp3',
+        songCover: 'https://img.youtube.com/vi/WaNwvukxz64/maxresdefault.jpg',
+    },
+    {
+        songTitle: `Oliver Tree - Miss You (Bemax Cover Remix) I'm Your Treasure Box [AMV]`,
+        songUrl:
+            'https://pw-music-game-db.netlify.app/resources/oliver%20tree%20-%20miss%20you%20(bemax%20cover%20remix)%20i%E2%80%99m%20your%20treasure%20box%20[amv].mp3',
+        songCover: 'https://img.youtube.com/vi/TOoC7aXkpMs/maxresdefault.jpg',
+    },
+]
 let songNotes = []
 
-async function init() {
-    const response = await fetch(
-        'https://pw-music-game-database.kevinsouza456.repl.co/data.json'
-    )
-    const responseJson = await response.json()
-    data = responseJson
-
+function init() {
     function compareSongTitles(a, b) {
         const songTitleA = a.songTitle.toUpperCase()
         const songTitleB = b.songTitle.toUpperCase()

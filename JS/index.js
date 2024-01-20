@@ -15,8 +15,12 @@ let totalPoints = 0
 let multiplicatorPoints = 1
 let selectDifficulty = 2
 let canActions = false
+let canPause = false
 let totalNotes = 0
 let consecutiveHits = 0
+
+let gamePausedDelay = null
+let gamePaused = false
 
 const containerTarget = document.querySelector('.main-container .container')
 const livePointer = document.querySelector(
@@ -211,7 +215,7 @@ function animateElementDown(element, distance) {
                 controllerRateBarsMissed()
             }
 
-            if (progress < duration) {
+            if (progress < duration && gamePaused === false) {
                 requestAnimationFrame(step)
             }
         }
@@ -310,7 +314,7 @@ song.addEventListener('ended', () => {
         })
 })
 
-const teclasPermitidas = ['d', 'f', 'j', 'k']
+const teclasPermitidas = ['d', 'f', 'j', 'k', 'p']
 let teclaJaPressionada = {} // Armazenar o estado de cada tecla
 
 document.addEventListener('keydown', function (event) {
@@ -395,6 +399,9 @@ document.addEventListener('keyup', function (event) {
     }
     if (teclaPressionada == 'k') {
         trail4.classList.remove('pressed')
+    }
+    if (teclaPressionada == 'p') {
+        gamePause()
     }
 
     teclaJaPressionada[teclaPressionada] = false
@@ -493,6 +500,7 @@ function startCounting(song) {
                         'none'
                     setSong(song)
                     canActions = true
+                    canPause = true
                 }, 800)
             }, 800)
         }, 800)
@@ -501,6 +509,7 @@ function startCounting(song) {
 function controllerFailed() {
     song.pause()
     canActions = false
+    gamePausedDelay = null
     document.querySelector(
         '.main-container .main-container-failed'
     ).style.display = 'flex'
@@ -533,228 +542,31 @@ document
 
 document
     .querySelector('.main-container .main-container-failed .box .retry')
-    .addEventListener('click', () => {
-        document.querySelector('.counter-to-start').style.display = 'flex'
-        document.querySelector(
-            '.main-container .main-container-cover'
-        ).style.display = 'block'
-        document.querySelector(
-            '.main-container .main-container-flashlight'
-        ).style.display = 'block'
+    .addEventListener('click', gameRetry)
 
-        document
-            .querySelector('.main-container .main-container-flashlight')
-            .addEventListener('animationend', (event) => {
-                if (
-                    event.animationName ===
-                    'animation-main-container-flashlight'
-                ) {
-                    document.querySelector(
-                        '.main-container .main-container-flashlight'
-                    ).style.display = 'none'
-                }
-            })
-        document.querySelector(
-            '.main-container .main-container-failed'
-        ).style.display = 'none'
-
-        livePoints = 51
-        totalNotes = 0
-        totalPoints = 0
-        consecutiveHits = 0
-        livePointerEvents()
-        totalNotesEvents()
-        totalPointsEvents()
-        controllerRateBarsMissed()
-
-        for (let i = 0; i < songNotes.length; i++) {
-            delete songNotes[i].created
-        }
-
-        setTimeout(() => {
-            document.querySelector('.counter-to-start').textContent = 3
-            setTimeout(() => {
-                document.querySelector('.counter-to-start').textContent = 2
-                setTimeout(() => {
-                    document.querySelector('.counter-to-start').textContent = 1
-                    setTimeout(() => {
-                        document.querySelector(
-                            '.counter-to-start'
-                        ).textContent = 'Ready?'
-                        document.querySelector(
-                            '.counter-to-start'
-                        ).style.display = 'none'
-                        song.currentTime = 0
-                        song.play()
-                        canActions = true
-                    }, 800)
-                }, 800)
-            }, 800)
-        }, 1500)
-    })
+document
+    .querySelector('.main-container-paused-option-retry')
+    .addEventListener('click', gameRetry)
 
 document
     .querySelector('.main-container .container-song-completed .retry')
-    .addEventListener('click', () => {
-        document.querySelector('.counter-to-start').style.display = 'flex'
-        document.querySelector('.main-container .container').style.display =
-            'flex'
-        document.querySelector('.container-info').style.display = 'block'
-        document.querySelector('.container-info-2').style.display = 'block'
-        document.querySelector(
-            '.main-container .main-container-cover'
-        ).style.display = 'block'
-        document.querySelector(
-            '.main-container .main-container-flashlight'
-        ).style.display = 'block'
-
-        document
-            .querySelector('.main-container .main-container-flashlight')
-            .addEventListener('animationend', (event) => {
-                if (
-                    event.animationName ===
-                    'animation-main-container-flashlight'
-                ) {
-                    document.querySelector(
-                        '.main-container .main-container-flashlight'
-                    ).style.display = 'none'
-                }
-            })
-        document.querySelector(
-            '.main-container .container-song-completed'
-        ).style.display = 'none'
-
-        livePoints = 51
-        totalNotes = 0
-        totalPoints = 0
-        consecutiveHits = 0
-        livePointerEvents()
-        totalNotesEvents()
-        totalPointsEvents()
-        controllerRateBarsMissed()
-
-        for (let i = 0; i < songNotes.length; i++) {
-            delete songNotes[i].created
-        }
-
-        setTimeout(() => {
-            document.querySelector('.counter-to-start').textContent = 3
-            setTimeout(() => {
-                document.querySelector('.counter-to-start').textContent = 2
-                setTimeout(() => {
-                    document.querySelector('.counter-to-start').textContent = 1
-                    setTimeout(() => {
-                        document.querySelector(
-                            '.counter-to-start'
-                        ).textContent = 'Ready?'
-                        document.querySelector(
-                            '.counter-to-start'
-                        ).style.display = 'none'
-                        song.currentTime = 0
-                        song.play()
-                        canActions = true
-                    }, 800)
-                }, 800)
-            }, 800)
-        }, 1500)
-    })
+    .addEventListener('click', gamePostRetry)
 
 document
     .querySelector('.main-container .main-container-failed .box .exit')
-    .addEventListener('click', () => {
-        document.querySelector('.main-container .container').style.display =
-            'none'
-        document.querySelector('.container-info').style.display = 'none'
-        document.querySelector('.container-info-2').style.display = 'none'
-        document.querySelector(
-            '.main-container .main-container-cover'
-        ).style.display = 'none'
-        document.querySelector(
-            '.main-container .main-container-flashlight'
-        ).style.display = 'block'
+    .addEventListener('click', gameExit)
 
-        document
-            .querySelector('.main-container .main-container-flashlight')
-            .addEventListener('animationend', (event) => {
-                if (
-                    event.animationName ===
-                    'animation-main-container-flashlight'
-                ) {
-                    document.querySelector(
-                        '.main-container .main-container-flashlight'
-                    ).style.display = 'none'
-                }
-            })
-        document.querySelector(
-            '.main-container .main-container-failed'
-        ).style.display = 'none'
-
-        document.querySelector(
-            '.main-container .container-songs'
-        ).style.display = 'block'
-        songCover.style.background =
-            'linear-gradient(135deg, #0c0922 0%, #5f0909 100%) center center / cover no-repeat'
-
-        livePoints = 51
-        totalNotes = 0
-        totalPoints = 0
-        consecutiveHits = 0
-        livePointerEvents()
-        totalNotesEvents()
-        totalPointsEvents()
-        controllerRateBarsMissed()
-
-        for (let i = 0; i < songNotes.length; i++) {
-            delete songNotes[i].created
-        }
-    })
+document
+    .querySelector('.main-container-paused-option-exit')
+    .addEventListener('click', gameExit)
 
 document
     .querySelector('.main-container .container-song-completed .exit')
-    .addEventListener('click', () => {
-        document.querySelector(
-            '.main-container .main-container-cover'
-        ).style.display = 'none'
-        document.querySelector(
-            '.main-container .main-container-flashlight'
-        ).style.display = 'block'
+    .addEventListener('click', gamePostExit)
 
-        document
-            .querySelector('.main-container .main-container-flashlight')
-            .addEventListener('animationend', (event) => {
-                if (
-                    event.animationName ===
-                    'animation-main-container-flashlight'
-                ) {
-                    document.querySelector(
-                        '.main-container .main-container-flashlight'
-                    ).style.display = 'none'
-                }
-            })
-
-        document.querySelector(
-            '.main-container .container-song-completed'
-        ).style.display = 'none'
-
-        document.querySelector(
-            '.main-container .container-songs'
-        ).style.display = 'block'
-        songCover.style.background =
-            'linear-gradient(135deg, #0c0922 0%, #5f0909 100%) center center / cover no-repeat'
-
-        livePoints = 51
-        totalNotes = 0
-        totalPoints = 0
-        consecutiveHits = 0
-        livePointerEvents()
-        totalNotesEvents()
-        totalPointsEvents()
-        controllerRateBarsMissed()
-
-        for (let i = 0; i < songNotes.length; i++) {
-            delete songNotes[i].created
-        }
-    })
+document
+    .querySelector('.main-container-paused-option-resume')
+    .addEventListener('click', gamePause)
 
 function generatorContentSongs() {
     data.forEach((song) => {
@@ -906,5 +718,252 @@ function controllerRateBarsMissed() {
 
     bars.forEach((bar) => {
         bar.classList.remove('form-1', 'form-2', 'form-3', 'form-4')
+    })
+}
+function gamePause() {
+    if (gamePausedDelay || !canPause) {
+        return
+    }
+    gamePausedDelay = setTimeout(() => {
+        gamePausedDelay = null
+    }, 1000)
+
+    if (gamePaused === false) {
+        gamePaused = true
+        canActions = false
+        song.pause()
+        document.querySelector(
+            '.main-container .main-container-paused'
+        ).style.display = 'flex'
+    } else {
+        gamePaused = false
+        canActions = true
+        song.play()
+        document.querySelector(
+            '.main-container .main-container-paused'
+        ).style.display = 'none'
+    }
+}
+
+function gameRetry() {
+    document.querySelector('.counter-to-start').style.display = 'flex'
+    document.querySelector(
+        '.main-container .main-container-cover'
+    ).style.display = 'block'
+    document.querySelector(
+        '.main-container .main-container-flashlight'
+    ).style.display = 'block'
+    document.querySelector(
+        '.main-container .main-container-paused'
+    ).style.display = 'none'
+
+    document
+        .querySelector('.main-container .main-container-flashlight')
+        .addEventListener('animationend', (event) => {
+            if (event.animationName === 'animation-main-container-flashlight') {
+                document.querySelector(
+                    '.main-container .main-container-flashlight'
+                ).style.display = 'none'
+            }
+        })
+    document.querySelector(
+        '.main-container .main-container-failed'
+    ).style.display = 'none'
+
+    livePoints = 51
+    totalNotes = 0
+    totalPoints = 0
+    consecutiveHits = 0
+    livePointerEvents()
+    totalNotesEvents()
+    totalPointsEvents()
+    controllerRateBarsMissed()
+    gamePaused = false
+
+    for (let i = 0; i < songNotes.length; i++) {
+        delete songNotes[i].created
+    }
+
+    document.querySelectorAll('.target').forEach((target) => {
+        target.remove()
+    })
+
+    setTimeout(() => {
+        document.querySelector('.counter-to-start').textContent = 3
+        setTimeout(() => {
+            document.querySelector('.counter-to-start').textContent = 2
+            setTimeout(() => {
+                document.querySelector('.counter-to-start').textContent = 1
+                setTimeout(() => {
+                    document.querySelector('.counter-to-start').textContent =
+                        'Ready?'
+                    document.querySelector('.counter-to-start').style.display =
+                        'none'
+                    song.currentTime = 0
+                    song.play()
+                    canActions = true
+                    canPause = true
+                }, 800)
+            }, 800)
+        }, 800)
+    }, 1500)
+}
+
+function gamePostRetry() {
+    document.querySelector('.counter-to-start').style.display = 'flex'
+    document.querySelector('.main-container .container').style.display = 'flex'
+    document.querySelector('.container-info').style.display = 'block'
+    document.querySelector('.container-info-2').style.display = 'block'
+    document.querySelector(
+        '.main-container .main-container-cover'
+    ).style.display = 'block'
+    document.querySelector(
+        '.main-container .main-container-flashlight'
+    ).style.display = 'block'
+
+    document
+        .querySelector('.main-container .main-container-flashlight')
+        .addEventListener('animationend', (event) => {
+            if (event.animationName === 'animation-main-container-flashlight') {
+                document.querySelector(
+                    '.main-container .main-container-flashlight'
+                ).style.display = 'none'
+            }
+        })
+    document.querySelector(
+        '.main-container .container-song-completed'
+    ).style.display = 'none'
+
+    livePoints = 51
+    totalNotes = 0
+    totalPoints = 0
+    consecutiveHits = 0
+    livePointerEvents()
+    totalNotesEvents()
+    totalPointsEvents()
+    controllerRateBarsMissed()
+
+    for (let i = 0; i < songNotes.length; i++) {
+        delete songNotes[i].created
+    }
+
+    document.querySelectorAll('.target').forEach((target) => {
+        target.remove()
+    })
+
+    setTimeout(() => {
+        document.querySelector('.counter-to-start').textContent = 3
+        setTimeout(() => {
+            document.querySelector('.counter-to-start').textContent = 2
+            setTimeout(() => {
+                document.querySelector('.counter-to-start').textContent = 1
+                setTimeout(() => {
+                    document.querySelector('.counter-to-start').textContent =
+                        'Ready?'
+                    document.querySelector('.counter-to-start').style.display =
+                        'none'
+                    song.currentTime = 0
+                    song.play()
+                    canActions = true
+                    canPause = true
+                }, 800)
+            }, 800)
+        }, 800)
+    }, 1500)
+}
+
+function gameExit() {
+    document.querySelector('.main-container .container').style.display = 'none'
+    document.querySelector('.container-info').style.display = 'none'
+    document.querySelector('.container-info-2').style.display = 'none'
+    document.querySelector(
+        '.main-container .main-container-cover'
+    ).style.display = 'none'
+    document.querySelector(
+        '.main-container .main-container-flashlight'
+    ).style.display = 'block'
+    document.querySelector(
+        '.main-container .main-container-paused'
+    ).style.display = 'none'
+
+    document
+        .querySelector('.main-container .main-container-flashlight')
+        .addEventListener('animationend', (event) => {
+            if (event.animationName === 'animation-main-container-flashlight') {
+                document.querySelector(
+                    '.main-container .main-container-flashlight'
+                ).style.display = 'none'
+            }
+        })
+    document.querySelector(
+        '.main-container .main-container-failed'
+    ).style.display = 'none'
+
+    document.querySelector('.main-container .container-songs').style.display =
+        'block'
+    songCover.style.background =
+        'linear-gradient(135deg, #0c0922 0%, #5f0909 100%) center center / cover no-repeat'
+
+    livePoints = 51
+    totalNotes = 0
+    totalPoints = 0
+    consecutiveHits = 0
+    livePointerEvents()
+    totalNotesEvents()
+    totalPointsEvents()
+    controllerRateBarsMissed()
+    gamePaused = false
+
+    for (let i = 0; i < songNotes.length; i++) {
+        delete songNotes[i].created
+    }
+
+    document.querySelectorAll('.target').forEach((target) => {
+        target.remove()
+    })
+}
+
+function gamePostExit() {
+    document.querySelector(
+        '.main-container .main-container-cover'
+    ).style.display = 'none'
+    document.querySelector(
+        '.main-container .main-container-flashlight'
+    ).style.display = 'block'
+
+    document
+        .querySelector('.main-container .main-container-flashlight')
+        .addEventListener('animationend', (event) => {
+            if (event.animationName === 'animation-main-container-flashlight') {
+                document.querySelector(
+                    '.main-container .main-container-flashlight'
+                ).style.display = 'none'
+            }
+        })
+
+    document.querySelector(
+        '.main-container .container-song-completed'
+    ).style.display = 'none'
+
+    document.querySelector('.main-container .container-songs').style.display =
+        'block'
+    songCover.style.background =
+        'linear-gradient(135deg, #0c0922 0%, #5f0909 100%) center center / cover no-repeat'
+
+    livePoints = 51
+    totalNotes = 0
+    totalPoints = 0
+    consecutiveHits = 0
+    livePointerEvents()
+    totalNotesEvents()
+    totalPointsEvents()
+    controllerRateBarsMissed()
+
+    for (let i = 0; i < songNotes.length; i++) {
+        delete songNotes[i].created
+    }
+
+    document.querySelectorAll('.target').forEach((target) => {
+        target.remove()
     })
 }

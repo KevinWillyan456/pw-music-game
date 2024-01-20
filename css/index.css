@@ -5,6 +5,7 @@
 }
 body {
     font-family: 'Hind Vadodara', sans-serif;
+    user-select: none;
 }
 body::-webkit-scrollbar {
     width: 10px;
@@ -700,6 +701,73 @@ body::-webkit-scrollbar-thumb {
     position: absolute;
     bottom: 60px;
     right: 0;
+    width: 200px;
+    height: 60px;
+    background: #e22a2a;
+    color: #000;
+    font-size: 36px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.main-container .main-container-paused {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 54px;
+    flex-direction: column;
+}
+.main-container-paused .box {
+    width: 400px;
+    height: 372px;
+    border-radius: 10px;
+    border: 2px solid #c3c3c3;
+    background: linear-gradient(180deg, #0c0922 25.03%, #5f0909 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+.main-container-paused-title {
+    color: #fff;
+    font-size: 48px;
+    font-weight: 400;
+    margin-top: 20px;
+}
+.main-container-paused-option-resume {
+    width: 200px;
+    height: 60px;
+    background: #11c718;
+    color: #000;
+    font-size: 36px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.main-container-paused-option-retry {
+    width: 200px;
+    height: 60px;
+    background: #e7eb21;
+    color: #000;
+    font-size: 36px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.main-container-paused-option-exit {
     width: 200px;
     height: 60px;
     background: #e22a2a;

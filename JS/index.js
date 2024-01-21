@@ -304,8 +304,37 @@ song.addEventListener('timeupdate', function () {
     })
 })
 
-function setSong(songChange) {
+function loadSong(songChange) {
     song.src = songChange.songUrl
+
+    document.querySelector('.counter-to-start').style.display = 'flex'
+    document.querySelector('.container-songs').style.display = 'none'
+    document.querySelector('.main-container .container').style.display = 'flex'
+    document.querySelector('.container-info').style.display = 'block'
+    document.querySelector('.container-info-2').style.display = 'block'
+    document.querySelector(
+        '.main-container .main-container-cover'
+    ).style.display = 'block'
+    document.querySelector(
+        '.main-container .main-container-flashlight'
+    ).style.display = 'block'
+
+    document
+        .querySelector('.main-container .main-container-flashlight')
+        .addEventListener('animationend', (event) => {
+            if (event.animationName === 'animation-main-container-flashlight') {
+                document.querySelector(
+                    '.main-container .main-container-flashlight'
+                ).style.display = 'none'
+            }
+        })
+    document.querySelector('.counter-to-start').textContent = 'Loading...'
+    song.addEventListener('canplaythrough', () => {
+        startCounting(songChange)
+    })
+}
+
+function setSong(songChange) {
     song.play()
     songCover.style.setProperty(
         'background-image',
@@ -521,27 +550,7 @@ function totalNotesEvents() {
 }
 
 function startCounting(song) {
-    document.querySelector('.counter-to-start').style.display = 'flex'
-    document.querySelector('.container-songs').style.display = 'none'
-    document.querySelector('.main-container .container').style.display = 'flex'
-    document.querySelector('.container-info').style.display = 'block'
-    document.querySelector('.container-info-2').style.display = 'block'
-    document.querySelector(
-        '.main-container .main-container-cover'
-    ).style.display = 'block'
-    document.querySelector(
-        '.main-container .main-container-flashlight'
-    ).style.display = 'block'
-
-    document
-        .querySelector('.main-container .main-container-flashlight')
-        .addEventListener('animationend', (event) => {
-            if (event.animationName === 'animation-main-container-flashlight') {
-                document.querySelector(
-                    '.main-container .main-container-flashlight'
-                ).style.display = 'none'
-            }
-        })
+    document.querySelector('.counter-to-start').textContent = 'Ready?'
 
     setTimeout(() => {
         document.querySelector('.counter-to-start').textContent = 3
@@ -550,8 +559,6 @@ function startCounting(song) {
             setTimeout(() => {
                 document.querySelector('.counter-to-start').textContent = 1
                 setTimeout(() => {
-                    document.querySelector('.counter-to-start').textContent =
-                        'Ready?'
                     document.querySelector('.counter-to-start').style.display =
                         'none'
                     setSong(song)
@@ -565,6 +572,7 @@ function startCounting(song) {
 function controllerFailed() {
     song.pause()
     canActions = false
+    canPause = false
     gamePausedDelay = null
     document.querySelector(
         '.main-container .main-container-failed'
@@ -625,7 +633,7 @@ function generatorContentSongs() {
         songPlayDiv.classList.add('song-play')
         songPlayDiv.textContent = 'Play'
         songPlayDiv.addEventListener('click', () => {
-            startCounting(song)
+            loadSong(song)
         })
 
         contentDifficultyDiv.appendChild(difficultyEasyDiv)
@@ -782,6 +790,7 @@ function gameRetry() {
     totalPointsEvents()
     controllerRateBarsMissed()
     gamePaused = false
+    canPause = false
 
     for (let i = 0; i < songNotes.length; i++) {
         delete songNotes[i].created
@@ -916,6 +925,7 @@ function gameExit() {
     totalPointsEvents()
     controllerRateBarsMissed()
     gamePaused = false
+    canPause = false
 
     for (let i = 0; i < songNotes.length; i++) {
         delete songNotes[i].created
@@ -961,6 +971,7 @@ function gamePostExit() {
     totalNotesEvents()
     totalPointsEvents()
     controllerRateBarsMissed()
+    canPause = false
 
     for (let i = 0; i < songNotes.length; i++) {
         delete songNotes[i].created

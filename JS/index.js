@@ -226,6 +226,7 @@ function isElementOverlapping(element1, element2) {
             totalPointsEvents()
             totalNotesEvents()
             controllerRateBars()
+            consecutiveHitsEvents()
             consecutiveHits++
             return true
         }
@@ -577,6 +578,43 @@ function controllerFailed() {
     document.querySelector(
         '.main-container .main-container-failed'
     ).style.display = 'flex'
+}
+
+let timerConsecutiveHits = null
+function consecutiveHitsEvents() {
+    if (
+        (consecutiveHits % 50 === 0 && consecutiveHits !== 0) ||
+        consecutiveHits === 20
+    ) {
+        if (timerConsecutiveHits) {
+            clearTimeout(timerConsecutiveHits)
+            timerConsecutiveHits = null
+        }
+        document.querySelector('.consecutive-hits').style.display = 'flex'
+        document.querySelector(
+            '.consecutive-hits'
+        ).textContent = `${consecutiveHits} consecutive hits!`
+
+        timerConsecutiveHits = setTimeout(() => {
+            document.querySelector('.consecutive-hits').classList.add('fade')
+
+            document
+                .querySelector('.consecutive-hits')
+                .addEventListener('animationend', (event) => {
+                    if (
+                        event.animationName ===
+                        'animation-consecutive-hits-exit'
+                    ) {
+                        document
+                            .querySelector('.consecutive-hits')
+                            .classList.remove('fade')
+                        document.querySelector(
+                            '.consecutive-hits'
+                        ).style.display = 'none'
+                    }
+                })
+        }, 4000)
+    }
 }
 
 function generatorContentSongs() {

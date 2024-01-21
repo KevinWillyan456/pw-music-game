@@ -779,3 +779,48 @@ body::-webkit-scrollbar-thumb {
     justify-content: center;
     cursor: pointer;
 }
+.consecutive-hits {
+    animation: animation-consecutive-hits-color 200ms infinite alternate linear,
+        animation-consecutive-hits-enter 1s linear;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 54px;
+    flex-direction: column;
+}
+.consecutive-hits.fade {
+    animation: animation-consecutive-hits-exit 1s linear;
+}
+@keyframes animation-consecutive-hits-enter {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(0%);
+    }
+}
+@keyframes animation-consecutive-hits-exit {
+    0% {
+        transform: translateY(0%);
+    }
+    100% {
+        transform: translateY(-100%);
+    }
+}
+@keyframes animation-consecutive-hits-color {
+    0% {
+        color: white;
+    }
+    50% {
+        color: #24f82c;
+    }
+    100% {
+        color: #e22a2a;
+    }
+}

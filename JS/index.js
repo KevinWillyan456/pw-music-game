@@ -31,6 +31,7 @@ const songTitle = document.querySelector('.container-info .box .name')
 const contentSongs = document.querySelector('.content-songs')
 
 const song = document.querySelector('#song')
+const songPreviw = document.querySelector('#song-preview')
 
 let data = [
     {
@@ -159,6 +160,7 @@ function allEventsListeners() {
                     }
                 })
             document.querySelector('.container-songs').style.display = 'block'
+            setPreviewDifficulty(selectDifficulty)
         })
 
     document
@@ -319,6 +321,14 @@ function loadSong(songChange) {
     document.querySelector(
         '.main-container .main-container-flashlight'
     ).style.display = 'block'
+
+    document
+        .querySelectorAll(
+            '.main-container .container-songs .content-songs .song'
+        )
+        .forEach((song) => {
+            song.classList.remove('selected')
+        })
 
     document
         .querySelector('.main-container .main-container-flashlight')
@@ -628,6 +638,17 @@ function generatorContentSongs() {
 
         const previewDiv = document.createElement('div')
         previewDiv.classList.add('preview')
+        previewDiv.addEventListener('click', () => {
+            gameSongPreview(song)
+            document
+                .querySelectorAll(
+                    '.main-container .container-songs .content-songs .song'
+                )
+                .forEach((song) => {
+                    song.classList.remove('selected')
+                })
+            songDiv.classList.add('selected')
+        })
 
         const divisionDiv = document.createElement('div')
         divisionDiv.classList.add('division')
@@ -644,6 +665,7 @@ function generatorContentSongs() {
         difficultyEasyDiv.textContent = 'Easy'
         difficultyEasyDiv.addEventListener('click', () => {
             selectDifficulty = 1
+            setPreviewDifficulty(selectDifficulty)
         })
 
         const difficultyMediumDiv = document.createElement('div')
@@ -651,6 +673,7 @@ function generatorContentSongs() {
         difficultyMediumDiv.textContent = 'Medium'
         difficultyMediumDiv.addEventListener('click', () => {
             selectDifficulty = 2
+            setPreviewDifficulty(selectDifficulty)
         })
 
         const difficultyHardDiv = document.createElement('div')
@@ -658,6 +681,7 @@ function generatorContentSongs() {
         difficultyHardDiv.textContent = 'Hard'
         difficultyHardDiv.addEventListener('click', () => {
             selectDifficulty = 3
+            setPreviewDifficulty(selectDifficulty)
         })
 
         const difficultyExpertDiv = document.createElement('div')
@@ -665,12 +689,14 @@ function generatorContentSongs() {
         difficultyExpertDiv.textContent = 'Expert'
         difficultyExpertDiv.addEventListener('click', () => {
             selectDifficulty = 4
+            setPreviewDifficulty(selectDifficulty)
         })
 
         const songPlayDiv = document.createElement('div')
         songPlayDiv.classList.add('song-play')
         songPlayDiv.textContent = 'Play'
         songPlayDiv.addEventListener('click', () => {
+            gameSongPreviewStop()
             loadSong(song)
         })
 
@@ -838,6 +864,8 @@ function gameRetry() {
         target.remove()
     })
 
+    document.querySelector('.counter-to-start').textContent = 'Ready?'
+
     setTimeout(() => {
         document.querySelector('.counter-to-start').textContent = 3
         setTimeout(() => {
@@ -845,8 +873,6 @@ function gameRetry() {
             setTimeout(() => {
                 document.querySelector('.counter-to-start').textContent = 1
                 setTimeout(() => {
-                    document.querySelector('.counter-to-start').textContent =
-                        'Ready?'
                     document.querySelector('.counter-to-start').style.display =
                         'none'
                     song.currentTime = 0
@@ -901,6 +927,8 @@ function gamePostRetry() {
         target.remove()
     })
 
+    document.querySelector('.counter-to-start').textContent = 'Ready?'
+
     setTimeout(() => {
         document.querySelector('.counter-to-start').textContent = 3
         setTimeout(() => {
@@ -908,8 +936,6 @@ function gamePostRetry() {
             setTimeout(() => {
                 document.querySelector('.counter-to-start').textContent = 1
                 setTimeout(() => {
-                    document.querySelector('.counter-to-start').textContent =
-                        'Ready?'
                     document.querySelector('.counter-to-start').style.display =
                         'none'
                     song.currentTime = 0
@@ -1018,4 +1044,155 @@ function gamePostExit() {
     document.querySelectorAll('.target').forEach((target) => {
         target.remove()
     })
+}
+
+let timerGameSongPreview = null
+function gameSongPreview(songChange) {
+    if (songPreviw.src === songChange.songUrl) {
+        return
+    }
+    songPreviw.src = songChange.songUrl
+    songPreviw.play()
+
+    if (timerGameSongPreview) {
+        clearTimeout(timerGameSongPreview)
+        timerGameSongPreview = null
+    }
+
+    document.querySelector('.song-preview-details').classList.remove('hide')
+
+    timerGameSongPreview = setTimeout(() => {
+        songPreviwDetailsClose()
+    }, 10000)
+
+    document.querySelector('.song-preview-details').style.display = 'flex'
+    document.querySelector(
+        '.song-preview-details-title-song'
+    ).textContent = `Song title: ${songChange.songTitle}`
+
+    setPreviewDifficulty(selectDifficulty)
+
+    document.querySelector('.song-preview-details-duration').textContent =
+        'Song duration: --:--'
+
+    songPreviw.addEventListener('loadedmetadata', () => {
+        const minutes = Math.floor(songPreviw.duration / 60)
+        const seconds = Math.floor(songPreviw.duration - minutes * 60)
+        document.querySelector(
+            '.song-preview-details-duration'
+        ).textContent = `Song duration: ${minutes}m ${seconds}s`
+    })
+}
+
+function gameSongPreviewStop() {
+    songPreviw.pause()
+    songPreviw.src = ''
+    document.querySelector('.song-preview-details').classList.remove('hide')
+
+    if (timerGameSongPreview) {
+        clearTimeout(timerGameSongPreview)
+        timerGameSongPreview = null
+    }
+
+    document.querySelector('.song-preview-details').classList.add('exit')
+    document
+        .querySelector('.song-preview-details.exit')
+        .addEventListener('animationend', (event) => {
+            if (event.animationName === 'animation-song-preview-details-exit') {
+                document.querySelector('.song-preview-details').style.display =
+                    'none'
+                document
+                    .querySelector('.song-preview-details')
+                    .classList.remove('exit')
+            }
+        })
+}
+
+function songPreviwDetailsClose() {
+    document.querySelector('.song-preview-details').classList.add('hide')
+    document
+        .querySelector('.song-preview-details')
+        .addEventListener('click', () => {
+            if (
+                document
+                    .querySelector('.song-preview-details')
+                    .classList.contains('hide')
+            ) {
+                document
+                    .querySelector('.song-preview-details')
+                    .classList.remove('hide')
+            }
+        })
+    timerGameSongPreview = null
+}
+
+function setPreviewDifficulty(selectDifficulty) {
+    const difficulty =
+        selectDifficulty === 1
+            ? 'Easy'
+            : selectDifficulty === 2
+            ? 'Medium'
+            : selectDifficulty === 3
+            ? 'Hard'
+            : 'Expert'
+
+    if (difficulty === 'Easy') {
+        document
+            .querySelectorAll(
+                '.difficulty-expert, .difficulty-hard, .difficulty-medium'
+            )
+            .forEach((difficulty) => {
+                difficulty.classList.remove('selected')
+            })
+        document.querySelectorAll('.difficulty-easy').forEach((difficulty) => {
+            difficulty.classList.add('selected')
+        })
+    }
+
+    if (difficulty === 'Medium') {
+        document
+            .querySelectorAll(
+                '.difficulty-expert, .difficulty-hard, .difficulty-easy'
+            )
+            .forEach((difficulty) => {
+                difficulty.classList.remove('selected')
+            })
+        document
+            .querySelectorAll('.difficulty-medium')
+            .forEach((difficulty) => {
+                difficulty.classList.add('selected')
+            })
+    }
+
+    if (difficulty === 'Hard') {
+        document
+            .querySelectorAll(
+                '.difficulty-expert, .difficulty-easy, .difficulty-medium'
+            )
+            .forEach((difficulty) => {
+                difficulty.classList.remove('selected')
+            })
+        document.querySelectorAll('.difficulty-hard').forEach((difficulty) => {
+            difficulty.classList.add('selected')
+        })
+    }
+
+    if (difficulty === 'Expert') {
+        document
+            .querySelectorAll(
+                '.difficulty-easy, .difficulty-hard, .difficulty-medium'
+            )
+            .forEach((difficulty) => {
+                difficulty.classList.remove('selected')
+            })
+        document
+            .querySelectorAll('.difficulty-expert')
+            .forEach((difficulty) => {
+                difficulty.classList.add('selected')
+            })
+    }
+
+    document.querySelector(
+        '.song-preview-details-difficulty'
+    ).textContent = `Selected difficulty: ${difficulty}`
 }

@@ -26,7 +26,7 @@ body::-webkit-scrollbar-thumb {
     position: relative;
 }
 
-.main-container .main-container-cover {
+.main-container .container-game-cover {
     display: none;
     position: absolute;
     top: 0;
@@ -35,8 +35,8 @@ body::-webkit-scrollbar-thumb {
     min-height: 100vh;
     background-color: rgba(0, 0, 0, 0.4);
 }
-.main-container .main-container-flashlight {
-    animation: animation-main-container-flashlight 400ms linear;
+.main-container .screen-flashlight {
+    animation: animation-screen-flashlight 400ms linear;
     position: absolute;
     top: 0;
     left: 0;
@@ -45,7 +45,7 @@ body::-webkit-scrollbar-thumb {
     background-color: rgba(255, 255, 255, 0.08);
     display: none;
 }
-@keyframes animation-main-container-flashlight {
+@keyframes animation-screen-flashlight {
     0% {
         background-color: rgba(255, 255, 255, 0.08);
     }
@@ -53,16 +53,16 @@ body::-webkit-scrollbar-thumb {
         background-color: transparent;
     }
 }
-.container-info {
+.content-info {
     display: none;
     position: absolute;
     left: 40px;
     bottom: 40px;
 }
-.container-info .box:first-child {
+.content-info .box:first-child {
     margin-bottom: 20px;
 }
-.container-info .box {
+.content-info .box {
     width: 320px;
     border-radius: 5px;
     border: 2px solid #c3c3c3;
@@ -70,12 +70,12 @@ body::-webkit-scrollbar-thumb {
     padding: 10px;
     box-shadow: 0 0 10px black;
 }
-.container-info .box .title {
+.content-info .box .title {
     color: #fff;
     font-size: 14px;
     font-weight: 400;
 }
-.container-info .box .name {
+.content-info .box .name {
     height: 25px;
     border: 2px solid #000;
     background: #d3d8ff;
@@ -88,7 +88,7 @@ body::-webkit-scrollbar-thumb {
     font-size: 14px;
     font-weight: 500;
 }
-.container-info .box .score {
+.content-info .box .score {
     height: 25px;
     border: 2px solid #000;
     padding-right: 4px;
@@ -99,13 +99,13 @@ body::-webkit-scrollbar-thumb {
     justify-content: flex-end;
     font-weight: 700;
 }
-.container-info .box .title-big {
+.content-info .box .title-big {
     color: #fff;
     font-size: 24px;
     font-weight: 400;
     margin-bottom: 10px;
 }
-.container-info .box .live {
+.content-info .box .live {
     width: 300px;
     height: 60px;
     display: flex;
@@ -114,31 +114,31 @@ body::-webkit-scrollbar-thumb {
     border-radius: 10px;
     box-shadow: 0 0 10px black;
 }
-.container-info .box .live .live-part-red {
+.content-info .box .live .live-part-red {
     width: 100px;
     height: 60px;
     background: #5a1111;
 }
-.container-info .box .live .live-part-red.hovered {
+.content-info .box .live .live-part-red.hovered {
     background: #e22a2a;
 }
-.container-info .box .live .live-part-yellow {
+.content-info .box .live .live-part-yellow {
     width: 100px;
     height: 60px;
     background: #5c5e0d;
 }
-.container-info .box .live .live-part-yellow.hovered {
+.content-info .box .live .live-part-yellow.hovered {
     background: #e7eb21;
 }
-.container-info .box .live .live-part-green {
+.content-info .box .live .live-part-green {
     width: 100px;
     height: 60px;
     background: #125714;
 }
-.container-info .box .live .live-part-green.hovered {
+.content-info .box .live .live-part-green.hovered {
     background: #2cd933;
 }
-.container-info .box .live .pointer-live {
+.content-info .box .live .pointer-live {
     width: 6px;
     height: 60px;
     background: white;
@@ -147,7 +147,7 @@ body::-webkit-scrollbar-thumb {
     transform: translateX(-6px);
     left: 100%;
 }
-.container-info .box .live .pointer-live.almost-failing {
+.content-info .box .live .pointer-live.almost-failing {
     animation: animation-almost-failing 80ms infinite alternate linear;
 }
 @keyframes animation-almost-failing {
@@ -158,13 +158,13 @@ body::-webkit-scrollbar-thumb {
         background: #e22a2a;
     }
 }
-.container-info-2 {
+.content-info-2 {
     display: none;
     position: absolute;
     right: 40px;
     bottom: 40px;
 }
-.container-info-2 .box {
+.content-info-2 .box {
     width: 320px;
     height: 160px;
     border-radius: 5px;
@@ -174,7 +174,7 @@ body::-webkit-scrollbar-thumb {
     box-shadow: 0 0 10px black;
     position: relative;
 }
-.container-info-2 .box .title {
+.content-info-2 .box .title {
     color: #fff;
     font-size: 32px;
     font-weight: 400;
@@ -182,7 +182,7 @@ body::-webkit-scrollbar-thumb {
     top: 10px;
     left: 10px;
 }
-.container-info-2 .box .notes-count {
+.content-info-2 .box .notes-count {
     color: #fff;
     font-size: 20px;
     font-weight: 400;
@@ -190,7 +190,7 @@ body::-webkit-scrollbar-thumb {
     top: 10px;
     right: 10px;
 }
-.container-info-2 .box .multiplicator-x {
+.content-info-2 .box .multiplicator-x {
     color: #fff;
     font-size: 48px;
     font-weight: 400;
@@ -198,7 +198,7 @@ body::-webkit-scrollbar-thumb {
     top: 54px;
     right: 75px;
 }
-.container-info-2 .box .multiplicator-n {
+.content-info-2 .box .multiplicator-n {
     color: #fff;
     font-size: 70px;
     font-weight: 400;
@@ -206,7 +206,7 @@ body::-webkit-scrollbar-thumb {
     top: 36px;
     right: 32px;
 }
-.container-info-2 .box .bars {
+.content-info-2 .box .bars {
     position: absolute;
     left: 15px;
     bottom: 30px;
@@ -214,66 +214,66 @@ body::-webkit-scrollbar-thumb {
     align-items: flex-end;
     gap: 5px;
 }
-.container-info-2 .box .bars .bar:nth-child(1) {
+.content-info-2 .box .bars .bar:nth-child(1) {
     width: 12px;
     height: 20px;
     background: #d3d8ff;
 }
-.container-info-2 .box .bars .bar:nth-child(2) {
+.content-info-2 .box .bars .bar:nth-child(2) {
     width: 12px;
     height: 25px;
     background: #d3d8ff;
 }
-.container-info-2 .box .bars .bar:nth-child(3) {
+.content-info-2 .box .bars .bar:nth-child(3) {
     width: 12px;
     height: 30px;
     background: #d3d8ff;
 }
-.container-info-2 .box .bars .bar:nth-child(4) {
+.content-info-2 .box .bars .bar:nth-child(4) {
     width: 12px;
     height: 35px;
     background: #d3d8ff;
 }
-.container-info-2 .box .bars .bar:nth-child(5) {
+.content-info-2 .box .bars .bar:nth-child(5) {
     width: 12px;
     height: 40px;
     background: #d3d8ff;
 }
-.container-info-2 .box .bars .bar:nth-child(6) {
+.content-info-2 .box .bars .bar:nth-child(6) {
     width: 12px;
     height: 45px;
     background: #d3d8ff;
 }
-.container-info-2 .box .bars .bar:nth-child(7) {
+.content-info-2 .box .bars .bar:nth-child(7) {
     width: 12px;
     height: 50px;
     background: #d3d8ff;
 }
-.container-info-2 .box .bars .bar:nth-child(8) {
+.content-info-2 .box .bars .bar:nth-child(8) {
     width: 12px;
     height: 55px;
     background: #d3d8ff;
 }
-.container-info-2 .box .bars .bar:nth-child(9) {
+.content-info-2 .box .bars .bar:nth-child(9) {
     width: 12px;
     height: 60px;
     background: #d3d8ff;
 }
-.container-info-2 .box .bars .bar:nth-child(10) {
+.content-info-2 .box .bars .bar:nth-child(10) {
     width: 12px;
     height: 65px;
     background: #d3d8ff;
 }
-.container-info-2 .box .bars .bar.form-1 {
+.content-info-2 .box .bars .bar.form-1 {
     background-color: #5c43f8;
 }
-.container-info-2 .box .bars .bar.form-2 {
+.content-info-2 .box .bars .bar.form-2 {
     background-color: #11c718;
 }
-.container-info-2 .box .bars .bar.form-3 {
+.content-info-2 .box .bars .bar.form-3 {
     background-color: #d4e22a;
 }
-.container-info-2 .box .bars .bar.form-4 {
+.content-info-2 .box .bars .bar.form-4 {
     background-color: #e22a2a;
 }
 .main-container .container {
@@ -528,6 +528,7 @@ body::-webkit-scrollbar-thumb {
     .division
     .content-difficulty
     .difficulty-easy {
+    transition: 200ms;
     width: 120px;
     height: 40px;
     background: #424548;
@@ -555,6 +556,7 @@ body::-webkit-scrollbar-thumb {
     .division
     .content-difficulty
     .difficulty-medium {
+    transition: 200ms;
     width: 120px;
     height: 40px;
     background: #064007;
@@ -582,6 +584,7 @@ body::-webkit-scrollbar-thumb {
     .division
     .content-difficulty
     .difficulty-hard {
+    transition: 200ms;
     width: 120px;
     height: 40px;
     background: #474a0a;
@@ -609,6 +612,7 @@ body::-webkit-scrollbar-thumb {
     .division
     .content-difficulty
     .difficulty-expert {
+    transition: 200ms;
     width: 120px;
     height: 40px;
     background: #2b1414;

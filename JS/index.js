@@ -24,10 +24,10 @@ let gamePaused = false
 
 const containerTarget = document.querySelector('.main-container .container')
 const livePointer = document.querySelector(
-    '.container-info .box .live .pointer-live'
+    '.content-info .box .live .pointer-live'
 )
 const songCover = document.querySelector('.main-container')
-const songTitle = document.querySelector('.container-info .box .name')
+const songTitle = document.querySelector('.content-info .box .name')
 const contentSongs = document.querySelector('.content-songs')
 
 const song = document.querySelector('#song')
@@ -144,18 +144,15 @@ function allEventsListeners() {
                 '.main-container .container-home'
             ).style.display = 'none'
             document.querySelector(
-                '.main-container .main-container-flashlight'
+                '.main-container .screen-flashlight'
             ).style.display = 'block'
 
             document
-                .querySelector('.main-container .main-container-flashlight')
+                .querySelector('.main-container .screen-flashlight')
                 .addEventListener('animationend', (event) => {
-                    if (
-                        event.animationName ===
-                        'animation-main-container-flashlight'
-                    ) {
+                    if (event.animationName === 'animation-screen-flashlight') {
                         document.querySelector(
-                            '.main-container .main-container-flashlight'
+                            '.main-container .screen-flashlight'
                         ).style.display = 'none'
                     }
                 })
@@ -313,14 +310,13 @@ function loadSong(songChange) {
     document.querySelector('.counter-to-start').style.display = 'flex'
     document.querySelector('.container-songs').style.display = 'none'
     document.querySelector('.main-container .container').style.display = 'flex'
-    document.querySelector('.container-info').style.display = 'block'
-    document.querySelector('.container-info-2').style.display = 'block'
+    document.querySelector('.content-info').style.display = 'block'
+    document.querySelector('.content-info-2').style.display = 'block'
     document.querySelector(
-        '.main-container .main-container-cover'
+        '.main-container .container-game-cover'
     ).style.display = 'block'
-    document.querySelector(
-        '.main-container .main-container-flashlight'
-    ).style.display = 'block'
+    document.querySelector('.main-container .screen-flashlight').style.display =
+        'block'
 
     document
         .querySelectorAll(
@@ -331,11 +327,11 @@ function loadSong(songChange) {
         })
 
     document
-        .querySelector('.main-container .main-container-flashlight')
+        .querySelector('.main-container .screen-flashlight')
         .addEventListener('animationend', (event) => {
-            if (event.animationName === 'animation-main-container-flashlight') {
+            if (event.animationName === 'animation-screen-flashlight') {
                 document.querySelector(
-                    '.main-container .main-container-flashlight'
+                    '.main-container .screen-flashlight'
                 ).style.display = 'none'
             }
         })
@@ -392,19 +388,18 @@ song.addEventListener('ended', () => {
     ).textContent = `Difficulty: ${difficulty}`
 
     document.querySelector('.main-container .container').style.display = 'none'
-    document.querySelector('.container-info').style.display = 'none'
-    document.querySelector('.container-info-2').style.display = 'none'
+    document.querySelector('.content-info').style.display = 'none'
+    document.querySelector('.content-info-2').style.display = 'none'
 
-    document.querySelector(
-        '.main-container .main-container-flashlight'
-    ).style.display = 'block'
+    document.querySelector('.main-container .screen-flashlight').style.display =
+        'block'
 
     document
-        .querySelector('.main-container .main-container-flashlight')
+        .querySelector('.main-container .screen-flashlight')
         .addEventListener('animationend', (event) => {
-            if (event.animationName === 'animation-main-container-flashlight') {
+            if (event.animationName === 'animation-screen-flashlight') {
                 document.querySelector(
-                    '.main-container .main-container-flashlight'
+                    '.main-container .screen-flashlight'
                 ).style.display = 'none'
             }
         })
@@ -511,33 +506,33 @@ function livePointerEvents() {
 
     if (livePoints <= 33) {
         document
-            .querySelector('.container-info .box .live .live-part-green')
+            .querySelector('.content-info .box .live .live-part-green')
             .classList.remove('hovered')
         document
-            .querySelector('.container-info .box .live .live-part-yellow')
+            .querySelector('.content-info .box .live .live-part-yellow')
             .classList.remove('hovered')
         document
-            .querySelector('.container-info .box .live .live-part-red')
+            .querySelector('.content-info .box .live .live-part-red')
             .classList.add('hovered')
     } else if (livePoints >= 66) {
         document
-            .querySelector('.container-info .box .live .live-part-red')
+            .querySelector('.content-info .box .live .live-part-red')
             .classList.remove('hovered')
         document
-            .querySelector('.container-info .box .live .live-part-yellow')
+            .querySelector('.content-info .box .live .live-part-yellow')
             .classList.remove('hovered')
         document
-            .querySelector('.container-info .box .live .live-part-green')
+            .querySelector('.content-info .box .live .live-part-green')
             .classList.add('hovered')
     } else {
         document
-            .querySelector('.container-info .box .live .live-part-red')
+            .querySelector('.content-info .box .live .live-part-red')
             .classList.remove('hovered')
         document
-            .querySelector('.container-info .box .live .live-part-green')
+            .querySelector('.content-info .box .live .live-part-green')
             .classList.remove('hovered')
         document
-            .querySelector('.container-info .box .live .live-part-yellow')
+            .querySelector('.content-info .box .live .live-part-yellow')
             .classList.add('hovered')
     }
     if (livePoints <= 20) {
@@ -551,12 +546,12 @@ function livePointerEvents() {
 }
 
 function totalPointsEvents() {
-    document.querySelector('.container-info .box .score').textContent =
+    document.querySelector('.content-info .box .score').textContent =
         totalPoints
 }
 function totalNotesEvents() {
     const formattedTotalNotes = String(totalNotes).padStart(3, '0')
-    document.querySelector('.container-info-2 .box .notes-count').textContent =
+    document.querySelector('.content-info-2 .box .notes-count').textContent =
         formattedTotalNotes
 }
 
@@ -753,7 +748,7 @@ function controllerRateBars() {
         bars[rightPart].classList.add('form-1')
         multiplicatorPoints = 1
         document.querySelector(
-            '.container-info-2 .box .multiplicator-n'
+            '.content-info-2 .box .multiplicator-n'
         ).textContent = 1
     }
 
@@ -761,7 +756,7 @@ function controllerRateBars() {
         bars[rightPart].classList.add('form-2')
         multiplicatorPoints = 2
         document.querySelector(
-            '.container-info-2 .box .multiplicator-n'
+            '.content-info-2 .box .multiplicator-n'
         ).textContent = 2
     }
 
@@ -769,7 +764,7 @@ function controllerRateBars() {
         bars[rightPart].classList.add('form-3')
         multiplicatorPoints = 4
         document.querySelector(
-            '.container-info-2 .box .multiplicator-n'
+            '.content-info-2 .box .multiplicator-n'
         ).textContent = 4
     }
 
@@ -777,7 +772,7 @@ function controllerRateBars() {
         bars[rightPart].classList.add('form-4')
         multiplicatorPoints = 8
         document.querySelector(
-            '.container-info-2 .box .multiplicator-n'
+            '.content-info-2 .box .multiplicator-n'
         ).textContent = 8
     }
 
@@ -788,7 +783,7 @@ function controllerRateBarsMissed() {
     consecutiveHits = 0
     multiplicatorPoints = 1
     document.querySelector(
-        '.container-info-2 .box .multiplicator-n'
+        '.content-info-2 .box .multiplicator-n'
     ).textContent = 1
 
     bars.forEach((bar) => {
@@ -823,21 +818,20 @@ function gamePause() {
 function gameRetry() {
     document.querySelector('.counter-to-start').style.display = 'flex'
     document.querySelector(
-        '.main-container .main-container-cover'
+        '.main-container .container-game-cover'
     ).style.display = 'block'
-    document.querySelector(
-        '.main-container .main-container-flashlight'
-    ).style.display = 'block'
+    document.querySelector('.main-container .screen-flashlight').style.display =
+        'block'
     document.querySelector(
         '.main-container .main-container-paused'
     ).style.display = 'none'
 
     document
-        .querySelector('.main-container .main-container-flashlight')
+        .querySelector('.main-container .screen-flashlight')
         .addEventListener('animationend', (event) => {
-            if (event.animationName === 'animation-main-container-flashlight') {
+            if (event.animationName === 'animation-screen-flashlight') {
                 document.querySelector(
-                    '.main-container .main-container-flashlight'
+                    '.main-container .screen-flashlight'
                 ).style.display = 'none'
             }
         })
@@ -888,21 +882,20 @@ function gameRetry() {
 function gamePostRetry() {
     document.querySelector('.counter-to-start').style.display = 'flex'
     document.querySelector('.main-container .container').style.display = 'flex'
-    document.querySelector('.container-info').style.display = 'block'
-    document.querySelector('.container-info-2').style.display = 'block'
+    document.querySelector('.content-info').style.display = 'block'
+    document.querySelector('.content-info-2').style.display = 'block'
     document.querySelector(
-        '.main-container .main-container-cover'
+        '.main-container .container-game-cover'
     ).style.display = 'block'
-    document.querySelector(
-        '.main-container .main-container-flashlight'
-    ).style.display = 'block'
+    document.querySelector('.main-container .screen-flashlight').style.display =
+        'block'
 
     document
-        .querySelector('.main-container .main-container-flashlight')
+        .querySelector('.main-container .screen-flashlight')
         .addEventListener('animationend', (event) => {
-            if (event.animationName === 'animation-main-container-flashlight') {
+            if (event.animationName === 'animation-screen-flashlight') {
                 document.querySelector(
-                    '.main-container .main-container-flashlight'
+                    '.main-container .screen-flashlight'
                 ).style.display = 'none'
             }
         })
@@ -950,24 +943,23 @@ function gamePostRetry() {
 
 function gameExit() {
     document.querySelector('.main-container .container').style.display = 'none'
-    document.querySelector('.container-info').style.display = 'none'
-    document.querySelector('.container-info-2').style.display = 'none'
+    document.querySelector('.content-info').style.display = 'none'
+    document.querySelector('.content-info-2').style.display = 'none'
     document.querySelector(
-        '.main-container .main-container-cover'
+        '.main-container .container-game-cover'
     ).style.display = 'none'
-    document.querySelector(
-        '.main-container .main-container-flashlight'
-    ).style.display = 'block'
+    document.querySelector('.main-container .screen-flashlight').style.display =
+        'block'
     document.querySelector(
         '.main-container .main-container-paused'
     ).style.display = 'none'
 
     document
-        .querySelector('.main-container .main-container-flashlight')
+        .querySelector('.main-container .screen-flashlight')
         .addEventListener('animationend', (event) => {
-            if (event.animationName === 'animation-main-container-flashlight') {
+            if (event.animationName === 'animation-screen-flashlight') {
                 document.querySelector(
-                    '.main-container .main-container-flashlight'
+                    '.main-container .screen-flashlight'
                 ).style.display = 'none'
             }
         })
@@ -1002,18 +994,17 @@ function gameExit() {
 
 function gamePostExit() {
     document.querySelector(
-        '.main-container .main-container-cover'
+        '.main-container .container-game-cover'
     ).style.display = 'none'
-    document.querySelector(
-        '.main-container .main-container-flashlight'
-    ).style.display = 'block'
+    document.querySelector('.main-container .screen-flashlight').style.display =
+        'block'
 
     document
-        .querySelector('.main-container .main-container-flashlight')
+        .querySelector('.main-container .screen-flashlight')
         .addEventListener('animationend', (event) => {
-            if (event.animationName === 'animation-main-container-flashlight') {
+            if (event.animationName === 'animation-screen-flashlight') {
                 document.querySelector(
-                    '.main-container .main-container-flashlight'
+                    '.main-container .screen-flashlight'
                 ).style.display = 'none'
             }
         })

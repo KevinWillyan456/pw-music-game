@@ -21,61 +21,6 @@
         <audio id="song"></audio>
         <audio id="song-preview"></audio>
         <main class="main-container">
-            <div class="main-container-cover"></div>
-            <section class="container-info">
-                <div class="box">
-                    <div class="title">SONG</div>
-                    <div class="name"></div>
-                </div>
-                <div class="box">
-                    <div class="title">POINTS</div>
-                    <div class="score">0</div>
-                    <div class="title-big">LIVE</div>
-                    <div class="live">
-                        <div class="live-part-red"></div>
-                        <div class="live-part-yellow"></div>
-                        <div class="live-part-green"></div>
-                        <div class="pointer-live almost-failing"></div>
-                    </div>
-                </div>
-            </section>
-            <section class="container-info-2">
-                <div class="box">
-                    <div class="title">RATE</div>
-                    <div class="notes-count">000</div>
-                    <div class="multiplicator-x">x</div>
-                    <div class="multiplicator-n">1</div>
-                    <div class="bars">
-                        <div class="bar"></div>
-                        <div class="bar"></div>
-                        <div class="bar"></div>
-                        <div class="bar"></div>
-                        <div class="bar"></div>
-                        <div class="bar"></div>
-                        <div class="bar"></div>
-                        <div class="bar"></div>
-                        <div class="bar"></div>
-                        <div class="bar"></div>
-                    </div>
-                </div>
-            </section>
-            <section class="container">
-                <div class="trails">
-                    <div class="trail-1"></div>
-                    <div class="trail-2"></div>
-                    <div class="trail-3"></div>
-                    <div class="trail-4"></div>
-                </div>
-            </section>
-            <div class="counter-to-start"></div>
-            <section class="main-container-failed">
-                <div class="box">
-                    <div class="title">Failed</div>
-                    <div class="retry">Retry</div>
-                    <div class="exit">Exit</div>
-                </div>
-            </section>
-
             <section class="container-home">
                 <div class="logo">
                     <img
@@ -91,23 +36,90 @@
                 </div>
             </section>
 
+            <section class="container-game">
+                <div class="container-game-cover"></div>
+                <div class="content-info">
+                    <div class="box">
+                        <div class="title">SONG</div>
+                        <div class="name"></div>
+                    </div>
+                    <div class="box">
+                        <div class="title">POINTS</div>
+                        <div class="score">0</div>
+                        <div class="title-big">LIVE</div>
+                        <div class="live">
+                            <div class="live-part-red"></div>
+                            <div class="live-part-yellow"></div>
+                            <div class="live-part-green"></div>
+                            <div class="pointer-live almost-failing"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-info-2">
+                    <div class="box">
+                        <div class="title">RATE</div>
+                        <div class="notes-count">000</div>
+                        <div class="multiplicator-x">x</div>
+                        <div class="multiplicator-n">1</div>
+                        <div class="bars">
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="trails">
+                        <div class="trail-1"></div>
+                        <div class="trail-2"></div>
+                        <div class="trail-3"></div>
+                        <div class="trail-4"></div>
+                    </div>
+                </div>
+
+                <div class="counter-to-start"></div>
+
+                <section class="main-container-failed">
+                    <div class="box">
+                        <div class="title">Failed</div>
+                        <div class="retry">Retry</div>
+                        <div class="exit">Exit</div>
+                    </div>
+                </section>
+
+                <section class="main-container-paused">
+                    <div class="box">
+                        <div class="main-container-paused-title">Paused</div>
+                        <div class="main-container-paused-option-resume">
+                            Resume
+                        </div>
+                        <div class="main-container-paused-option-retry">
+                            Retry
+                        </div>
+                        <div class="main-container-paused-option-exit">
+                            Exit
+                        </div>
+                    </div>
+                </section>
+
+                <div class="consecutive-hits"></div>
+            </section>
+
             <section class="container-song-completed">
                 <div class="title">Song Completed Successfully!</div>
                 <div class="points">Points: 439438</div>
                 <div class="difficulty">Difficulty: Medium</div>
                 <div class="retry">Retry</div>
                 <div class="exit">Exit</div>
-            </section>
-
-            <section class="main-container-paused">
-                <div class="box">
-                    <div class="main-container-paused-title">Paused</div>
-                    <div class="main-container-paused-option-resume">
-                        Resume
-                    </div>
-                    <div class="main-container-paused-option-retry">Retry</div>
-                    <div class="main-container-paused-option-exit">Exit</div>
-                </div>
             </section>
 
             <section class="song-preview-details">
@@ -117,9 +129,7 @@
                 <div class="song-preview-details-duration"></div>
             </section>
 
-            <div class="consecutive-hits"></div>
-
-            <div class="main-container-flashlight"></div>
+            <div class="screen-flashlight"></div>
         </main>
 
         <script src="JS/index.js"></script>

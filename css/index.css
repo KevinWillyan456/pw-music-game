@@ -26,6 +26,17 @@ body::-webkit-scrollbar-thumb {
     position: relative;
 }
 
+.main-container .container-game {
+    width: 100%;
+    min-height: 100vh;
+    display: none;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
 .main-container .container-game-cover {
     display: none;
     position: absolute;
@@ -703,32 +714,40 @@ body::-webkit-scrollbar-thumb {
 }
 .main-container .container-song-completed {
     width: calc(100% - 130px);
+    width: 100%;
     margin: 0 auto;
-    padding-top: 90px;
+    padding: 90px 65px 0;
     position: relative;
     display: none;
+
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 .main-container .container-song-completed .title {
     color: #fff;
     font-size: 48px;
     font-weight: 700;
     margin-bottom: 40px;
+    text-shadow: 0 0 5px black;
 }
 .main-container .container-song-completed .points {
     color: #fff;
     font-size: 36px;
     font-weight: 700;
     margin-bottom: 10px;
+    text-shadow: 0 0 5px black;
 }
 .main-container .container-song-completed .difficulty {
     color: #fff;
     font-size: 36px;
     font-weight: 700;
+    text-shadow: 0 0 5px black;
 }
 .main-container .container-song-completed .retry {
     position: absolute;
     bottom: 60px;
-    right: 240px;
+    right: 305px;
     width: 200px;
     height: 60px;
     background: #e7eb21;
@@ -743,7 +762,7 @@ body::-webkit-scrollbar-thumb {
 .main-container .container-song-completed .exit {
     position: absolute;
     bottom: 60px;
-    right: 0;
+    right: 65px;
     width: 200px;
     height: 60px;
     background: #e22a2a;

@@ -26,7 +26,7 @@ const containerTarget = document.querySelector('.main-container .container')
 const livePointer = document.querySelector(
     '.content-info .box .live .pointer-live'
 )
-const songCover = document.querySelector('.main-container')
+const songCover = document.querySelector('.container-game')
 const songTitle = document.querySelector('.content-info .box .name')
 const contentSongs = document.querySelector('.content-songs')
 
@@ -307,6 +307,7 @@ song.addEventListener('timeupdate', function () {
 function loadSong(songChange) {
     song.src = songChange.songUrl
 
+    document.querySelector('.container-game').style.display = 'flex'
     document.querySelector('.counter-to-start').style.display = 'flex'
     document.querySelector('.container-songs').style.display = 'none'
     document.querySelector('.main-container .container').style.display = 'flex'
@@ -354,6 +355,10 @@ function setSong(songChange) {
     livePointerEvents()
     totalNotesEvents()
     totalPointsEvents()
+
+    document
+        .querySelector('.container-song-completed')
+        .style.setProperty('background-image', `url("${songChange.songCover}")`)
 }
 
 song.addEventListener('ended', () => {
@@ -362,6 +367,7 @@ song.addEventListener('ended', () => {
     }
 
     canActions = false
+    canPause = false
     document.querySelector(
         '.main-container .container-song-completed'
     ).style.display = 'block'
@@ -387,6 +393,8 @@ song.addEventListener('ended', () => {
         '.main-container .container-song-completed .difficulty'
     ).textContent = `Difficulty: ${difficulty}`
 
+    document.querySelector('.container-game').style.display = 'none'
+    document.querySelector('.container-song-completed').s
     document.querySelector('.main-container .container').style.display = 'none'
     document.querySelector('.content-info').style.display = 'none'
     document.querySelector('.content-info-2').style.display = 'none'
@@ -880,6 +888,7 @@ function gameRetry() {
 }
 
 function gamePostRetry() {
+    document.querySelector('.container-game').style.display = 'flex'
     document.querySelector('.counter-to-start').style.display = 'flex'
     document.querySelector('.main-container .container').style.display = 'flex'
     document.querySelector('.content-info').style.display = 'block'
@@ -969,8 +978,8 @@ function gameExit() {
 
     document.querySelector('.main-container .container-songs').style.display =
         'block'
-    songCover.style.background =
-        'linear-gradient(135deg, #0c0922 0%, #5f0909 100%) center center / cover no-repeat'
+    document.querySelector('.container-game').style.display = 'none'
+    document.querySelector('.container-game').style.backgroundImage = 'none'
 
     livePoints = 51
     totalNotes = 0
@@ -1015,8 +1024,8 @@ function gamePostExit() {
 
     document.querySelector('.main-container .container-songs').style.display =
         'block'
-    songCover.style.background =
-        'linear-gradient(135deg, #0c0922 0%, #5f0909 100%) center center / cover no-repeat'
+    document.querySelector('.container-game').style.display = 'none'
+    document.querySelector('.container-game').style.backgroundImage = 'none'
 
     livePoints = 51
     totalNotes = 0

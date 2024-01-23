@@ -140,9 +140,48 @@ function allEventsListeners() {
     document
         .querySelector('.main-container .container-home .logo')
         .addEventListener('click', () => {
-            document.querySelector(
-                '.main-container .container-home'
-            ).style.display = 'none'
+            document.querySelector('body').style.overflow = 'hidden'
+            document
+                .querySelector('.main-container .container-home')
+                .classList.add('after-exit')
+            document
+                .querySelector('.main-container .container-home')
+                .addEventListener('animationend', (event) => {
+                    if (
+                        event.animationName ===
+                        'animation-containers-after-exit'
+                    ) {
+                        document.querySelector(
+                            '.main-container .container-home'
+                        ).style.display = 'none'
+                        document
+                            .querySelector('.main-container .container-home')
+                            .classList.remove('after-exit')
+
+                        document.querySelector(
+                            '.container-songs'
+                        ).style.display = 'block'
+                        document
+                            .querySelector('.container-songs')
+                            .classList.add('before')
+                        document
+                            .querySelector('.container-songs')
+                            .addEventListener('animationend', (event) => {
+                                if (
+                                    event.animationName ===
+                                    'animation-containers-before'
+                                ) {
+                                    document
+                                        .querySelector('.container-songs')
+                                        .classList.remove('before')
+                                    document.querySelector(
+                                        'body'
+                                    ).style.overflow = 'auto'
+                                }
+                            })
+                    }
+                })
+
             document.querySelector(
                 '.main-container .screen-flashlight'
             ).style.display = 'block'
@@ -156,7 +195,6 @@ function allEventsListeners() {
                         ).style.display = 'none'
                     }
                 })
-            document.querySelector('.container-songs').style.display = 'block'
             setPreviewDifficulty(selectDifficulty)
         })
 
@@ -187,6 +225,58 @@ function allEventsListeners() {
     document
         .querySelector('.main-container-paused-option-resume')
         .addEventListener('click', gamePause)
+    document.querySelector('.btn-back-songs').addEventListener('click', () => {
+        document.querySelector('body').style.overflow = 'hidden'
+        document.querySelector('.container-songs').classList.add('before-exit')
+        document
+            .querySelector('.container-songs')
+            .addEventListener('animationend', (event) => {
+                if (
+                    event.animationName === 'animation-containers-before-exit'
+                ) {
+                    document.querySelector('.container-songs').style.display =
+                        'none'
+                    document
+                        .querySelector('.container-songs')
+                        .classList.remove('before-exit')
+                    document
+                        .querySelector('.container-home')
+                        .classList.add('after')
+                    document
+                        .querySelector('.container-home')
+                        .addEventListener('animationend', (event) => {
+                            if (
+                                event.animationName ===
+                                'animation-containers-after'
+                            ) {
+                                document
+                                    .querySelector('.container-home')
+                                    .classList.remove('after')
+                                document.querySelector('body').style.overflow =
+                                    'auto'
+                            }
+                        })
+                }
+            })
+
+        document.querySelector(
+            '.main-container .screen-flashlight'
+        ).style.display = 'block'
+
+        document
+            .querySelector('.main-container .screen-flashlight')
+            .addEventListener('animationend', (event) => {
+                if (event.animationName === 'animation-screen-flashlight') {
+                    document.querySelector(
+                        '.main-container .screen-flashlight'
+                    ).style.display = 'none'
+                }
+            })
+
+        document.querySelector(
+            '.main-container .container-home'
+        ).style.display = 'flex'
+    })
 }
 
 function isElementOverlapping(element1, element2) {

@@ -442,6 +442,67 @@ body::-webkit-scrollbar-thumb {
     justify-content: center;
     display: flex;
 }
+.main-container .container-home.after {
+    animation: animation-containers-after 500ms linear;
+}
+.main-container .container-home.after-exit {
+    animation: animation-containers-after-exit 500ms linear;
+}
+.main-container .container-home.before {
+    animation: animation-containers-before 500ms linear;
+}
+.main-container .container-home.before-exit {
+    animation: animation-containers-before-exit 500ms linear;
+}
+
+@keyframes animation-containers-before {
+    0% {
+        transform: translateX(100%);
+    }
+    20% {
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0%);
+        opacity: 1;
+    }
+}
+@keyframes animation-containers-before-exit {
+    0% {
+        transform: translateX(0%);
+    }
+    20% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}
+@keyframes animation-containers-after {
+    0% {
+        transform: translateX(-100%);
+    }
+    20% {
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0%);
+        opacity: 1;
+    }
+}
+@keyframes animation-containers-after-exit {
+    0% {
+        transform: translateX(0%);
+    }
+    20% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+}
 .main-container .container-home .logo {
     display: flex;
     cursor: pointer;
@@ -453,6 +514,35 @@ body::-webkit-scrollbar-thumb {
 .main-container .container-songs {
     width: 100%;
     display: none;
+}
+.main-container .container-songs.after {
+    animation: animation-containers-after 500ms linear;
+}
+.main-container .container-songs.after-exit {
+    animation: animation-containers-after-exit 500ms linear;
+}
+.main-container .container-songs.before {
+    animation: animation-containers-before 500ms linear;
+}
+.main-container .container-songs.before-exit {
+    animation: animation-containers-before-exit 500ms linear;
+}
+.container-songs .btn-back-songs {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    border: 2px solid #fff;
+    padding: 5px 12px;
+    border-radius: 5px;
+    outline: none;
+    background-color: transparent;
+    color: white;
+    font-size: 24px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
 }
 .main-container .container-songs .content-songs .select-song {
     color: #fff;

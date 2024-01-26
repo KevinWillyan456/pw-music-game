@@ -23,6 +23,7 @@ let totalNotes = 0
 let consecutiveHits = 0
 let gamePausedDelay = null
 let gamePaused = false
+let songPreviewData = {}
 
 const containerTarget = document.querySelector('.main-container .container')
 const livePointer = document.querySelector(
@@ -33,7 +34,7 @@ const songTitle = document.querySelector('.content-info .box .name')
 const contentSongs = document.querySelector('.content-songs')
 
 const song = document.querySelector('#song')
-const songPreviw = document.querySelector('#song-preview')
+const songPreview = document.querySelector('#song-preview')
 
 let data = [
     {
@@ -142,6 +143,15 @@ const containerSongCompletedExitBtn = document.querySelector(
     '.container-song-completed .exit'
 )
 
+// elementos do song preview details
+const songPreviewDetails = document.querySelector('.song-preview-details')
+const songPreviewDetailsStopBtn = document.querySelector(
+    '.song-preview-details-stop-btn'
+)
+const songPreviewDetailsPlayBtn = document.querySelector(
+    '.song-preview-details-play-btn'
+)
+
 function init() {
     function compareSongTitles(a, b) {
         const songTitleA = a.songTitle.toUpperCase()
@@ -241,6 +251,8 @@ function allEventsListeners() {
 
         setScreenFlashlight()
     })
+    songPreviewDetailsStopBtn.addEventListener('click', gameSongPreviewStop)
+    songPreviewDetailsPlayBtn.addEventListener('click', gameSongPreviewPlay)
 }
 
 function isElementOverlapping(element1, element2) {
@@ -1039,24 +1051,33 @@ function gamePostExit() {
 
 let timerGameSongPreview = null
 function gameSongPreview(songChange) {
-    if (songPreviw.src === songChange.songUrl) {
+    if (songPreview.src === songChange.songUrl) {
         return
     }
-    songPreviw.src = songChange.songUrl
-    songPreviw.play()
+
+    if (songPreviewDetails.classList.contains('exit')) {
+        songPreviewDetails.classList.remove('exit')
+    }
+
+    songPreview.src = songChange.songUrl
+    songPreview.play()
+
+    songPreviewData.songTitle = songChange.songTitle
+    songPreviewData.songUrl = songChange.songUrl
+    songPreviewData.songCover = songChange.songCover
 
     if (timerGameSongPreview) {
         clearTimeout(timerGameSongPreview)
         timerGameSongPreview = null
     }
 
-    document.querySelector('.song-preview-details').classList.remove('hide')
+    songPreviewDetails.classList.remove('hide')
 
     timerGameSongPreview = setTimeout(() => {
-        songPreviwDetailsClose()
+        songPreviewDetailsClose()
     }, 10000)
 
-    document.querySelector('.song-preview-details').style.display = 'flex'
+    songPreviewDetails.style.display = 'flex'
     document.querySelector(
         '.song-preview-details-title-song'
     ).textContent = `Song title: ${songChange.songTitle}`
@@ -1066,9 +1087,9 @@ function gameSongPreview(songChange) {
     document.querySelector('.song-preview-details-duration').textContent =
         'Song duration: --:--'
 
-    songPreviw.addEventListener('loadedmetadata', () => {
-        const minutes = Math.floor(songPreviw.duration / 60)
-        const seconds = Math.floor(songPreviw.duration - minutes * 60)
+    songPreview.addEventListener('loadedmetadata', () => {
+        const minutes = Math.floor(songPreview.duration / 60)
+        const seconds = Math.floor(songPreview.duration - minutes * 60)
         document.querySelector(
             '.song-preview-details-duration'
         ).textContent = `Song duration: ${minutes}m ${seconds}s`
@@ -1076,22 +1097,21 @@ function gameSongPreview(songChange) {
 }
 
 function gameSongPreviewStop() {
-    songPreviw.pause()
-    songPreviw.src = ''
-    document.querySelector('.song-preview-details').classList.remove('hide')
+    songPreview.pause()
+    songPreview.src = ''
+    songPreviewDetails.classList.remove('hide')
 
     if (timerGameSongPreview) {
         clearTimeout(timerGameSongPreview)
         timerGameSongPreview = null
     }
 
-    document.querySelector('.song-preview-details').classList.add('exit')
+    songPreviewDetails.classList.add('exit')
     document
         .querySelector('.song-preview-details.exit')
         .addEventListener('animationend', (event) => {
             if (event.animationName === 'animation-song-preview-details-exit') {
-                document.querySelector('.song-preview-details').style.display =
-                    'none'
+                songPreviewDetails.style.display = 'none'
                 document
                     .querySelector('.song-preview-details')
                     .classList.remove('exit')
@@ -1099,8 +1119,13 @@ function gameSongPreviewStop() {
         })
 }
 
-function songPreviwDetailsClose() {
-    document.querySelector('.song-preview-details').classList.add('hide')
+function gameSongPreviewPlay() {
+    gameSongPreviewStop()
+    loadSong(songPreviewData)
+}
+
+function songPreviewDetailsClose() {
+    songPreviewDetails.classList.add('hide')
     document
         .querySelector('.song-preview-details')
         .addEventListener('click', () => {
@@ -1114,7 +1139,12 @@ function songPreviwDetailsClose() {
                     .classList.remove('hide')
             }
         })
+
+    clearTimeout(timerGameSongPreview)
     timerGameSongPreview = null
+    timerGameSongPreview = setTimeout(() => {
+        songPreviewDetailsClose()
+    }, 10000)
 }
 
 function setPreviewDifficulty(selectDifficulty) {

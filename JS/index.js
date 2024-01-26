@@ -206,13 +206,7 @@ function allEventsListeners() {
             }
         })
 
-        screenFlashlight.style.display = 'block'
-
-        screenFlashlight.addEventListener('animationend', (event) => {
-            if (event.animationName === 'animation-screen-flashlight') {
-                screenFlashlight.style.display = 'none'
-            }
-        })
+        setScreenFlashlight()
         setPreviewDifficulty(selectDifficulty)
     })
 
@@ -245,12 +239,7 @@ function allEventsListeners() {
             }
         })
 
-        screenFlashlight.style.display = 'block'
-        screenFlashlight.addEventListener('animationend', (event) => {
-            if (event.animationName === 'animation-screen-flashlight') {
-                screenFlashlight.style.display = 'none'
-            }
-        })
+        setScreenFlashlight()
     })
 }
 
@@ -381,8 +370,6 @@ function loadSong(songChange) {
     document.querySelector(
         '.main-container .container-game-cover'
     ).style.display = 'block'
-    document.querySelector('.main-container .screen-flashlight').style.display =
-        'block'
 
     document
         .querySelectorAll(
@@ -392,15 +379,8 @@ function loadSong(songChange) {
             song.classList.remove('selected')
         })
 
-    document
-        .querySelector('.main-container .screen-flashlight')
-        .addEventListener('animationend', (event) => {
-            if (event.animationName === 'animation-screen-flashlight') {
-                document.querySelector(
-                    '.main-container .screen-flashlight'
-                ).style.display = 'none'
-            }
-        })
+    setScreenFlashlight()
+
     document.querySelector('.counter-to-start').textContent = 'Loading...'
     song.addEventListener('canplaythrough', () => {
         startCounting(songChange)
@@ -464,18 +444,7 @@ song.addEventListener('ended', () => {
     document.querySelector('.content-info').style.display = 'none'
     document.querySelector('.content-info-2').style.display = 'none'
 
-    document.querySelector('.main-container .screen-flashlight').style.display =
-        'block'
-
-    document
-        .querySelector('.main-container .screen-flashlight')
-        .addEventListener('animationend', (event) => {
-            if (event.animationName === 'animation-screen-flashlight') {
-                document.querySelector(
-                    '.main-container .screen-flashlight'
-                ).style.display = 'none'
-            }
-        })
+    setScreenFlashlight()
 })
 
 const teclasPermitidas = ['d', 'f', 'j', 'k', 'p']
@@ -892,20 +861,10 @@ function gameRetry() {
     document.querySelector(
         '.main-container .container-game-cover'
     ).style.display = 'block'
-    document.querySelector('.main-container .screen-flashlight').style.display =
-        'block'
     document.querySelector('.main-container .container-paused').style.display =
         'none'
 
-    document
-        .querySelector('.main-container .screen-flashlight')
-        .addEventListener('animationend', (event) => {
-            if (event.animationName === 'animation-screen-flashlight') {
-                document.querySelector(
-                    '.main-container .screen-flashlight'
-                ).style.display = 'none'
-            }
-        })
+    setScreenFlashlight()
     document.querySelector('.main-container .container-failed').style.display =
         'none'
 
@@ -958,18 +917,9 @@ function gamePostRetry() {
     document.querySelector(
         '.main-container .container-game-cover'
     ).style.display = 'block'
-    document.querySelector('.main-container .screen-flashlight').style.display =
-        'block'
 
-    document
-        .querySelector('.main-container .screen-flashlight')
-        .addEventListener('animationend', (event) => {
-            if (event.animationName === 'animation-screen-flashlight') {
-                document.querySelector(
-                    '.main-container .screen-flashlight'
-                ).style.display = 'none'
-            }
-        })
+    setScreenFlashlight()
+
     document.querySelector(
         '.main-container .container-song-completed'
     ).style.display = 'none'
@@ -1019,20 +969,11 @@ function gameExit() {
     document.querySelector(
         '.main-container .container-game-cover'
     ).style.display = 'none'
-    document.querySelector('.main-container .screen-flashlight').style.display =
-        'block'
     document.querySelector('.main-container .container-paused').style.display =
         'none'
 
-    document
-        .querySelector('.main-container .screen-flashlight')
-        .addEventListener('animationend', (event) => {
-            if (event.animationName === 'animation-screen-flashlight') {
-                document.querySelector(
-                    '.main-container .screen-flashlight'
-                ).style.display = 'none'
-            }
-        })
+    setScreenFlashlight()
+
     document.querySelector('.main-container .container-failed').style.display =
         'none'
 
@@ -1065,18 +1006,8 @@ function gamePostExit() {
     document.querySelector(
         '.main-container .container-game-cover'
     ).style.display = 'none'
-    document.querySelector('.main-container .screen-flashlight').style.display =
-        'block'
 
-    document
-        .querySelector('.main-container .screen-flashlight')
-        .addEventListener('animationend', (event) => {
-            if (event.animationName === 'animation-screen-flashlight') {
-                document.querySelector(
-                    '.main-container .screen-flashlight'
-                ).style.display = 'none'
-            }
-        })
+    setScreenFlashlight()
 
     document.querySelector(
         '.main-container .container-song-completed'
@@ -1255,4 +1186,13 @@ function setPreviewDifficulty(selectDifficulty) {
     document.querySelector(
         '.song-preview-details-difficulty'
     ).textContent = `Selected difficulty: ${difficulty}`
+}
+
+function setScreenFlashlight() {
+    screenFlashlight.style.display = 'block'
+    screenFlashlight.addEventListener('animationend', (event) => {
+        if (event.animationName === 'animation-screen-flashlight') {
+            screenFlashlight.style.display = 'none'
+        }
+    })
 }

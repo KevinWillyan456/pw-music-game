@@ -48,7 +48,7 @@ body::-webkit-scrollbar-thumb {
 }
 .main-container .screen-flashlight {
     animation: animation-screen-flashlight 400ms linear;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;

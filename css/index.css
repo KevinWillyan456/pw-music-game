@@ -750,7 +750,7 @@ body::-webkit-scrollbar-thumb {
 .main-container .container-songs .content-songs .song .song-play:hover {
     box-shadow: 0 0 5px #e22a2a inset, 0 0 40px #e22a2a inset;
 }
-.main-container .main-container-failed {
+.main-container .container-failed {
     position: absolute;
     top: 0;
     left: 0;
@@ -761,7 +761,7 @@ body::-webkit-scrollbar-thumb {
     align-items: center;
     justify-content: center;
 }
-.main-container .main-container-failed .box {
+.main-container .container-failed .box {
     width: 400px;
     height: 292px;
     border-radius: 10px;
@@ -772,13 +772,13 @@ body::-webkit-scrollbar-thumb {
     align-items: center;
     gap: 20px;
 }
-.main-container .main-container-failed .box .title {
+.main-container .container-failed .box .title {
     color: #fff;
     font-size: 48px;
     font-weight: 400;
     margin-top: 20px;
 }
-.main-container .main-container-failed .box .retry {
+.main-container .container-failed .box .retry {
     width: 200px;
     height: 60px;
     background: #e7eb21;
@@ -790,7 +790,7 @@ body::-webkit-scrollbar-thumb {
     justify-content: center;
     cursor: pointer;
 }
-.main-container .main-container-failed .box .exit {
+.main-container .container-failed .box .exit {
     width: 200px;
     height: 60px;
     background: #e22a2a;
@@ -864,7 +864,7 @@ body::-webkit-scrollbar-thumb {
     justify-content: center;
     cursor: pointer;
 }
-.main-container .main-container-paused {
+.main-container .container-paused {
     position: absolute;
     top: 0;
     left: 0;
@@ -878,7 +878,7 @@ body::-webkit-scrollbar-thumb {
     font-size: 54px;
     flex-direction: column;
 }
-.main-container-paused .box {
+.container-paused .box {
     width: 400px;
     height: 372px;
     border-radius: 10px;
@@ -889,13 +889,13 @@ body::-webkit-scrollbar-thumb {
     align-items: center;
     gap: 20px;
 }
-.main-container-paused-title {
+.container-paused-title {
     color: #fff;
     font-size: 48px;
     font-weight: 400;
     margin-top: 20px;
 }
-.main-container-paused-option-resume {
+.container-paused-option-resume {
     width: 200px;
     height: 60px;
     background: #11c718;
@@ -907,7 +907,7 @@ body::-webkit-scrollbar-thumb {
     justify-content: center;
     cursor: pointer;
 }
-.main-container-paused-option-retry {
+.container-paused-option-retry {
     width: 200px;
     height: 60px;
     background: #e7eb21;
@@ -919,7 +919,7 @@ body::-webkit-scrollbar-thumb {
     justify-content: center;
     cursor: pointer;
 }
-.main-container-paused-option-exit {
+.container-paused-option-exit {
     width: 200px;
     height: 60px;
     background: #e22a2a;

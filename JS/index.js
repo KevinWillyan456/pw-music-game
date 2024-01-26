@@ -1,8 +1,10 @@
+// trails são os acionnadores de notas
 const trail1 = document.querySelector('.trail-1')
 const trail2 = document.querySelector('.trail-2')
 const trail3 = document.querySelector('.trail-3')
 const trail4 = document.querySelector('.trail-4')
 
+// targets são as notas
 let target1 = document.querySelectorAll('.target-1')
 let target2 = document.querySelectorAll('.target-2')
 let target3 = document.querySelectorAll('.target-3')
@@ -10,6 +12,7 @@ let target4 = document.querySelectorAll('.target-4')
 
 let targets = document.querySelectorAll('.target')
 
+// variáveis de controle
 let livePoints = 51
 let totalPoints = 0
 let multiplicatorPoints = 1
@@ -18,7 +21,6 @@ let canActions = false
 let canPause = false
 let totalNotes = 0
 let consecutiveHits = 0
-
 let gamePausedDelay = null
 let gamePaused = false
 
@@ -91,6 +93,55 @@ let data = [
 ]
 let songNotes = []
 
+const body = document.querySelector('body')
+const screenFlashlight = document.querySelector(
+    '.main-container .screen-flashlight'
+)
+
+// elementos do container home
+const containerHome = document.querySelector('.main-container .container-home')
+const containerHomeLogo = document.querySelector(
+    '.main-container .container-home .logo'
+)
+
+// elementos do container songs
+const containerSongs = document.querySelector(
+    '.main-container .container-songs'
+)
+const containerSongsBackBtn = document.querySelector(
+    '.container-songs .btn-back-songs'
+)
+
+// elementos do container game
+const containerGame = document.querySelector('.main-container .container-game')
+const containerGameFailedRetryBtn = document.querySelector(
+    '.container-failed .box .retry'
+)
+const containerGameFailedExitBtn = document.querySelector(
+    '.container-failed .box .exit'
+)
+
+const containerGamePausedRetryBtn = document.querySelector(
+    '.container-paused-option-retry'
+)
+const containerGamePausedExitBtn = document.querySelector(
+    '.container-paused-option-exit'
+)
+const containerGamePausedResumeBtn = document.querySelector(
+    '.container-paused-option-resume'
+)
+
+// elementos do container song completed
+const containerSongCompleted = document.querySelector(
+    '.main-container .container-song-completed'
+)
+const containerSongCompletedRetryBtn = document.querySelector(
+    '.container-song-completed .retry'
+)
+const containerSongCompletedExitBtn = document.querySelector(
+    '.container-song-completed .exit'
+)
+
 function init() {
     function compareSongTitles(a, b) {
         const songTitleA = a.songTitle.toUpperCase()
@@ -137,145 +188,69 @@ function init() {
 init()
 
 function allEventsListeners() {
-    document
-        .querySelector('.main-container .container-home .logo')
-        .addEventListener('click', () => {
-            document.querySelector('body').style.overflow = 'hidden'
-            document
-                .querySelector('.main-container .container-home')
-                .classList.add('after-exit')
-            document
-                .querySelector('.main-container .container-home')
-                .addEventListener('animationend', (event) => {
-                    if (
-                        event.animationName ===
-                        'animation-containers-after-exit'
-                    ) {
-                        document.querySelector(
-                            '.main-container .container-home'
-                        ).style.display = 'none'
-                        document
-                            .querySelector('.main-container .container-home')
-                            .classList.remove('after-exit')
-
-                        document.querySelector(
-                            '.container-songs'
-                        ).style.display = 'block'
-                        document
-                            .querySelector('.container-songs')
-                            .classList.add('before')
-                        document
-                            .querySelector('.container-songs')
-                            .addEventListener('animationend', (event) => {
-                                if (
-                                    event.animationName ===
-                                    'animation-containers-before'
-                                ) {
-                                    document
-                                        .querySelector('.container-songs')
-                                        .classList.remove('before')
-                                    document.querySelector(
-                                        'body'
-                                    ).style.overflow = 'auto'
-                                }
-                            })
+    containerHomeLogo.addEventListener('click', () => {
+        body.style.overflow = 'hidden'
+        containerHome.classList.add('after-exit')
+        containerHome.addEventListener('animationend', (event) => {
+            if (event.animationName === 'animation-containers-after-exit') {
+                containerHome.style.display = 'none'
+                containerHome.classList.remove('after-exit')
+                containerSongs.style.display = 'block'
+                containerSongs.classList.add('before')
+                containerSongs.addEventListener('animationend', (event) => {
+                    if (event.animationName === 'animation-containers-before') {
+                        containerSongs.classList.remove('before')
+                        body.style.overflow = 'auto'
                     }
                 })
-
-            document.querySelector(
-                '.main-container .screen-flashlight'
-            ).style.display = 'block'
-
-            document
-                .querySelector('.main-container .screen-flashlight')
-                .addEventListener('animationend', (event) => {
-                    if (event.animationName === 'animation-screen-flashlight') {
-                        document.querySelector(
-                            '.main-container .screen-flashlight'
-                        ).style.display = 'none'
-                    }
-                })
-            setPreviewDifficulty(selectDifficulty)
+            }
         })
 
-    document
-        .querySelector('.main-container .main-container-failed .box .retry')
-        .addEventListener('click', gameRetry)
+        screenFlashlight.style.display = 'block'
 
-    document
-        .querySelector('.main-container-paused-option-retry')
-        .addEventListener('click', gameRetry)
+        screenFlashlight.addEventListener('animationend', (event) => {
+            if (event.animationName === 'animation-screen-flashlight') {
+                screenFlashlight.style.display = 'none'
+            }
+        })
+        setPreviewDifficulty(selectDifficulty)
+    })
 
-    document
-        .querySelector('.main-container .container-song-completed .retry')
-        .addEventListener('click', gamePostRetry)
+    containerGameFailedRetryBtn.addEventListener('click', gameRetry)
+    containerGamePausedRetryBtn.addEventListener('click', gameRetry)
+    containerSongCompletedRetryBtn.addEventListener('click', gamePostRetry)
 
-    document
-        .querySelector('.main-container .main-container-failed .box .exit')
-        .addEventListener('click', gameExit)
+    containerGameFailedExitBtn.addEventListener('click', gameExit)
+    containerGamePausedExitBtn.addEventListener('click', gameExit)
 
-    document
-        .querySelector('.main-container-paused-option-exit')
-        .addEventListener('click', gameExit)
+    containerSongCompletedExitBtn.addEventListener('click', gamePostExit)
 
-    document
-        .querySelector('.main-container .container-song-completed .exit')
-        .addEventListener('click', gamePostExit)
+    containerGamePausedResumeBtn.addEventListener('click', gamePause)
 
-    document
-        .querySelector('.main-container-paused-option-resume')
-        .addEventListener('click', gamePause)
-    document.querySelector('.btn-back-songs').addEventListener('click', () => {
-        document.querySelector('body').style.overflow = 'hidden'
-        document.querySelector('.container-songs').classList.add('before-exit')
-        document
-            .querySelector('.container-songs')
-            .addEventListener('animationend', (event) => {
-                if (
-                    event.animationName === 'animation-containers-before-exit'
-                ) {
-                    document.querySelector('.container-songs').style.display =
-                        'none'
-                    document
-                        .querySelector('.container-songs')
-                        .classList.remove('before-exit')
-                    document
-                        .querySelector('.container-home')
-                        .classList.add('after')
-                    document
-                        .querySelector('.container-home')
-                        .addEventListener('animationend', (event) => {
-                            if (
-                                event.animationName ===
-                                'animation-containers-after'
-                            ) {
-                                document
-                                    .querySelector('.container-home')
-                                    .classList.remove('after')
-                                document.querySelector('body').style.overflow =
-                                    'auto'
-                            }
-                        })
-                }
-            })
+    containerSongsBackBtn.addEventListener('click', () => {
+        body.style.overflow = 'hidden'
+        containerSongs.classList.add('before-exit')
+        containerSongs.addEventListener('animationend', (event) => {
+            if (event.animationName === 'animation-containers-before-exit') {
+                containerSongs.style.display = 'none'
+                containerSongs.classList.remove('before-exit')
+                containerHome.style.display = 'flex'
+                containerHome.classList.add('after')
+                containerHome.addEventListener('animationend', (event) => {
+                    if (event.animationName === 'animation-containers-after') {
+                        containerHome.classList.remove('after')
+                        body.style.overflow = 'auto'
+                    }
+                })
+            }
+        })
 
-        document.querySelector(
-            '.main-container .screen-flashlight'
-        ).style.display = 'block'
-
-        document
-            .querySelector('.main-container .screen-flashlight')
-            .addEventListener('animationend', (event) => {
-                if (event.animationName === 'animation-screen-flashlight') {
-                    document.querySelector(
-                        '.main-container .screen-flashlight'
-                    ).style.display = 'none'
-                }
-            })
-
-        document.querySelector(
-            '.main-container .container-home'
-        ).style.display = 'flex'
+        screenFlashlight.style.display = 'block'
+        screenFlashlight.addEventListener('animationend', (event) => {
+            if (event.animationName === 'animation-screen-flashlight') {
+                screenFlashlight.style.display = 'none'
+            }
+        })
     })
 }
 
@@ -678,9 +653,8 @@ function controllerFailed() {
     canActions = false
     canPause = false
     gamePausedDelay = null
-    document.querySelector(
-        '.main-container .main-container-failed'
-    ).style.display = 'flex'
+    document.querySelector('.main-container .container-failed').style.display =
+        'flex'
 }
 
 let timerConsecutiveHits = null
@@ -901,14 +875,14 @@ function gamePause() {
         canActions = false
         song.pause()
         document.querySelector(
-            '.main-container .main-container-paused'
+            '.main-container .container-paused'
         ).style.display = 'flex'
     } else {
         gamePaused = false
         canActions = true
         song.play()
         document.querySelector(
-            '.main-container .main-container-paused'
+            '.main-container .container-paused'
         ).style.display = 'none'
     }
 }
@@ -920,9 +894,8 @@ function gameRetry() {
     ).style.display = 'block'
     document.querySelector('.main-container .screen-flashlight').style.display =
         'block'
-    document.querySelector(
-        '.main-container .main-container-paused'
-    ).style.display = 'none'
+    document.querySelector('.main-container .container-paused').style.display =
+        'none'
 
     document
         .querySelector('.main-container .screen-flashlight')
@@ -933,9 +906,8 @@ function gameRetry() {
                 ).style.display = 'none'
             }
         })
-    document.querySelector(
-        '.main-container .main-container-failed'
-    ).style.display = 'none'
+    document.querySelector('.main-container .container-failed').style.display =
+        'none'
 
     livePoints = 51
     totalNotes = 0
@@ -1049,9 +1021,8 @@ function gameExit() {
     ).style.display = 'none'
     document.querySelector('.main-container .screen-flashlight').style.display =
         'block'
-    document.querySelector(
-        '.main-container .main-container-paused'
-    ).style.display = 'none'
+    document.querySelector('.main-container .container-paused').style.display =
+        'none'
 
     document
         .querySelector('.main-container .screen-flashlight')
@@ -1062,9 +1033,8 @@ function gameExit() {
                 ).style.display = 'none'
             }
         })
-    document.querySelector(
-        '.main-container .main-container-failed'
-    ).style.display = 'none'
+    document.querySelector('.main-container .container-failed').style.display =
+        'none'
 
     document.querySelector('.main-container .container-songs').style.display =
         'block'

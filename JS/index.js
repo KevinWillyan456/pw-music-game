@@ -454,7 +454,7 @@ song.addEventListener('ended', () => {
     setScreenFlashlight()
 })
 
-const teclasPermitidas = ['d', 'f', 'j', 'k', 'p']
+const teclasPermitidas = ['d', 'f', 'j', 'k', 'p', 'escape']
 let teclaJaPressionada = {} // Armazenar o estado de cada tecla
 
 document.addEventListener('keydown', function (event) {
@@ -541,6 +541,9 @@ document.addEventListener('keyup', function (event) {
         trail4.classList.remove('pressed')
     }
     if (teclaPressionada == 'p') {
+        gamePause()
+    }
+    if (teclaPressionada == 'escape') {
         gamePause()
     }
 

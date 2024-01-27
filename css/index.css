@@ -57,6 +57,29 @@ body::-webkit-scrollbar-thumb {
     min-height: 100vh;
     background-color: rgba(0, 0, 0, 0.4);
 }
+.container-game-pause {
+    position: absolute;
+    top: 100px;
+    left: 40px;
+    min-width: 40px;
+    min-height: 40px;
+    max-width: 40px;
+    max-height: 40px;
+    background-color: transparent;
+    filter: hue-rotate(200deg);
+    border: none;
+    font-size: 40px;
+    cursor: pointer;
+    border-radius: 5px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 5px black;
+}
+.container-game-pause div {
+    transform: translateY(-2.8px);
+}
 .main-container .screen-flashlight {
     animation: animation-screen-flashlight 400ms linear;
     position: fixed;

@@ -134,6 +134,7 @@ const containerGamePausedResumeBtn = document.querySelector(
     '.container-paused-option-resume'
 )
 const consecutiveHitsElement = document.querySelector('.consecutive-hits')
+const containerGamePauseBtn = document.querySelector('.container-game-pause')
 
 // elementos do container song completed
 const containerSongCompleted = document.querySelector(
@@ -256,6 +257,7 @@ function allEventsListeners() {
     })
     songPreviewDetailsStopBtn.addEventListener('click', gameSongPreviewStop)
     songPreviewDetailsPlayBtn.addEventListener('click', gameSongPreviewPlay)
+    containerGamePauseBtn.addEventListener('click', gamePause)
 }
 
 function isElementOverlapping(element1, element2) {
@@ -374,16 +376,7 @@ song.addEventListener('timeupdate', function () {
 })
 
 function loadSong(songChange) {
-    // containerGame.style.display = 'flex'
     counterToStart.style.display = 'flex'
-    // containerSongs.style.display = 'none'
-
-    // containerGame.classList.add('before')
-    // containerGame.addEventListener('animationend', (event) => {
-    //     if (event.animationName === 'animation-containers-before') {
-    //         containerGame.classList.remove('before')
-    //     }
-    // })
 
     body.style.overflow = 'hidden'
     containerSongs.classList.add('after-exit')
@@ -904,22 +897,22 @@ function gameRetry() {
 
     counterToStart.textContent = 'Ready?'
 
-    // setTimeout(() => {
-    //     counterToStart.textContent = 3
-    //     setTimeout(() => {
-    //         counterToStart.textContent = 2
-    //         setTimeout(() => {
-    //             counterToStart.textContent = 1
-    //             setTimeout(() => {
-    counterToStart.style.display = 'none'
-    song.currentTime = 0
-    song.play()
-    canActions = true
-    canPause = true
-    //             }, 800)
-    //         }, 800)
-    //     }, 800)
-    // }, 1500)
+    setTimeout(() => {
+        counterToStart.textContent = 3
+        setTimeout(() => {
+            counterToStart.textContent = 2
+            setTimeout(() => {
+                counterToStart.textContent = 1
+                setTimeout(() => {
+                    counterToStart.style.display = 'none'
+                    song.currentTime = 0
+                    song.play()
+                    canActions = true
+                    canPause = true
+                }, 800)
+            }, 800)
+        }, 800)
+    }, 1500)
 }
 
 function gamePostRetry() {

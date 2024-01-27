@@ -38,7 +38,6 @@ body::-webkit-scrollbar-thumb {
     background-repeat: no-repeat;
 }
 .main-container .container-game-cover {
-    display: none;
     position: absolute;
     top: 0;
     left: 0;
@@ -65,7 +64,6 @@ body::-webkit-scrollbar-thumb {
     }
 }
 .content-info {
-    display: none;
     position: absolute;
     left: 40px;
     bottom: 40px;
@@ -170,7 +168,6 @@ body::-webkit-scrollbar-thumb {
     }
 }
 .content-info-2 {
-    display: none;
     position: absolute;
     right: 40px;
     bottom: 40px;

@@ -25,13 +25,15 @@ let gamePausedDelay = null
 let gamePaused = false
 let songPreviewData = {}
 
-const containerTarget = document.querySelector('.main-container .container')
+const containerTarget = document.querySelector(
+    '.main-container .container-game .container'
+)
 const livePointer = document.querySelector(
     '.content-info .box .live .pointer-live'
 )
-const songCover = document.querySelector('.container-game')
 const songTitle = document.querySelector('.content-info .box .name')
 const contentSongs = document.querySelector('.content-songs')
+const counterToStart = document.querySelector('.counter-to-start')
 
 const song = document.querySelector('#song')
 const songPreview = document.querySelector('#song-preview')
@@ -131,6 +133,7 @@ const containerGamePausedExitBtn = document.querySelector(
 const containerGamePausedResumeBtn = document.querySelector(
     '.container-paused-option-resume'
 )
+const consecutiveHitsElement = document.querySelector('.consecutive-hits')
 
 // elementos do container song completed
 const containerSongCompleted = document.querySelector(
@@ -373,15 +376,10 @@ song.addEventListener('timeupdate', function () {
 function loadSong(songChange) {
     song.src = songChange.songUrl
 
-    document.querySelector('.container-game').style.display = 'flex'
-    document.querySelector('.counter-to-start').style.display = 'flex'
-    document.querySelector('.container-songs').style.display = 'none'
-    document.querySelector('.main-container .container').style.display = 'flex'
-    document.querySelector('.content-info').style.display = 'block'
-    document.querySelector('.content-info-2').style.display = 'block'
-    document.querySelector(
-        '.main-container .container-game-cover'
-    ).style.display = 'block'
+    containerGame.style.display = 'flex'
+    counterToStart.style.display = 'flex'
+    containerSongs.style.display = 'none'
+    containerTarget.style.display = 'flex'
 
     document
         .querySelectorAll(
@@ -393,7 +391,7 @@ function loadSong(songChange) {
 
     setScreenFlashlight()
 
-    document.querySelector('.counter-to-start').textContent = 'Loading...'
+    counterToStart.textContent = 'Loading...'
     song.addEventListener('canplaythrough', () => {
         startCounting(songChange)
     })
@@ -401,7 +399,7 @@ function loadSong(songChange) {
 
 function setSong(songChange) {
     song.play()
-    songCover.style.setProperty(
+    containerGame.style.setProperty(
         'background-image',
         `url("${songChange.songCover}")`
     )
@@ -413,9 +411,10 @@ function setSong(songChange) {
     totalNotesEvents()
     totalPointsEvents()
 
-    document
-        .querySelector('.container-song-completed')
-        .style.setProperty('background-image', `url("${songChange.songCover}")`)
+    containerSongCompleted.style.setProperty(
+        'background-image',
+        `url("${songChange.songCover}")`
+    )
 }
 
 song.addEventListener('ended', () => {
@@ -425,9 +424,7 @@ song.addEventListener('ended', () => {
 
     canActions = false
     canPause = false
-    document.querySelector(
-        '.main-container .container-song-completed'
-    ).style.display = 'block'
+    containerSongCompleted.style.display = 'block'
     document.querySelector(
         '.main-container .container-song-completed .points'
     ).textContent = `Points: ${totalPoints}`
@@ -450,11 +447,9 @@ song.addEventListener('ended', () => {
         '.main-container .container-song-completed .difficulty'
     ).textContent = `Difficulty: ${difficulty}`
 
-    document.querySelector('.container-game').style.display = 'none'
-    document.querySelector('.container-song-completed').s
-    document.querySelector('.main-container .container').style.display = 'none'
-    document.querySelector('.content-info').style.display = 'none'
-    document.querySelector('.content-info-2').style.display = 'none'
+    containerGame.style.display = 'none'
+    containerSongCompleted.style.display = 'block'
+    containerTarget.style.display = 'none'
 
     setScreenFlashlight()
 })
@@ -610,17 +605,16 @@ function totalNotesEvents() {
 }
 
 function startCounting(song) {
-    document.querySelector('.counter-to-start').textContent = 'Ready?'
+    counterToStart.textContent = 'Ready?'
 
     setTimeout(() => {
-        document.querySelector('.counter-to-start').textContent = 3
+        counterToStart.textContent = 3
         setTimeout(() => {
-            document.querySelector('.counter-to-start').textContent = 2
+            counterToStart.textContent = 2
             setTimeout(() => {
-                document.querySelector('.counter-to-start').textContent = 1
+                counterToStart.textContent = 1
                 setTimeout(() => {
-                    document.querySelector('.counter-to-start').style.display =
-                        'none'
+                    counterToStart.style.display = 'none'
                     setSong(song)
                     canActions = true
                     canPause = true
@@ -648,29 +642,17 @@ function consecutiveHitsEvents() {
             clearTimeout(timerConsecutiveHits)
             timerConsecutiveHits = null
         }
-        document.querySelector('.consecutive-hits').style.display = 'flex'
-        document.querySelector(
-            '.consecutive-hits'
-        ).textContent = `${consecutiveHits} consecutive hits!`
+        consecutiveHitsElement.style.display = 'flex'
+        consecutiveHitsElement.textContent = `${consecutiveHits} consecutive hits!`
 
         timerConsecutiveHits = setTimeout(() => {
-            document.querySelector('.consecutive-hits').classList.add('fade')
-
-            document
-                .querySelector('.consecutive-hits')
-                .addEventListener('animationend', (event) => {
-                    if (
-                        event.animationName ===
-                        'animation-consecutive-hits-exit'
-                    ) {
-                        document
-                            .querySelector('.consecutive-hits')
-                            .classList.remove('fade')
-                        document.querySelector(
-                            '.consecutive-hits'
-                        ).style.display = 'none'
-                    }
-                })
+            consecutiveHitsElement.classList.add('fade')
+            consecutiveHitsElement.addEventListener('animationend', (event) => {
+                if (event.animationName === 'animation-consecutive-hits-exit') {
+                    consecutiveHitsElement.classList.remove('fade')
+                    consecutiveHitsElement.style.display = 'none'
+                }
+            })
         }, 4000)
     }
 }
@@ -869,10 +851,7 @@ function gamePause() {
 }
 
 function gameRetry() {
-    document.querySelector('.counter-to-start').style.display = 'flex'
-    document.querySelector(
-        '.main-container .container-game-cover'
-    ).style.display = 'block'
+    counterToStart.style.display = 'flex'
     document.querySelector('.main-container .container-paused').style.display =
         'none'
 
@@ -899,17 +878,16 @@ function gameRetry() {
         target.remove()
     })
 
-    document.querySelector('.counter-to-start').textContent = 'Ready?'
+    counterToStart.textContent = 'Ready?'
 
     setTimeout(() => {
-        document.querySelector('.counter-to-start').textContent = 3
+        counterToStart.textContent = 3
         setTimeout(() => {
-            document.querySelector('.counter-to-start').textContent = 2
+            counterToStart.textContent = 2
             setTimeout(() => {
-                document.querySelector('.counter-to-start').textContent = 1
+                counterToStart.textContent = 1
                 setTimeout(() => {
-                    document.querySelector('.counter-to-start').style.display =
-                        'none'
+                    counterToStart.style.display = 'none'
                     song.currentTime = 0
                     song.play()
                     canActions = true
@@ -922,19 +900,12 @@ function gameRetry() {
 
 function gamePostRetry() {
     document.querySelector('.container-game').style.display = 'flex'
-    document.querySelector('.counter-to-start').style.display = 'flex'
+    counterToStart.style.display = 'flex'
     document.querySelector('.main-container .container').style.display = 'flex'
-    document.querySelector('.content-info').style.display = 'block'
-    document.querySelector('.content-info-2').style.display = 'block'
-    document.querySelector(
-        '.main-container .container-game-cover'
-    ).style.display = 'block'
 
     setScreenFlashlight()
 
-    document.querySelector(
-        '.main-container .container-song-completed'
-    ).style.display = 'none'
+    containerSongCompleted.style.display = 'none'
 
     livePoints = 51
     totalNotes = 0
@@ -953,17 +924,16 @@ function gamePostRetry() {
         target.remove()
     })
 
-    document.querySelector('.counter-to-start').textContent = 'Ready?'
+    counterToStart.textContent = 'Ready?'
 
     setTimeout(() => {
-        document.querySelector('.counter-to-start').textContent = 3
+        counterToStart.textContent = 3
         setTimeout(() => {
-            document.querySelector('.counter-to-start').textContent = 2
+            counterToStart.textContent = 2
             setTimeout(() => {
-                document.querySelector('.counter-to-start').textContent = 1
+                counterToStart.textContent = 1
                 setTimeout(() => {
-                    document.querySelector('.counter-to-start').style.display =
-                        'none'
+                    counterToStart.style.display = 'none'
                     song.currentTime = 0
                     song.play()
                     canActions = true
@@ -976,11 +946,6 @@ function gamePostRetry() {
 
 function gameExit() {
     document.querySelector('.main-container .container').style.display = 'none'
-    document.querySelector('.content-info').style.display = 'none'
-    document.querySelector('.content-info-2').style.display = 'none'
-    document.querySelector(
-        '.main-container .container-game-cover'
-    ).style.display = 'none'
     document.querySelector('.main-container .container-paused').style.display =
         'none'
 
@@ -1015,15 +980,9 @@ function gameExit() {
 }
 
 function gamePostExit() {
-    document.querySelector(
-        '.main-container .container-game-cover'
-    ).style.display = 'none'
-
     setScreenFlashlight()
 
-    document.querySelector(
-        '.main-container .container-song-completed'
-    ).style.display = 'none'
+    containerSongCompleted.style.display = 'none'
 
     document.querySelector('.main-container .container-songs').style.display =
         'block'

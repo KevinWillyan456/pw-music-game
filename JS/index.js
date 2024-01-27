@@ -374,12 +374,41 @@ song.addEventListener('timeupdate', function () {
 })
 
 function loadSong(songChange) {
-    song.src = songChange.songUrl
-
-    containerGame.style.display = 'flex'
+    // containerGame.style.display = 'flex'
     counterToStart.style.display = 'flex'
-    containerSongs.style.display = 'none'
-    containerTarget.style.display = 'flex'
+    // containerSongs.style.display = 'none'
+
+    // containerGame.classList.add('before')
+    // containerGame.addEventListener('animationend', (event) => {
+    //     if (event.animationName === 'animation-containers-before') {
+    //         containerGame.classList.remove('before')
+    //     }
+    // })
+
+    body.style.overflow = 'hidden'
+    containerSongs.classList.add('after-exit')
+    containerSongs.addEventListener('animationend', (event) => {
+        if (event.animationName === 'animation-containers-after-exit') {
+            containerSongs.style.display = 'none'
+            containerSongs.classList.remove('after-exit')
+            containerGame.style.display = 'flex'
+            containerGame.classList.add('before')
+            containerGame.addEventListener('animationend', (event) => {
+                if (event.animationName === 'animation-containers-before') {
+                    containerGame.classList.remove('before')
+                    body.style.overflow = 'auto'
+
+                    counterToStart.textContent = 'Loading...'
+                    song.src = songChange.songUrl
+                    song.addEventListener('canplaythrough', () => {
+                        startCounting(songChange)
+                    })
+
+                    setScreenFlashlight()
+                }
+            })
+        }
+    })
 
     document
         .querySelectorAll(
@@ -388,13 +417,6 @@ function loadSong(songChange) {
         .forEach((song) => {
             song.classList.remove('selected')
         })
-
-    setScreenFlashlight()
-
-    counterToStart.textContent = 'Loading...'
-    song.addEventListener('canplaythrough', () => {
-        startCounting(songChange)
-    })
 }
 
 function setSong(songChange) {
@@ -449,7 +471,6 @@ song.addEventListener('ended', () => {
 
     containerGame.style.display = 'none'
     containerSongCompleted.style.display = 'block'
-    containerTarget.style.display = 'none'
 
     setScreenFlashlight()
 })
@@ -883,28 +904,27 @@ function gameRetry() {
 
     counterToStart.textContent = 'Ready?'
 
-    setTimeout(() => {
-        counterToStart.textContent = 3
-        setTimeout(() => {
-            counterToStart.textContent = 2
-            setTimeout(() => {
-                counterToStart.textContent = 1
-                setTimeout(() => {
-                    counterToStart.style.display = 'none'
-                    song.currentTime = 0
-                    song.play()
-                    canActions = true
-                    canPause = true
-                }, 800)
-            }, 800)
-        }, 800)
-    }, 1500)
+    // setTimeout(() => {
+    //     counterToStart.textContent = 3
+    //     setTimeout(() => {
+    //         counterToStart.textContent = 2
+    //         setTimeout(() => {
+    //             counterToStart.textContent = 1
+    //             setTimeout(() => {
+    counterToStart.style.display = 'none'
+    song.currentTime = 0
+    song.play()
+    canActions = true
+    canPause = true
+    //             }, 800)
+    //         }, 800)
+    //     }, 800)
+    // }, 1500)
 }
 
 function gamePostRetry() {
     document.querySelector('.container-game').style.display = 'flex'
     counterToStart.style.display = 'flex'
-    document.querySelector('.main-container .container').style.display = 'flex'
 
     setScreenFlashlight()
 
@@ -948,19 +968,30 @@ function gamePostRetry() {
 }
 
 function gameExit() {
-    document.querySelector('.main-container .container').style.display = 'none'
     document.querySelector('.main-container .container-paused').style.display =
         'none'
-
-    setScreenFlashlight()
-
     document.querySelector('.main-container .container-failed').style.display =
         'none'
 
-    document.querySelector('.main-container .container-songs').style.display =
-        'block'
-    document.querySelector('.container-game').style.display = 'none'
-    document.querySelector('.container-game').style.backgroundImage = 'none'
+    body.style.overflow = 'hidden'
+    containerGame.classList.add('before-exit')
+    containerGame.addEventListener('animationend', (event) => {
+        if (event.animationName === 'animation-containers-before-exit') {
+            containerGame.style.display = 'none'
+            containerGame.style.backgroundImage = 'none'
+            containerGame.classList.remove('before-exit')
+            containerSongs.style.display = 'block'
+            containerSongs.classList.add('after')
+            containerSongs.addEventListener('animationend', (event) => {
+                if (event.animationName === 'animation-containers-after') {
+                    containerSongs.classList.remove('after')
+                    body.style.overflow = 'auto'
+                }
+            })
+        }
+    })
+
+    setScreenFlashlight()
 
     livePoints = 51
     totalNotes = 0

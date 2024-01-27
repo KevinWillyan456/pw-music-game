@@ -37,6 +37,18 @@ body::-webkit-scrollbar-thumb {
     background-size: cover;
     background-repeat: no-repeat;
 }
+.main-container .container-game.after {
+    animation: animation-containers-after 500ms linear;
+}
+.main-container .container-game.after-exit {
+    animation: animation-containers-after-exit 500ms linear;
+}
+.main-container .container-game.before {
+    animation: animation-containers-before 500ms linear;
+}
+.main-container .container-game.before-exit {
+    animation: animation-containers-before-exit 500ms linear;
+}
 .main-container .container-game-cover {
     position: absolute;
     top: 0;
@@ -290,7 +302,7 @@ body::-webkit-scrollbar-thumb {
     border: 5px solid #000;
     background-color: rgba(0, 0, 0, 0.85);
     box-shadow: 0 0 10px black;
-    display: none;
+    display: flex;
     align-items: flex-end;
     justify-content: center;
     position: relative;

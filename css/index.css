@@ -58,6 +58,7 @@ body::-webkit-scrollbar-thumb {
     background-color: rgba(0, 0, 0, 0.4);
 }
 .container-game-pause {
+    transition: 200ms;
     position: absolute;
     top: 100px;
     left: 40px;
@@ -76,6 +77,11 @@ body::-webkit-scrollbar-thumb {
     align-items: center;
     justify-content: center;
     box-shadow: 0 0 5px black;
+    outline: none;
+}
+.container-game-pause:hover,
+.container-game-pause:focus {
+    transform: scale(1.1);
 }
 .container-game-pause div {
     transform: translateY(-2.8px);
@@ -536,8 +542,17 @@ body::-webkit-scrollbar-thumb {
     }
 }
 .main-container .container-home .logo {
+    transition: 200ms;
     display: flex;
     cursor: pointer;
+    background: transparent;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+}
+.main-container .container-home .logo:hover,
+.main-container .container-home .logo:focus {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
 }
 .main-container .container-home .logo img {
     pointer-events: none;
@@ -560,6 +575,7 @@ body::-webkit-scrollbar-thumb {
     animation: animation-containers-before-exit 500ms linear;
 }
 .container-songs .btn-back-songs {
+    transition: 200ms;
     position: absolute;
     top: 20px;
     left: 20px;
@@ -575,6 +591,11 @@ body::-webkit-scrollbar-thumb {
     align-items: center;
     justify-content: center;
     cursor: pointer;
+}
+.container-songs .btn-back-songs:hover,
+.container-songs .btn-back-songs:focus {
+    box-shadow: 0 0 10px rgb(255, 255, 255);
+    background-color: rgba(255, 255, 255, 0.2);
 }
 .main-container .container-songs .content-songs .select-song {
     color: #fff;
@@ -811,6 +832,7 @@ body::-webkit-scrollbar-thumb {
     margin-top: 20px;
 }
 .main-container .container-failed .box .retry {
+    transition: 200ms;
     width: 200px;
     height: 60px;
     background: #e7eb21;
@@ -821,8 +843,16 @@ body::-webkit-scrollbar-thumb {
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+}
+.main-container .container-failed .box .retry:hover,
+.main-container .container-failed .box .retry:focus {
+    transform: scale(1.1);
 }
 .main-container .container-failed .box .exit {
+    transition: 200ms;
     width: 200px;
     height: 60px;
     background: #e22a2a;
@@ -833,6 +863,13 @@ body::-webkit-scrollbar-thumb {
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+}
+.main-container .container-failed .box .exit:hover,
+.main-container .container-failed .box .exit:focus {
+    transform: scale(1.1);
 }
 .main-container .container-song-completed {
     width: calc(100% - 130px);
@@ -867,6 +904,7 @@ body::-webkit-scrollbar-thumb {
     text-shadow: 0 0 5px black;
 }
 .main-container .container-song-completed .retry {
+    transition: 200ms;
     position: absolute;
     bottom: 60px;
     right: 305px;
@@ -880,8 +918,16 @@ body::-webkit-scrollbar-thumb {
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+}
+.main-container .container-song-completed .retry:hover,
+.main-container .container-song-completed .retry:focus {
+    transform: scale(1.1);
 }
 .main-container .container-song-completed .exit {
+    transition: 200ms;
     position: absolute;
     bottom: 60px;
     right: 65px;
@@ -895,6 +941,13 @@ body::-webkit-scrollbar-thumb {
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+}
+.main-container .container-song-completed .exit:hover,
+.main-container .container-song-completed .exit:focus {
+    transform: scale(1.1);
 }
 .main-container .container-paused {
     position: absolute;
@@ -928,6 +981,7 @@ body::-webkit-scrollbar-thumb {
     margin-top: 20px;
 }
 .container-paused-option-resume {
+    transition: 200ms;
     width: 200px;
     height: 60px;
     background: #11c718;
@@ -938,8 +992,16 @@ body::-webkit-scrollbar-thumb {
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+}
+.container-paused-option-resume:hover,
+.container-paused-option-resume:focus {
+    transform: scale(1.1);
 }
 .container-paused-option-retry {
+    transition: 200ms;
     width: 200px;
     height: 60px;
     background: #e7eb21;
@@ -950,8 +1012,16 @@ body::-webkit-scrollbar-thumb {
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+}
+.container-paused-option-retry:hover,
+.container-paused-option-retry:focus {
+    transform: scale(1.1);
 }
 .container-paused-option-exit {
+    transition: 200ms;
     width: 200px;
     height: 60px;
     background: #e22a2a;
@@ -962,6 +1032,13 @@ body::-webkit-scrollbar-thumb {
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+}
+.container-paused-option-exit:hover,
+.container-paused-option-exit:focus {
+    transform: scale(1.1);
 }
 .consecutive-hits {
     animation: animation-consecutive-hits-color 200ms infinite alternate linear,

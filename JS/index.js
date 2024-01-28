@@ -649,6 +649,33 @@ function startCounting(song) {
         }, 800)
     }, 1500)
 }
+
+let timerPauseCounting = null
+function pauseCounting() {
+    if (timerPauseCounting) {
+        clearTimeout(timerPauseCounting)
+        timerPauseCounting = null
+    }
+    counterToStart.style.display = 'flex'
+    counterToStart.textContent = 3
+    document.querySelector('.main-container .container-paused').style.display =
+        'none'
+
+    setScreenFlashlight()
+    timerPauseCounting = setTimeout(() => {
+        counterToStart.textContent = 2
+        setTimeout(() => {
+            counterToStart.textContent = 1
+            setTimeout(() => {
+                counterToStart.style.display = 'none'
+                gamePaused = false
+                canActions = true
+                song.play()
+            }, 800)
+        }, 800)
+    }, 800)
+}
+
 function controllerFailed() {
     song.pause()
     canActions = false
@@ -867,12 +894,7 @@ function gamePause() {
             '.main-container .container-paused'
         ).style.display = 'flex'
     } else {
-        gamePaused = false
-        canActions = true
-        song.play()
-        document.querySelector(
-            '.main-container .container-paused'
-        ).style.display = 'none'
+        pauseCounting()
     }
 }
 

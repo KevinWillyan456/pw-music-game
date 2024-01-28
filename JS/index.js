@@ -24,6 +24,7 @@ let consecutiveHits = 0
 let gamePausedDelay = null
 let gamePaused = false
 let songPreviewData = {}
+let hasPerfect = true
 
 const containerTarget = document.querySelector(
     '.main-container .container-game .container'
@@ -146,6 +147,9 @@ const containerSongCompletedRetryBtn = document.querySelector(
 )
 const containerSongCompletedExitBtn = document.querySelector(
     '.container-song-completed .exit'
+)
+const songPerfect = document.querySelector(
+    '.main-container .container-song-completed .perfect'
 )
 
 // elementos do song preview details
@@ -339,6 +343,8 @@ function animateElementDown(element, distance) {
                         : selectDifficulty === 2
                         ? (livePoints -= 2)
                         : (livePoints -= 3)
+
+                hasPerfect = false
                 livePointerEvents()
                 controllerRateBarsMissed()
             }
@@ -442,6 +448,7 @@ song.addEventListener('ended', () => {
     canActions = false
     canPause = false
     containerSongCompleted.style.display = 'block'
+    songPerfect.style.display = hasPerfect ? 'block' : 'none'
     document.querySelector(
         '.main-container .container-song-completed .points'
     ).textContent = `Points: ${totalPoints}`
@@ -883,6 +890,7 @@ function gameRetry() {
     totalNotes = 0
     totalPoints = 0
     consecutiveHits = 0
+    hasPerfect = true
     livePointerEvents()
     totalNotesEvents()
     totalPointsEvents()
@@ -931,6 +939,7 @@ function gamePostRetry() {
     totalNotes = 0
     totalPoints = 0
     consecutiveHits = 0
+    hasPerfect = true
     livePointerEvents()
     totalNotesEvents()
     totalPointsEvents()
@@ -996,6 +1005,7 @@ function gameExit() {
     totalNotes = 0
     totalPoints = 0
     consecutiveHits = 0
+    hasPerfect = true
     livePointerEvents()
     totalNotesEvents()
     totalPointsEvents()
@@ -1028,6 +1038,7 @@ function gamePostExit() {
     totalNotes = 0
     totalPoints = 0
     consecutiveHits = 0
+    hasPerfect = true
     livePointerEvents()
     totalNotesEvents()
     totalPointsEvents()

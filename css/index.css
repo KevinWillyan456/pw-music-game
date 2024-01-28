@@ -932,6 +932,14 @@ body::-webkit-scrollbar-thumb {
     font-weight: 700;
     text-shadow: 0 0 5px black;
 }
+.main-container .container-song-completed .perfect {
+    color: #e7eb21;
+    font-size: 48px;
+    font-weight: 700;
+    margin-top: 10px;
+    text-shadow: 0 0 5px black;
+    display: none;
+}
 .main-container .container-song-completed .retry {
     transition: 200ms;
     position: absolute;

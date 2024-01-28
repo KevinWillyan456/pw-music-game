@@ -1184,6 +1184,7 @@ body::-webkit-scrollbar-thumb {
     top: 10px;
     border-radius: 50%;
     border: 2px solid #fff;
+    cursor: pointer;
 }
 @keyframes animation-song-preview-details-hide {
     0% {

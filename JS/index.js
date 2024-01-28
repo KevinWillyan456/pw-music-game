@@ -986,6 +986,7 @@ function gameExit() {
 
     setScreenFlashlight()
 
+    songTitle.textContent = ''
     livePoints = 51
     totalNotes = 0
     totalPoints = 0
@@ -1016,6 +1017,7 @@ function gamePostExit() {
     document.querySelector('.container-game').style.display = 'none'
     document.querySelector('.container-game').style.backgroundImage = 'none'
 
+    songTitle.textContent = ''
     livePoints = 51
     totalNotes = 0
     totalPoints = 0

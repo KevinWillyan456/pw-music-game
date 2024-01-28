@@ -541,6 +541,22 @@ body::-webkit-scrollbar-thumb {
         transform: translateX(-100%);
     }
 }
+.container-home .container-home-touch {
+    animation: animation-container-home-touch 1s steps(10) alternate infinite;
+    position: absolute;
+    bottom: 20%;
+    color: white;
+    font-size: 30px;
+    text-transform: uppercase;
+}
+@keyframes animation-container-home-touch {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
 .main-container .container-home .logo {
     transition: 200ms;
     display: flex;

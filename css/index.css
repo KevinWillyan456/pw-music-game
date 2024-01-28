@@ -554,6 +554,19 @@ body::-webkit-scrollbar-thumb {
 .main-container .container-home .logo:focus {
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
 }
+
+.main-container .container-home .logo.playing {
+    animation: animation-logo-playing 800ms infinite alternate
+        cubic-bezier(0.08, 0.82, 0.85, 0.26);
+}
+@keyframes animation-logo-playing {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.1);
+    }
+}
 .main-container .container-home .logo img {
     pointer-events: none;
     width: 100%;

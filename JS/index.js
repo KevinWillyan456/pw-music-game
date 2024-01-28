@@ -377,6 +377,7 @@ song.addEventListener('timeupdate', function () {
 
 function loadSong(songChange) {
     counterToStart.style.display = 'flex'
+    counterToStart.textContent = 'Loading...'
 
     body.style.overflow = 'hidden'
     containerSongs.classList.add('after-exit')
@@ -391,7 +392,6 @@ function loadSong(songChange) {
                     containerGame.classList.remove('before')
                     body.style.overflow = 'auto'
 
-                    counterToStart.textContent = 'Loading...'
                     song.src = songChange.songUrl
                     song.addEventListener('canplaythrough', () => {
                         startCounting(songChange)
@@ -1045,6 +1045,8 @@ function gameSongPreview(songChange) {
         songPreviewDetails.classList.remove('exit')
     }
 
+    containerHomeLogo.classList.add('playing')
+
     songPreview.src = songChange.songUrl
     songPreview.play()
 
@@ -1086,6 +1088,7 @@ function gameSongPreviewStop() {
     songPreview.pause()
     songPreview.src = ''
     songPreviewDetails.classList.remove('hide')
+    containerHomeLogo.classList.remove('playing')
 
     if (timerGameSongPreview) {
         clearTimeout(timerGameSongPreview)

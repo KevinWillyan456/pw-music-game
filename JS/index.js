@@ -135,6 +135,7 @@ const containerGamePausedResumeBtn = document.querySelector(
 )
 const consecutiveHitsElement = document.querySelector('.consecutive-hits')
 const containerGamePauseBtn = document.querySelector('.container-game-pause')
+const progressBar = document.querySelector('.progress-bar')
 
 // elementos do container song completed
 const containerSongCompleted = document.querySelector(
@@ -366,6 +367,7 @@ function createElementAtTime(type) {
 
 song.addEventListener('timeupdate', function () {
     const currentTime = song.currentTime
+    calculateProgressBarWidth()
 
     songNotes.forEach((moment) => {
         if (currentTime >= moment.time && !moment.created) {
@@ -876,6 +878,7 @@ function gameRetry() {
     document.querySelector('.main-container .container-failed').style.display =
         'none'
 
+    progressBar.style.backgroundImage = `linear-gradient(90deg, #fff 0%, #fff 0%, #ffffff33 0%, #ffffff33 100%)`
     livePoints = 51
     totalNotes = 0
     totalPoints = 0
@@ -923,6 +926,7 @@ function gamePostRetry() {
 
     containerSongCompleted.style.display = 'none'
 
+    progressBar.style.backgroundImage = `linear-gradient(90deg, #fff 0%, #fff 0%, #ffffff33 0%, #ffffff33 100%)`
     livePoints = 51
     totalNotes = 0
     totalPoints = 0
@@ -986,6 +990,7 @@ function gameExit() {
 
     setScreenFlashlight()
 
+    progressBar.style.backgroundImage = `linear-gradient(90deg, #fff 0%, #fff 0%, #ffffff33 0%, #ffffff33 100%)`
     songTitle.textContent = ''
     livePoints = 51
     totalNotes = 0
@@ -1017,6 +1022,7 @@ function gamePostExit() {
     document.querySelector('.container-game').style.display = 'none'
     document.querySelector('.container-game').style.backgroundImage = 'none'
 
+    progressBar.style.backgroundImage = `linear-gradient(90deg, #fff 0%, #fff 0%, #ffffff33 0%, #ffffff33 100%)`
     songTitle.textContent = ''
     livePoints = 51
     totalNotes = 0
@@ -1050,6 +1056,7 @@ function gameSongPreview(songChange) {
     containerHomeLogo.classList.add('playing')
 
     songPreview.src = songChange.songUrl
+    songPreview.loop = true
     songPreview.play()
 
     songPreviewData.songTitle = songChange.songTitle
@@ -1216,4 +1223,9 @@ function setScreenFlashlight() {
             screenFlashlight.style.display = 'none'
         }
     })
+}
+
+function calculateProgressBarWidth() {
+    const progressBarWidth = (song.currentTime / song.duration) * 100
+    progressBar.style.backgroundImage = `linear-gradient(90deg, #fff 0%, #fff ${progressBarWidth}%, #ffffff33 ${progressBarWidth}%, #ffffff33 100%)`
 }

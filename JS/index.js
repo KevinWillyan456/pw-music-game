@@ -552,7 +552,7 @@ document.addEventListener('keydown', function (event) {
     ) {
         // Coloque aqui o código que você deseja executar quando uma das teclas for pressionada.
         if (teclaPressionada == 'd') {
-            trail1.classList.add('pressed')
+            trail1.children[0].classList.add('pressed')
             if (!isElementOverlapping(trail1, target1)) {
                 livePoints =
                     selectDifficulty === 1
@@ -566,7 +566,7 @@ document.addEventListener('keydown', function (event) {
             }
         }
         if (teclaPressionada == 'f') {
-            trail2.classList.add('pressed')
+            trail2.children[0].classList.add('pressed')
             if (!isElementOverlapping(trail2, target2)) {
                 livePoints =
                     selectDifficulty === 1
@@ -579,7 +579,7 @@ document.addEventListener('keydown', function (event) {
             }
         }
         if (teclaPressionada == 'j') {
-            trail3.classList.add('pressed')
+            trail3.children[0].classList.add('pressed')
             if (!isElementOverlapping(trail3, target3)) {
                 livePoints =
                     selectDifficulty === 1
@@ -592,7 +592,7 @@ document.addEventListener('keydown', function (event) {
             }
         }
         if (teclaPressionada == 'k') {
-            trail4.classList.add('pressed')
+            trail4.children[0].classList.add('pressed')
             if (!isElementOverlapping(trail4, target4)) {
                 livePoints =
                     selectDifficulty === 1
@@ -613,16 +613,16 @@ document.addEventListener('keyup', function (event) {
     const teclaPressionada = event.key.toLowerCase()
 
     if (teclaPressionada == 'd') {
-        trail1.classList.remove('pressed')
+        trail1.children[0].classList.remove('pressed')
     }
     if (teclaPressionada == 'f') {
-        trail2.classList.remove('pressed')
+        trail2.children[0].classList.remove('pressed')
     }
     if (teclaPressionada == 'j') {
-        trail3.classList.remove('pressed')
+        trail3.children[0].classList.remove('pressed')
     }
     if (teclaPressionada == 'k') {
-        trail4.classList.remove('pressed')
+        trail4.children[0].classList.remove('pressed')
     }
     if (teclaPressionada == 'p') {
         gamePause()

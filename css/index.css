@@ -342,9 +342,18 @@ body::-webkit-scrollbar-thumb {
     height: 70px;
     display: flex;
     gap: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 90px;
 }
-.main-container .container .trails .trail-1 {
+.main-container .container .trails .trail-1,
+.main-container .container .trails .trail-2,
+.main-container .container .trails .trail-3,
+.main-container .container .trails .trail-4 {
+    width: 100px;
+    height: 140px;
+    display: flex;
+    align-items: flex-end;
+}
+.main-container .container .trails .trail-1 .trail-children-1 {
     transition: 100ms;
     width: 100px;
     height: 70px;
@@ -352,11 +361,11 @@ body::-webkit-scrollbar-thumb {
     border: 2px solid #000;
     background: #125714;
 }
-.main-container .container .trails .trail-1.pressed {
+.main-container .container .trails .trail-1 .trail-children-1.pressed {
     border: 5px solid #000;
     background: #2cd933;
 }
-.main-container .container .trails .trail-2 {
+.main-container .container .trails .trail-2 .trail-children-2 {
     transition: 100ms;
     width: 100px;
     height: 70px;
@@ -364,11 +373,11 @@ body::-webkit-scrollbar-thumb {
     border: 2px solid #000;
     background: #5a1111;
 }
-.main-container .container .trails .trail-2.pressed {
+.main-container .container .trails .trail-2 .trail-children-2.pressed {
     border: 5px solid #000;
     background: #e22a2a;
 }
-.main-container .container .trails .trail-3 {
+.main-container .container .trails .trail-3 .trail-children-3 {
     transition: 100ms;
     width: 100px;
     height: 70px;
@@ -376,11 +385,11 @@ body::-webkit-scrollbar-thumb {
     border: 2px solid #000;
     background: #555a11;
 }
-.main-container .container .trails .trail-3.pressed {
+.main-container .container .trails .trail-3 .trail-children-3.pressed {
     border: 5px solid #000;
     background: #d4e22a;
 }
-.main-container .container .trails .trail-4 {
+.main-container .container .trails .trail-4 .trail-children-4 {
     transition: 100ms;
     width: 100px;
     height: 70px;
@@ -388,20 +397,20 @@ body::-webkit-scrollbar-thumb {
     border: 2px solid #000;
     background: #1b115a;
 }
-.main-container .container .trails .trail-4.pressed {
+.main-container .container .trails .trail-4 .trail-children-4.pressed {
     border: 5px solid #000;
     background: #442ae2;
 }
-.main-container .container .trails .trail-1.hit {
+.main-container .container .trails .trail-1 .trail-children-1.hit {
     animation: animation-hit-1 150ms;
 }
-.main-container .container .trails .trail-2.hit {
+.main-container .container .trails .trail-2 .trail-children-2.hit {
     animation: animation-hit-2 150ms;
 }
-.main-container .container .trails .trail-3.hit {
+.main-container .container .trails .trail-3 .trail-children-3.hit {
     animation: animation-hit-3 150ms;
 }
-.main-container .container .trails .trail-4.hit {
+.main-container .container .trails .trail-4 .trail-children-4.hit {
     animation: animation-hit-4 150ms;
 }
 @keyframes animation-hit-1 {

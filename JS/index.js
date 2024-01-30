@@ -476,6 +476,12 @@ function loadSong(songChange) {
 }
 
 function setSong(songChange) {
+    if (
+        (song.currentTime > 0 && !song.paused) ||
+        containerGame.style.display === 'none'
+    ) {
+        return
+    }
     song.play()
     containerGame.style.setProperty(
         'background-image',

@@ -108,6 +108,20 @@ const containerHomeLogo = document.querySelector(
     '.main-container .container-home .logo'
 )
 
+// elementos do container select
+const containerSelect = document.querySelector(
+    '.main-container .container-select'
+)
+const containerSelectBackBtn = document.querySelector(
+    '.container-select .btn-back-select'
+)
+const containerSelectPlayBtn = document.querySelector(
+    '.container-select .btn-select-play'
+)
+const containerSelectOptionsBtn = document.querySelector(
+    '.container-select .btn-select-options'
+)
+
 // elementos do container songs
 const containerSongs = document.querySelector(
     '.main-container .container-songs'
@@ -214,11 +228,11 @@ function allEventsListeners() {
             if (event.animationName === 'animation-containers-after-exit') {
                 containerHome.style.display = 'none'
                 containerHome.classList.remove('after-exit')
-                containerSongs.style.display = 'block'
-                containerSongs.classList.add('before')
-                containerSongs.addEventListener('animationend', (event) => {
+                containerSelect.style.display = 'flex'
+                containerSelect.classList.add('before')
+                containerSelect.addEventListener('animationend', (event) => {
                     if (event.animationName === 'animation-containers-before') {
-                        containerSongs.classList.remove('before')
+                        containerSelect.classList.remove('before')
                         body.style.overflow = 'auto'
                     }
                 })
@@ -247,6 +261,29 @@ function allEventsListeners() {
             if (event.animationName === 'animation-containers-before-exit') {
                 containerSongs.style.display = 'none'
                 containerSongs.classList.remove('before-exit')
+                containerSelect.style.display = 'flex'
+                containerSelect.classList.add('after')
+                containerSelect.addEventListener('animationend', (event) => {
+                    if (event.animationName === 'animation-containers-after') {
+                        containerSelect.classList.remove('after')
+                        body.style.overflow = 'auto'
+                    }
+                })
+            }
+        })
+
+        setScreenFlashlight()
+    })
+    songPreviewDetailsStopBtn.addEventListener('click', gameSongPreviewStop)
+    songPreviewDetailsPlayBtn.addEventListener('click', gameSongPreviewPlay)
+    containerGamePauseBtn.addEventListener('click', gamePause)
+    containerSelectBackBtn.addEventListener('click', () => {
+        body.style.overflow = 'hidden'
+        containerSelect.classList.add('before-exit')
+        containerSelect.addEventListener('animationend', (event) => {
+            if (event.animationName === 'animation-containers-before-exit') {
+                containerSelect.style.display = 'none'
+                containerSelect.classList.remove('before-exit')
                 containerHome.style.display = 'flex'
                 containerHome.classList.add('after')
                 containerHome.addEventListener('animationend', (event) => {
@@ -260,9 +297,27 @@ function allEventsListeners() {
 
         setScreenFlashlight()
     })
-    songPreviewDetailsStopBtn.addEventListener('click', gameSongPreviewStop)
-    songPreviewDetailsPlayBtn.addEventListener('click', gameSongPreviewPlay)
-    containerGamePauseBtn.addEventListener('click', gamePause)
+    containerSelectPlayBtn.addEventListener('click', () => {
+        body.style.overflow = 'hidden'
+        containerHome.style.display = 'none'
+        containerSelect.classList.add('after-exit')
+        containerSelect.addEventListener('animationend', (event) => {
+            if (event.animationName === 'animation-containers-after-exit') {
+                containerSelect.style.display = 'none'
+                containerSelect.classList.remove('after-exit')
+                containerSongs.style.display = 'block'
+                containerSongs.classList.add('before')
+                containerSongs.addEventListener('animationend', (event) => {
+                    if (event.animationName === 'animation-containers-before') {
+                        containerSongs.classList.remove('before')
+                        body.style.overflow = 'auto'
+                    }
+                })
+            }
+        })
+
+        setScreenFlashlight()
+    })
 }
 
 function isElementOverlapping(element1, element2) {

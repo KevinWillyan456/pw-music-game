@@ -587,6 +587,96 @@ body::-webkit-scrollbar-thumb {
     pointer-events: none;
     width: 100%;
 }
+.main-container .container-select {
+    width: 100%;
+    min-height: 100vh;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+.main-container .container-select.after {
+    animation: animation-containers-after 500ms linear;
+}
+.main-container .container-select.after-exit {
+    animation: animation-containers-after-exit 500ms linear;
+}
+.main-container .container-select.before {
+    animation: animation-containers-before 500ms linear;
+}
+.main-container .container-select.before-exit {
+    animation: animation-containers-before-exit 500ms linear;
+}
+.container-select .btn-back-select {
+    transition: 200ms;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    border: 2px solid #fff;
+    padding: 5px 12px;
+    border-radius: 5px;
+    outline: none;
+    background-color: transparent;
+    color: white;
+    font-size: 24px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.container-select .btn-back-select:hover,
+.container-select .btn-back-select:focus {
+    box-shadow: 0 0 10px rgb(255, 255, 255);
+    background-color: rgba(255, 255, 255, 0.2);
+}
+.container-select .content-select {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+}
+.container-select .content-select .btn-select-play {
+    transition: 200ms;
+    width: 200px;
+    height: 60px;
+    background: #e7eb21;
+    color: #000;
+    font-size: 36px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+}
+.container-select .content-select .btn-select-play:hover,
+.container-select .content-select .btn-select-play:focus {
+    transform: scale(1.1);
+}
+.container-select .content-select .btn-select-options {
+    transition: 200ms;
+    width: 200px;
+    height: 60px;
+    background: #e22a2a;
+    color: #000;
+    font-size: 36px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+}
+.container-select .content-select .btn-select-options:hover,
+.container-select .content-select .btn-select-options:focus {
+    transform: scale(1.1);
+}
 .main-container .container-songs {
     width: 100%;
     display: none;

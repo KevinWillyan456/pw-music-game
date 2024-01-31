@@ -25,6 +25,7 @@ let gamePausedDelay = null
 let gamePaused = false
 let songPreviewData = {}
 let hasPerfect = true
+let totalNotesPassed = 0
 
 const containerTarget = document.querySelector(
     '.main-container .container-game .container'
@@ -398,7 +399,7 @@ function animateElementDown(element, distance) {
                         : selectDifficulty === 2
                         ? (livePoints -= 2)
                         : (livePoints -= 3)
-
+                totalNotesPassed++
                 hasPerfect = false
                 livePointerEvents()
                 controllerRateBarsMissed()
@@ -490,6 +491,7 @@ function setSong(songChange) {
     songTitle.textContent = songChange.songTitle
     livePoints = 51
     totalNotes = 0
+    totalNotesPassed = 0
     totalPoints = 0
     livePointerEvents()
     totalNotesEvents()
@@ -531,6 +533,12 @@ song.addEventListener('ended', () => {
     document.querySelector(
         '.main-container .container-song-completed .difficulty'
     ).textContent = `Difficulty: ${difficulty}`
+    document.querySelector(
+        '.main-container .container-song-completed .accuracy'
+    ).textContent = `Accuracy: ${(
+        ((totalNotesPassed * 100) / (totalNotes + totalNotesPassed) - 100) *
+        -1
+    ).toFixed(2)}%`
 
     containerGame.style.display = 'none'
     containerSongCompleted.style.display = 'block'
@@ -971,6 +979,7 @@ function gameRetry() {
     progressBar.style.backgroundImage = `linear-gradient(90deg, #fff 0%, #fff 0%, #ffffff33 0%, #ffffff33 100%)`
     livePoints = 51
     totalNotes = 0
+    totalNotesPassed = 0
     totalPoints = 0
     consecutiveHits = 0
     hasPerfect = true
@@ -1020,6 +1029,7 @@ function gamePostRetry() {
     progressBar.style.backgroundImage = `linear-gradient(90deg, #fff 0%, #fff 0%, #ffffff33 0%, #ffffff33 100%)`
     livePoints = 51
     totalNotes = 0
+    totalNotesPassed = 0
     totalPoints = 0
     consecutiveHits = 0
     hasPerfect = true
@@ -1086,6 +1096,7 @@ function gameExit() {
     songTitle.textContent = ''
     livePoints = 51
     totalNotes = 0
+    totalNotesPassed = 0
     totalPoints = 0
     consecutiveHits = 0
     hasPerfect = true
@@ -1119,6 +1130,7 @@ function gamePostExit() {
     songTitle.textContent = ''
     livePoints = 51
     totalNotes = 0
+    totalNotesPassed = 0
     totalPoints = 0
     consecutiveHits = 0
     hasPerfect = true

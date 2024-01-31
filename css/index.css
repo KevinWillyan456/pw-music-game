@@ -165,6 +165,7 @@ body::-webkit-scrollbar-thumb {
     box-shadow: 0 0 10px black;
 }
 .content-info .box .live .live-part-red {
+    transition: 200ms;
     width: 100px;
     height: 60px;
     background: #5a1111;
@@ -173,6 +174,7 @@ body::-webkit-scrollbar-thumb {
     background: #e22a2a;
 }
 .content-info .box .live .live-part-yellow {
+    transition: 200ms;
     width: 100px;
     height: 60px;
     background: #5c5e0d;
@@ -181,6 +183,7 @@ body::-webkit-scrollbar-thumb {
     background: #e7eb21;
 }
 .content-info .box .live .live-part-green {
+    transition: 200ms;
     width: 100px;
     height: 60px;
     background: #125714;
@@ -189,6 +192,7 @@ body::-webkit-scrollbar-thumb {
     background: #2cd933;
 }
 .content-info .box .live .pointer-live {
+    transition: 200ms;
     width: 6px;
     height: 60px;
     background: white;
@@ -262,6 +266,9 @@ body::-webkit-scrollbar-thumb {
     display: flex;
     align-items: flex-end;
     gap: 5px;
+}
+.content-info-2 .box .bars .bar {
+    transition: 200ms;
 }
 .content-info-2 .box .bars .bar:nth-child(1) {
     width: 12px;

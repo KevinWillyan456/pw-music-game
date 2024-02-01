@@ -938,6 +938,97 @@ body::-webkit-scrollbar-thumb {
 .main-container .container-songs .content-songs .song .song-play:hover {
     box-shadow: 0 0 5px #e22a2a inset, 0 0 40px #e22a2a inset;
 }
+.container-config {
+    width: 100%;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    display: none;
+}
+.container-config.after {
+    animation: animation-containers-after 500ms linear;
+}
+.container-config.after-exit {
+    animation: animation-containers-after-exit 500ms linear;
+}
+.container-config.before {
+    animation: animation-containers-before 500ms linear;
+}
+.container-config.before-exit {
+    animation: animation-containers-before-exit 500ms linear;
+}
+.container-config .btn-back-config {
+    transition: 200ms;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    border: 2px solid #fff;
+    padding: 5px 12px;
+    border-radius: 5px;
+    outline: none;
+    background-color: transparent;
+    color: white;
+    font-size: 24px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.container-config .btn-back-config:hover,
+.container-config .btn-back-config:focus {
+    box-shadow: 0 0 10px rgb(255, 255, 255);
+    background-color: rgba(255, 255, 255, 0.2);
+}
+.container-config .content-config {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+    padding: 60px 0;
+}
+.content-config .song-volume {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-direction: column;
+}
+.content-config .song-volume .title {
+    color: #fff;
+    font-size: 48px;
+    font-weight: 700;
+}
+.content-config .song-volume .volume[type='range'] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 4px;
+    cursor: pointer;
+    background: transparent;
+    background-image: linear-gradient(90deg, #e22a2a, #e22a2a 80%, #e22a2a33 0);
+}
+.content-config
+    .song-volume
+    .volume[type='range']::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 4px;
+}
+.content-config .song-volume .volume[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #f54141;
+    border-radius: 50%;
+    border: 2px solid #f54141;
+    cursor: pointer;
+    margin-top: -8px;
+}
+
 .main-container .container-failed {
     position: absolute;
     top: 0;

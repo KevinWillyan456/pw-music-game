@@ -26,6 +26,10 @@ let gamePaused = false
 let songPreviewData = {}
 let hasPerfect = true
 let totalNotesPassed = 0
+let screenIndex = {
+    songs: true,
+    config: true,
+}
 
 const containerTarget = document.querySelector(
     '.main-container .container-game .container'
@@ -130,6 +134,15 @@ const containerSongs = document.querySelector(
 const containerSongsBackBtn = document.querySelector(
     '.container-songs .btn-back-songs'
 )
+
+// elementos do container config
+const containerConfig = document.querySelector(
+    '.main-container .container-config'
+)
+const containerConfigBackBtn = document.querySelector(
+    '.container-config .btn-back-config'
+)
+const containerConfigChangeVolume = document.querySelector('#volume-song')
 
 // elementos do container game
 const containerGame = document.querySelector('.main-container .container-game')
@@ -256,6 +269,7 @@ function allEventsListeners() {
     containerGamePausedResumeBtn.addEventListener('click', gamePause)
 
     containerSongsBackBtn.addEventListener('click', () => {
+        screenIndex.config = true
         body.style.overflow = 'hidden'
         containerSongs.classList.add('before-exit')
         containerSongs.addEventListener('animationend', (event) => {
@@ -299,10 +313,16 @@ function allEventsListeners() {
         setScreenFlashlight()
     })
     containerSelectPlayBtn.addEventListener('click', () => {
+        screenIndex.config = false
+
         body.style.overflow = 'hidden'
         containerHome.style.display = 'none'
         containerSelect.classList.add('after-exit')
         containerSelect.addEventListener('animationend', (event) => {
+            if (screenIndex.songs === false) {
+                return
+            }
+
             if (event.animationName === 'animation-containers-after-exit') {
                 containerSelect.style.display = 'none'
                 containerSelect.classList.remove('after-exit')
@@ -311,6 +331,55 @@ function allEventsListeners() {
                 containerSongs.addEventListener('animationend', (event) => {
                     if (event.animationName === 'animation-containers-before') {
                         containerSongs.classList.remove('before')
+                        body.style.overflow = 'auto'
+                        screenIndex.config = true
+                    }
+                })
+            }
+        })
+
+        setScreenFlashlight()
+    })
+    containerSelectOptionsBtn.addEventListener('click', () => {
+        screenIndex.songs = false
+
+        body.style.overflow = 'hidden'
+        containerHome.style.display = 'none'
+
+        containerSelect.classList.add('after-exit')
+        containerSelect.addEventListener('animationend', (event) => {
+            if (screenIndex.config === false) {
+                return
+            }
+            if (event.animationName === 'animation-containers-after-exit') {
+                containerSelect.style.display = 'none'
+                containerSelect.classList.remove('after-exit')
+                containerConfig.style.display = 'block'
+                containerConfig.classList.add('before')
+                containerConfig.addEventListener('animationend', (event) => {
+                    if (event.animationName === 'animation-containers-before') {
+                        containerConfig.classList.remove('before')
+                        body.style.overflow = 'auto'
+                        screenIndex.songs = true
+                    }
+                })
+            }
+        })
+
+        setScreenFlashlight()
+    })
+    containerConfigBackBtn.addEventListener('click', () => {
+        body.style.overflow = 'hidden'
+        containerConfig.classList.add('before-exit')
+        containerConfig.addEventListener('animationend', (event) => {
+            if (event.animationName === 'animation-containers-before-exit') {
+                containerConfig.style.display = 'none'
+                containerConfig.classList.remove('before-exit')
+                containerSelect.style.display = 'flex'
+                containerSelect.classList.add('after')
+                containerSelect.addEventListener('animationend', (event) => {
+                    if (event.animationName === 'animation-containers-after') {
+                        containerSelect.classList.remove('after')
                         body.style.overflow = 'auto'
                     }
                 })

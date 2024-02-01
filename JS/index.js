@@ -230,6 +230,7 @@ function init() {
     livePointerEvents()
     generatorContentSongs()
     allEventsListeners()
+    getSongVolume()
 }
 
 init()
@@ -387,6 +388,9 @@ function allEventsListeners() {
         })
 
         setScreenFlashlight()
+    })
+    containerConfigChangeVolume.addEventListener('input', (e) => {
+        setSongVolume(e.target.value)
     })
 }
 
@@ -1403,4 +1407,43 @@ function setScreenFlashlight() {
 function calculateProgressBarWidth() {
     const progressBarWidth = (song.currentTime / song.duration) * 100
     progressBar.style.backgroundImage = `linear-gradient(90deg, #fff 0%, #fff ${progressBarWidth}%, #ffffff33 ${progressBarWidth}%, #ffffff33 100%)`
+}
+
+function getSongVolume() {
+    const volume = localStorage.getItem('songVolume')
+
+    if (volume) {
+        song.volume = volume / 100
+        songPreview.volume = volume / 100
+        const volumeSliderTrack = document.querySelector(
+            ".content-config .song-volume .volume[type='range']"
+        )
+        volumeSliderTrack.value = volume
+        volumeSliderTrack.style.backgroundImage = `linear-gradient(90deg, #e22a2a, #e22a2a ${volume}%, #e22a2a33 0)`
+    } else {
+        song.volume = 0.8
+        songPreview.volume = 0.8
+        const volumeSliderTrack = document.querySelector(
+            ".content-config .song-volume .volume[type='range']"
+        )
+        volumeSliderTrack.value = 80
+        volumeSliderTrack.style.backgroundImage = `linear-gradient(90deg, #e22a2a, #e22a2a 80%, #e22a2a33 0)`
+
+        localStorage.setItem('songVolume', 80)
+    }
+}
+function setSongVolume(volume) {
+    song.volume = volume / 100
+    songPreview.volume = volume / 100
+    localStorage.setItem('songVolume', volume)
+
+    const volumeSliderTrack = document.querySelector(
+        ".content-config .song-volume .volume[type='range']"
+    )
+
+    volumeSliderTrack.style.backgroundImage = `linear-gradient(90deg, #e22a2a, #e22a2a ${volume}%, #e22a2a33 0)`
+
+    if (volume == 0 || volume == 100) {
+        setScreenFlashlight()
+    }
 }

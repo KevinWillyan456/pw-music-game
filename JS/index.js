@@ -134,6 +134,8 @@ const containerSongs = document.querySelector(
 const containerSongsBackBtn = document.querySelector(
     '.container-songs .btn-back-songs'
 )
+const containerSongsSearchInput = document.querySelector('#select-song-search')
+const containerSongsSearchNoFound = document.querySelector('.song-not-found')
 
 // elementos do container config
 const containerConfig = document.querySelector(
@@ -391,6 +393,9 @@ function allEventsListeners() {
     })
     containerConfigChangeVolume.addEventListener('input', (e) => {
         setSongVolume(e.target.value)
+    })
+    containerSongsSearchInput.addEventListener('input', (e) => {
+        searchSong(e.target.value)
     })
 }
 
@@ -1092,7 +1097,7 @@ function gameRetry() {
 }
 
 function gamePostRetry() {
-    document.querySelector('.container-game').style.display = 'flex'
+    containerGame.style.display = 'flex'
     counterToStart.style.display = 'flex'
 
     setScreenFlashlight()
@@ -1194,10 +1199,9 @@ function gamePostExit() {
 
     containerSongCompleted.style.display = 'none'
 
-    document.querySelector('.main-container .container-songs').style.display =
-        'block'
-    document.querySelector('.container-game').style.display = 'none'
-    document.querySelector('.container-game').style.backgroundImage = 'none'
+    containerSongs.style.display = 'block'
+    containerGame.style.display = 'none'
+    containerGame.style.backgroundImage = 'none'
 
     progressBar.style.backgroundImage = `linear-gradient(90deg, #fff 0%, #fff 0%, #ffffff33 0%, #ffffff33 100%)`
     songTitle.textContent = ''
@@ -1432,6 +1436,7 @@ function getSongVolume() {
         localStorage.setItem('songVolume', 80)
     }
 }
+
 function setSongVolume(volume) {
     song.volume = volume / 100
     songPreview.volume = volume / 100
@@ -1446,4 +1451,27 @@ function setSongVolume(volume) {
     if (volume == 0 || volume == 100) {
         setScreenFlashlight()
     }
+}
+
+function searchSong(value) {
+    const dataFiltered = data.filter((song) => {
+        return song.songTitle.toLowerCase().includes(value.toLowerCase())
+    })
+
+    document.querySelectorAll('.song').forEach((song) => {
+        song.style.display = 'none'
+    })
+
+    containerSongsSearchNoFound.style.display = 'none'
+
+    if (dataFiltered.length === 0) {
+        containerSongsSearchNoFound.style.display = 'block'
+        return
+    }
+
+    dataFiltered.forEach((song) => {
+        document.querySelector(
+            `.song[style*="${song.songCover}"]`
+        ).style.display = 'flex'
+    })
 }

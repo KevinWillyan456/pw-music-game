@@ -21,7 +21,7 @@
         <audio id="song"></audio>
         <audio id="song-preview"></audio>
         <main class="main-container">
-            <section class="container-home">
+            <section class="container-home" style="display: none">
                 <button class="logo">
                     <img
                         src="https://i.ibb.co/f9Q0h3r/logo-pw-music-game.png"
@@ -43,6 +43,13 @@
                 <button class="btn-back-songs">&lt</button>
                 <div class="content-songs">
                     <div class="select-song">Select a song</div>
+                    <input
+                        class="select-song-search"
+                        id="select-song-search"
+                        type="text"
+                        placeholder="Search for a song..."
+                    />
+                    <div class="song-not-found">No songs found</div>
                 </div>
 
                 <div class="song-preview-details">

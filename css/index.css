@@ -695,7 +695,7 @@ body::-webkit-scrollbar-thumb {
 }
 .main-container .container-songs {
     width: 100%;
-    /* display: none; */
+    display: none;
 }
 .main-container .container-songs.after {
     animation: animation-containers-after 500ms linear;

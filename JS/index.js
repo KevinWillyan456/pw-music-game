@@ -416,7 +416,7 @@ function isElementOverlapping(element1, element2) {
         // Retorna true se houver sobreposição tanto na horizontal quanto na vertical
         if (horizontalOverlap && verticalOverlap) {
             element2[i].remove()
-            element1.classList.add('hit')
+            element1.children[0].classList.add('hit')
             element1.addEventListener('animationend', (event) => {
                 if (
                     event.animationName === 'animation-hit-1' ||

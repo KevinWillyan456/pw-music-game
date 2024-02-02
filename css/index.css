@@ -698,7 +698,7 @@ body::-webkit-scrollbar-thumb {
     position: absolute;
     top: 60px;
     width: 300px;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     gap: 5px;
@@ -708,6 +708,19 @@ body::-webkit-scrollbar-thumb {
     border: 2px solid #c3c3c3;
     border-radius: 5px;
     color: white;
+}
+.content-level.exit {
+    animation: animation-content-level-exit 500ms linear;
+}
+@keyframes animation-content-level-exit {
+    0% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
 }
 @keyframes animation-content-level {
     0% {

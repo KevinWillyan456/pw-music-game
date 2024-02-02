@@ -30,6 +30,8 @@ let screenIndex = {
     songs: true,
     config: true,
 }
+let level = 1
+let experience = 0
 
 const containerTarget = document.querySelector(
     '.main-container .container-game .container'
@@ -191,6 +193,12 @@ const songPreviewDetailsPlayBtn = document.querySelector(
     '.song-preview-details-play-btn'
 )
 
+// elementos do content level
+const contentLevel = document.querySelector('.content-level')
+const contentLevelBarFill = document.querySelector('#level-bar-fill')
+const contentLevelBarProgress = document.querySelector('#level-bar-progress')
+const contentLevelActual = document.querySelector('#level-actual')
+
 function init() {
     function compareSongTitles(a, b) {
         const songTitleA = a.songTitle.toUpperCase()
@@ -233,6 +241,7 @@ function init() {
     generatorContentSongs()
     allEventsListeners()
     getSongVolume()
+    getLevel()
 }
 
 init()
@@ -620,6 +629,20 @@ song.addEventListener('ended', () => {
 
     containerGame.style.display = 'none'
     containerSongCompleted.style.display = 'block'
+
+    if (hasPerfect) {
+        setExperience(50)
+    }
+
+    if (difficulty === 'Easy') {
+        setExperience(50)
+    } else if (difficulty === 'Medium') {
+        setExperience(80)
+    } else if (difficulty === 'Hard') {
+        setExperience(100)
+    } else {
+        setExperience(200)
+    }
 
     setScreenFlashlight()
 })
@@ -1474,4 +1497,86 @@ function searchSong(value) {
             `.song[style*="${song.songCover}"]`
         ).style.display = 'flex'
     })
+}
+function getLevel() {
+    const levelLocalStoraged = localStorage.getItem('level')
+    const experienceLocalStoraged = localStorage.getItem('experience')
+
+    if (levelLocalStoraged && experienceLocalStoraged) {
+        level = Number(levelLocalStoraged)
+        experience = Number(experienceLocalStoraged)
+
+        contentLevelBarProgress.textContent = `${experience}/${actualExperience()}`
+        contentLevelBarFill.style.width = `${
+            (experience / actualExperience()) * 100
+        }%`
+        contentLevelActual.textContent = `LEVEL ${level}`
+    } else {
+        level = 1
+        experience = 0
+        localStorage.setItem('level', 1)
+        localStorage.setItem('experience', 0)
+
+        contentLevelBarProgress.textContent = `${experience}/${actualExperience()}`
+        contentLevelBarFill.style.width = `${
+            (experience / actualExperience()) * 100
+        }%`
+        contentLevelActual.textContent = `LEVEL ${level}`
+    }
+}
+
+function actualExperience() {
+    return 100 * (level / 2) + 100 - 50
+}
+
+let timerExperience = null
+let timerExperienceBar = null
+
+function setExperience(value) {
+    if (!value) return
+
+    contentLevel.style.display = 'flex'
+
+    if (contentLevel.classList.contains('exit')) {
+        contentLevel.classList.remove('exit')
+    }
+
+    experience += value
+    localStorage.setItem('experience', experience)
+
+    if (experience >= actualExperience()) {
+        level++
+        experience = 0
+        localStorage.setItem('level', level)
+        localStorage.setItem('experience', experience)
+
+        setScreenFlashlight()
+    }
+
+    if (timerExperience) {
+        clearTimeout(timerExperience)
+        timerExperience = null
+    }
+
+    if (timerExperienceBar) {
+        clearTimeout(timerExperienceBar)
+        timerExperienceBar = null
+    }
+
+    timerExperience = setTimeout(() => {
+        contentLevelBarProgress.textContent = `${experience}/${actualExperience()}`
+        contentLevelBarFill.style.width = `${
+            (experience / actualExperience()) * 100
+        }%`
+        contentLevelActual.textContent = `LEVEL ${level}`
+        timerExperienceBar = setTimeout(() => {
+            contentLevel.classList.add('exit')
+            contentLevel.addEventListener('animationend', (event) => {
+                if (event.animationName === 'animation-content-level-exit') {
+                    contentLevel.classList.remove('exit')
+                    contentLevel.style.display = 'none'
+                }
+            })
+        }, 3000)
+    }, 1500)
 }

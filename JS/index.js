@@ -101,6 +101,36 @@ let data = [
             'https://pw-music-game-db.netlify.app/resources/oliver%20tree%20-%20miss%20you%20(bemax%20cover%20remix)%20i%E2%80%99m%20your%20treasure%20box%20[amv].mp3',
         songCover: 'https://img.youtube.com/vi/TOoC7aXkpMs/maxresdefault.jpg',
     },
+    {
+        songTitle: 'AMV - Nightmare - Bestamvsofalltime Anime MV ♫',
+        songUrl:
+            'https://pw-music-game-db.netlify.app/resources/amv%20-%20nightmare%20-%20bestamvsofalltime%20anime%20mv.mp3',
+        songCover: 'https://img.youtube.com/vi/H5BiTDw9zac/maxresdefault.jpg',
+    },
+    {
+        songTitle: '[AMV Date a Live] - Take It Out on Me',
+        songUrl:
+            'https://pw-music-game-db.netlify.app/resources/[amv%20date%20a%20live]%20-%20take%20it%20out%20on%20me.mp3',
+        songCover: 'https://img.youtube.com/vi/st7DQ-M7n9U/maxresdefault.jpg',
+    },
+    {
+        songTitle: 'Nightcore - Take A Hint (Rock Version) (Lyrics)',
+        songUrl:
+            'https://pw-music-game-db.netlify.app/resources/nightcore%20-%20take%20a%20hint%20(rock%20version)%20(lyrics).mp3',
+        songCover: 'https://img.youtube.com/vi/xkbrak3NFZs/maxresdefault.jpg',
+    },
+    {
+        songTitle: 'Nightcore - Heart Attack (Rock Version) (Lyrics)',
+        songUrl:
+            'https://pw-music-game-db.netlify.app/resources/nightcore%20-%20heart%20attack%20(rock%20version)%20(lyrics).mp3',
+        songCover: 'https://img.youtube.com/vi/fVgufFPbcqE/maxresdefault.jpg',
+    },
+    {
+        songTitle: 'Kamaz AMV',
+        songUrl:
+            'https://pw-music-game-db.netlify.app/resources/kamaz%20amv.mp3',
+        songCover: 'https://img.youtube.com/vi/zy97UHdoQKk/maxresdefault.jpg',
+    },
 ]
 let songNotes = []
 

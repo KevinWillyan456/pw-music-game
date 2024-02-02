@@ -693,6 +693,61 @@ body::-webkit-scrollbar-thumb {
 .container-select .content-select .btn-select-options:focus {
     transform: scale(1.1);
 }
+.content-level {
+    animation: animation-content-level 500ms linear;
+    position: absolute;
+    top: 60px;
+    width: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    flex-direction: column;
+    padding: 10px 10px 5px 10px;
+    background-color: #0d0e26;
+    border: 2px solid #c3c3c3;
+    border-radius: 5px;
+    color: white;
+}
+@keyframes animation-content-level {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+.content-level .level-bar {
+    position: relative;
+    width: 100%;
+    height: 40px;
+    background-color: #e22a2a33;
+    border-radius: 5px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.content-level .level-bar .level-bar-fill {
+    transition: 2s;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0%;
+    background-color: #e22a2a;
+    border-radius: 5px;
+}
+.content-level .level-bar .level-bar-progress {
+    font-size: 20px;
+    z-index: 1;
+}
+.content-level .level-actual {
+    text-transform: uppercase;
+    font-size: 20px;
+}
 .main-container .container-songs {
     width: 100%;
     display: none;

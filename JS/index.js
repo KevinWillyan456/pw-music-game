@@ -269,12 +269,31 @@ function init() {
 
     data.sort(compareSongTitles)
 
-    const totalTime = 360
+    livePointerEvents()
+    generatorContentSongs()
+    allEventsListeners()
+    getSongVolume()
+    getLevel()
+}
+
+init()
+
+function createNotes() {
+    const totalTime = song.duration
     let currentTime = 2
     let aux = 1
+    songNotes = []
+    const currentTimeForDifficulty =
+        selectDifficulty === 1
+            ? 0.45
+            : selectDifficulty === 2
+            ? 0.35
+            : selectDifficulty === 3
+            ? 0.25
+            : 0.2
 
     while (currentTime < totalTime) {
-        currentTime += 0.25
+        currentTime += currentTimeForDifficulty
         songNotes.push({
             type: `target-${aux}`,
             time: currentTime,
@@ -291,14 +310,7 @@ function init() {
         }
         aux = gerarNumeroAleatorio()
     }
-    livePointerEvents()
-    generatorContentSongs()
-    allEventsListeners()
-    getSongVolume()
-    getLevel()
 }
-
-init()
 
 function allEventsListeners() {
     containerHomeLogo.addEventListener('click', () => {
@@ -514,7 +526,7 @@ function animateElementDown(element, distance) {
         const targetPosition = startPosition + distance
         const duration =
             selectDifficulty === 1
-                ? 1200
+                ? 2000
                 : selectDifficulty === 2
                 ? 1000
                 : selectDifficulty === 3
@@ -599,6 +611,7 @@ function loadSong(songChange) {
 
                     song.src = songChange.songUrl
                     song.addEventListener('canplaythrough', () => {
+                        createNotes()
                         startCounting(songChange)
                     })
 

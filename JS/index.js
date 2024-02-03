@@ -131,6 +131,30 @@ let data = [
             'https://pw-music-game-db.netlify.app/resources/kamaz%20amv.mp3',
         songCover: 'https://img.youtube.com/vi/zy97UHdoQKk/maxresdefault.jpg',
     },
+    {
+        songTitle: 'S3RL - Feel The Melody [Tradução/Legendado]',
+        songUrl:
+            'https://pw-music-game-db.netlify.app/resources/s3rl%20-%20feel%20the%20melody%20[tradu%C3%A7%C3%A3o%20-%20legendado].mp3',
+        songCover: 'https://img.youtube.com/vi/_SNTDWZ838g/maxresdefault.jpg',
+    },
+    {
+        songTitle: 'S3RL - Nightcore This [Tradução/Legendado]',
+        songUrl:
+            'https://pw-music-game-db.netlify.app/resources/s3rl%20-%20nightcore%20this%20[tradu%C3%A7%C3%A3o%20-%20legendado].mp3',
+        songCover: 'https://img.youtube.com/vi/IFSZohWwUMM/maxresdefault.jpg',
+    },
+    {
+        songTitle: "I'll See You Again - S3RL feat Chi Chi",
+        songUrl:
+            "https://pw-music-game-db.netlify.app/resources/i'll%20see%20you%20again%20-%20s3rl%20feat%20chi%20chi.mp3",
+        songCover: 'https://img.youtube.com/vi/qYce_42Qbbk/maxresdefault.jpg',
+    },
+    {
+        songTitle: 'Nightcore - Rockefeller Street',
+        songUrl:
+            'https://pw-music-game-db.netlify.app/resources/nightcore%20-%20rockefeller%20street.mp3',
+        songCover: 'https://img.youtube.com/vi/hjGZLnja1o8/sddefault.jpg',
+    },
 ]
 let songNotes = []
 

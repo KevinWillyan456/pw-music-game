@@ -639,7 +639,8 @@ function loadSong(songChange) {
 function setSong(songChange) {
     if (
         (song.currentTime > 0 && !song.paused) ||
-        containerGame.style.display === 'none'
+        containerGame.style.display === 'none' ||
+        livePoints <= 0
     ) {
         return
     }
@@ -1029,10 +1030,10 @@ function generatorContentSongs() {
             songEffectClick()
         })
 
-        const songPlayDiv = document.createElement('div')
-        songPlayDiv.classList.add('song-play')
-        songPlayDiv.textContent = 'Play'
-        songPlayDiv.addEventListener('click', () => {
+        const songPlayButton = document.createElement('button')
+        songPlayButton.classList.add('song-play')
+        songPlayButton.textContent = 'Play'
+        songPlayButton.addEventListener('click', () => {
             gameSongPreviewStop()
             loadSong(song)
         })
@@ -1047,7 +1048,7 @@ function generatorContentSongs() {
 
         songDiv.appendChild(previewDiv)
         songDiv.appendChild(divisionDiv)
-        songDiv.appendChild(songPlayDiv)
+        songDiv.appendChild(songPlayButton)
 
         contentSongs.appendChild(songDiv)
     })
@@ -1177,6 +1178,7 @@ function gameRetry() {
     controllerRateBarsMissed()
     gamePaused = false
     canPause = false
+    canActions = false
 
     for (let i = 0; i < songNotes.length; i++) {
         delete songNotes[i].created
@@ -1222,6 +1224,7 @@ function gamePostRetry() {
     totalPoints = 0
     consecutiveHits = 0
     hasPerfect = true
+    canActions = false
     livePointerEvents()
     totalNotesEvents()
     totalPointsEvents()

@@ -1050,8 +1050,14 @@ body::-webkit-scrollbar-thumb {
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    border: none;
+    outline: none;
+    font-family: inherit;
 }
 .main-container .container-songs .content-songs .song .song-play:hover {
+    box-shadow: 0 0 5px #e22a2a inset, 0 0 40px #e22a2a inset;
+}
+.main-container .container-songs .content-songs .song .song-play:focus {
     box-shadow: 0 0 5px #e22a2a inset, 0 0 40px #e22a2a inset;
 }
 .container-config {

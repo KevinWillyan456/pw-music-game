@@ -333,6 +333,7 @@ function allEventsListeners() {
 
         setScreenFlashlight()
         setPreviewDifficulty(selectDifficulty)
+        songEffectClick()
     })
 
     containerGameFailedRetryBtn.addEventListener('click', gameRetry)
@@ -366,6 +367,7 @@ function allEventsListeners() {
         })
 
         setScreenFlashlight()
+        songEffectClick()
     })
     songPreviewDetailsStopBtn.addEventListener('click', gameSongPreviewStop)
     songPreviewDetailsPlayBtn.addEventListener('click', gameSongPreviewPlay)
@@ -389,6 +391,7 @@ function allEventsListeners() {
         })
 
         setScreenFlashlight()
+        songEffectClick()
     })
     containerSelectPlayBtn.addEventListener('click', () => {
         screenIndex.config = false
@@ -417,6 +420,7 @@ function allEventsListeners() {
         })
 
         setScreenFlashlight()
+        songEffectClick()
     })
     containerSelectOptionsBtn.addEventListener('click', () => {
         screenIndex.songs = false
@@ -445,6 +449,7 @@ function allEventsListeners() {
         })
 
         setScreenFlashlight()
+        songEffectClick()
     })
     containerConfigBackBtn.addEventListener('click', () => {
         body.style.overflow = 'hidden'
@@ -465,6 +470,7 @@ function allEventsListeners() {
         })
 
         setScreenFlashlight()
+        songEffectClick()
     })
     containerConfigChangeVolume.addEventListener('input', (e) => {
         setSongVolume(e.target.value)
@@ -712,6 +718,7 @@ song.addEventListener('ended', () => {
     }
 
     setScreenFlashlight()
+    songEffectCompleted()
 })
 
 const teclasPermitidas = ['d', 'f', 'j', 'k', 'p', 'escape']
@@ -739,6 +746,7 @@ document.addEventListener('keydown', function (event) {
 
                 livePointerEvents()
                 controllerRateBarsMissed()
+                songEffectMissed()
             }
         }
         if (teclaPressionada == 'f') {
@@ -752,6 +760,7 @@ document.addEventListener('keydown', function (event) {
                         : (livePoints -= 3)
                 livePointerEvents()
                 controllerRateBarsMissed()
+                songEffectMissed()
             }
         }
         if (teclaPressionada == 'j') {
@@ -765,6 +774,7 @@ document.addEventListener('keydown', function (event) {
                         : (livePoints -= 3)
                 livePointerEvents()
                 controllerRateBarsMissed()
+                songEffectMissed()
             }
         }
         if (teclaPressionada == 'k') {
@@ -778,6 +788,7 @@ document.addEventListener('keydown', function (event) {
                         : (livePoints -= 3)
                 livePointerEvents()
                 controllerRateBarsMissed()
+                songEffectMissed()
             }
         }
 
@@ -915,6 +926,7 @@ function pauseCounting() {
 
 function controllerFailed() {
     song.pause()
+    songEffectFailed()
     canActions = false
     canPause = false
     gamePausedDelay = null
@@ -968,6 +980,7 @@ function generatorContentSongs() {
                     song.classList.remove('selected')
                 })
             songDiv.classList.add('selected')
+            songEffectClick()
         })
 
         const divisionDiv = document.createElement('div')
@@ -986,6 +999,7 @@ function generatorContentSongs() {
         difficultyEasyDiv.addEventListener('click', () => {
             selectDifficulty = 1
             setPreviewDifficulty(selectDifficulty)
+            songEffectClick()
         })
 
         const difficultyMediumDiv = document.createElement('div')
@@ -994,6 +1008,7 @@ function generatorContentSongs() {
         difficultyMediumDiv.addEventListener('click', () => {
             selectDifficulty = 2
             setPreviewDifficulty(selectDifficulty)
+            songEffectClick()
         })
 
         const difficultyHardDiv = document.createElement('div')
@@ -1002,6 +1017,7 @@ function generatorContentSongs() {
         difficultyHardDiv.addEventListener('click', () => {
             selectDifficulty = 3
             setPreviewDifficulty(selectDifficulty)
+            songEffectClick()
         })
 
         const difficultyExpertDiv = document.createElement('div')
@@ -1010,6 +1026,7 @@ function generatorContentSongs() {
         difficultyExpertDiv.addEventListener('click', () => {
             selectDifficulty = 4
             setPreviewDifficulty(selectDifficulty)
+            songEffectClick()
         })
 
         const songPlayDiv = document.createElement('div')
@@ -1130,8 +1147,10 @@ function gamePause() {
         document.querySelector(
             '.main-container .container-paused'
         ).style.display = 'flex'
+        songEffectClick()
     } else {
         pauseCounting()
+        songEffectClick()
     }
 }
 
@@ -1141,6 +1160,7 @@ function gameRetry() {
         'none'
 
     setScreenFlashlight()
+    songEffectClick()
     document.querySelector('.main-container .container-failed').style.display =
         'none'
 
@@ -1191,6 +1211,7 @@ function gamePostRetry() {
     counterToStart.style.display = 'flex'
 
     setScreenFlashlight()
+    songEffectClick()
 
     containerSongCompleted.style.display = 'none'
 
@@ -1259,6 +1280,7 @@ function gameExit() {
     })
 
     setScreenFlashlight()
+    songEffectClick()
 
     progressBar.style.backgroundImage = `linear-gradient(90deg, #fff 0%, #fff 0%, #ffffff33 0%, #ffffff33 100%)`
     songTitle.textContent = ''
@@ -1286,6 +1308,7 @@ function gameExit() {
 
 function gamePostExit() {
     setScreenFlashlight()
+    songEffectClick()
 
     containerSongCompleted.style.display = 'none'
 
@@ -1388,6 +1411,7 @@ function gameSongPreviewStop() {
                     .classList.remove('exit')
             }
         })
+    songEffectClick()
 }
 
 function gameSongPreviewPlay() {
@@ -1408,6 +1432,7 @@ function songPreviewDetailsClose() {
                 document
                     .querySelector('.song-preview-details')
                     .classList.remove('hide')
+                songEffectClick()
             }
         })
 
@@ -1646,4 +1671,37 @@ function setExperience(value) {
             })
         }, 3000)
     }, 1500)
+}
+
+function songEffectClick() {
+    const audio = new Audio(
+        'https://pw-music-game-db.netlify.app/sounds/clicked.mp3'
+    )
+    audio.currentTime = 0.4
+    audio.play()
+}
+
+function songEffectFailed() {
+    const audios = [
+        'https://pw-music-game-db.netlify.app/sounds/failed-1.mp3',
+        'https://pw-music-game-db.netlify.app/sounds/failed-2.mp3',
+        'https://pw-music-game-db.netlify.app/sounds/failed-3.mp3',
+    ]
+    const random = Math.floor(Math.random() * audios.length)
+    const audio = new Audio(audios[random])
+    audio.play()
+}
+
+function songEffectCompleted() {
+    const audio = new Audio(
+        'https://pw-music-game-db.netlify.app/sounds/completed.mp3'
+    )
+    audio.play()
+}
+
+function songEffectMissed() {
+    const audio = new Audio(
+        'https://pw-music-game-db.netlify.app/sounds/missed.mp3'
+    )
+    audio.play()
 }

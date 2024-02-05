@@ -155,6 +155,54 @@ let data = [
             'https://pw-music-game-db.netlify.app/resources/nightcore%20-%20rockefeller%20street.mp3',
         songCover: 'https://img.youtube.com/vi/hjGZLnja1o8/sddefault.jpg',
     },
+    {
+        songTitle: 'Nightcore - Élan',
+        songUrl:
+            'https://pw-music-game-db.netlify.app/resources/nightcore%20-%20%C3%A9lan.mp3',
+        songCover: 'https://img.youtube.com/vi/dnlU6h5SjQA/maxresdefault.jpg',
+    },
+    {
+        songTitle: "Mahou Shoujo Site - I Don't Wanna Die [ AMV ]",
+        songUrl:
+            "https://pw-music-game-db.netlify.app/resources/mahou%20shoujo%20site%20-%20i%20don't%20wanna%20die%20[amv].mp3",
+        songCover: 'https://img.youtube.com/vi/mB_0FXiFHd0/maxresdefault.jpg',
+    },
+    {
+        songTitle: 'How Do You Love Someone「AMV」',
+        songUrl:
+            'https://pw-music-game-db.netlify.app/resources/how%20do%20you%20love%20someone%20[amv].mp3',
+        songCover: 'https://img.youtube.com/vi/nTVcBnY6spY/maxresdefault.jpg',
+    },
+    {
+        songTitle: 'Nightcore - BODY BAG (Lyrics)',
+        songUrl:
+            'https://pw-music-game-db.netlify.app/resources/nightcore%20-%20body%20bag%20(lyrics).mp3',
+        songCover: 'https://img.youtube.com/vi/tsKrCJ8R9PM/maxresdefault.jpg',
+    },
+    {
+        songTitle: 'Shivers -「AMV」- Anime MV',
+        songUrl:
+            'https://pw-music-game-db.netlify.app/resources/shivers%20-%20[amv]%20-%20anime%20mv.mp3',
+        songCover: 'https://img.youtube.com/vi/r4XjBWc8tE0/maxresdefault.jpg',
+    },
+    {
+        songTitle: '[ AMV ] Shivers',
+        songUrl:
+            'https://pw-music-game-db.netlify.app/resources/[%20amv%20]%20shivers.mp3',
+        songCover: 'https://img.youtube.com/vi/wzDaPu0VZOY/maxresdefault.jpg',
+    },
+    {
+        songTitle: 'Nightcore – Venom (Icon For Hire)',
+        songUrl:
+            'https://pw-music-game-db.netlify.app/resources/nightcore%20%E2%80%93%20venom%20(icon%20for%20hire).mp3',
+        songCover: 'https://img.youtube.com/vi/m9CGibWE3YI/maxresdefault.jpg',
+    },
+    {
+        songTitle: 'Vivid Strike! [Rinne Berlinetta] - Leave It All Behind',
+        songUrl:
+            'https://pw-music-game-db.netlify.app/resources/vivid%20strike!%20[rinne%20berlinetta]%20-%20leave%20it%20all%20behind.mp3',
+        songCover: 'https://i3.ytimg.com/vi/CvYqdIMthjU/hqdefault.jpg',
+    },
 ]
 let songNotes = []
 

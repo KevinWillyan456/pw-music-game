@@ -32,6 +32,7 @@ let screenIndex = {
 }
 let level = 1
 let experience = 0
+let soundEffectsVolume = 0.8
 
 const containerTarget = document.querySelector(
     '.main-container .container-game .container'
@@ -248,7 +249,10 @@ const containerConfig = document.querySelector(
 const containerConfigBackBtn = document.querySelector(
     '.container-config .btn-back-config'
 )
-const containerConfigChangeVolume = document.querySelector('#volume-song')
+const containerConfigChangeVolumeSong = document.querySelector('#volume-song')
+const containerConfigChangeVolumeSoundEffects = document.querySelector(
+    '#volume-sound-effects'
+)
 
 // elementos do container game
 const containerGame = document.querySelector('.main-container .container-game')
@@ -321,6 +325,7 @@ function init() {
     generatorContentSongs()
     allEventsListeners()
     getSongVolume()
+    getSoundEffectsVolume()
     getLevel()
 }
 
@@ -520,8 +525,11 @@ function allEventsListeners() {
         setScreenFlashlight()
         songEffectClick()
     })
-    containerConfigChangeVolume.addEventListener('input', (e) => {
+    containerConfigChangeVolumeSong.addEventListener('input', (e) => {
         setSongVolume(e.target.value)
+    })
+    containerConfigChangeVolumeSoundEffects.addEventListener('input', (e) => {
+        setSoundEffectsVolume(e.target.value)
     })
     containerSongsSearchInput.addEventListener('input', (e) => {
         searchSong(e.target.value)
@@ -1585,19 +1593,15 @@ function getSongVolume() {
     if (volume) {
         song.volume = volume / 100
         songPreview.volume = volume / 100
-        const volumeSliderTrack = document.querySelector(
-            ".content-config .song-volume .volume[type='range']"
-        )
-        volumeSliderTrack.value = volume
-        volumeSliderTrack.style.backgroundImage = `linear-gradient(90deg, #e22a2a, #e22a2a ${volume}%, #e22a2a33 0)`
+
+        containerConfigChangeVolumeSong.value = volume
+        containerConfigChangeVolumeSong.style.backgroundImage = `linear-gradient(90deg, #e22a2a, #e22a2a ${volume}%, #e22a2a33 0)`
     } else {
         song.volume = 0.8
         songPreview.volume = 0.8
-        const volumeSliderTrack = document.querySelector(
-            ".content-config .song-volume .volume[type='range']"
-        )
-        volumeSliderTrack.value = 80
-        volumeSliderTrack.style.backgroundImage = `linear-gradient(90deg, #e22a2a, #e22a2a 80%, #e22a2a33 0)`
+
+        containerConfigChangeVolumeSong.value = 80
+        containerConfigChangeVolumeSong.style.backgroundImage = `linear-gradient(90deg, #e22a2a, #e22a2a 80%, #e22a2a33 0)`
 
         localStorage.setItem('songVolume', 80)
     }
@@ -1608,11 +1612,7 @@ function setSongVolume(volume) {
     songPreview.volume = volume / 100
     localStorage.setItem('songVolume', volume)
 
-    const volumeSliderTrack = document.querySelector(
-        ".content-config .song-volume .volume[type='range']"
-    )
-
-    volumeSliderTrack.style.backgroundImage = `linear-gradient(90deg, #e22a2a, #e22a2a ${volume}%, #e22a2a33 0)`
+    containerConfigChangeVolumeSong.style.backgroundImage = `linear-gradient(90deg, #e22a2a, #e22a2a ${volume}%, #e22a2a33 0)`
 
     if (volume == 0 || volume == 100) {
         setScreenFlashlight()
@@ -1729,6 +1729,7 @@ function songEffectClick() {
         'https://pw-music-game-db.netlify.app/sounds/clicked.mp3'
     )
     audio.currentTime = 0.4
+    audio.volume = soundEffectsVolume
     audio.play()
 }
 
@@ -1740,6 +1741,7 @@ function songEffectFailed() {
     ]
     const random = Math.floor(Math.random() * audios.length)
     const audio = new Audio(audios[random])
+    audio.volume = soundEffectsVolume
     audio.play()
 }
 
@@ -1747,6 +1749,7 @@ function songEffectCompleted() {
     const audio = new Audio(
         'https://pw-music-game-db.netlify.app/sounds/completed.mp3'
     )
+    audio.volume = soundEffectsVolume
     audio.play()
 }
 
@@ -1754,5 +1757,37 @@ function songEffectMissed() {
     const audio = new Audio(
         'https://pw-music-game-db.netlify.app/sounds/missed.mp3'
     )
+    audio.volume = soundEffectsVolume
     audio.play()
+}
+
+function setSoundEffectsVolume(volume) {
+    soundEffectsVolume = volume / 100
+    localStorage.setItem('soundEffectsVolume', volume)
+
+    containerConfigChangeVolumeSoundEffects.style.backgroundImage = `linear-gradient(90deg, #e22a2a, #e22a2a ${volume}%, #e22a2a33 0)`
+    songEffectClick()
+
+    if (volume == 0 || volume == 100) {
+        setScreenFlashlight()
+    }
+}
+
+function getSoundEffectsVolume() {
+    const volume = localStorage.getItem('soundEffectsVolume')
+
+    if (volume) {
+        soundEffectsVolume = volume / 100
+
+        containerConfigChangeVolumeSoundEffects.value = volume
+
+        containerConfigChangeVolumeSoundEffects.style.backgroundImage = `linear-gradient(90deg, #e22a2a, #e22a2a ${volume}%, #e22a2a33 0)`
+    } else {
+        soundEffectsVolume = 0.8
+
+        containerConfigChangeVolumeSoundEffects.value = 80
+        containerConfigChangeVolumeSoundEffects.style.backgroundImage = `linear-gradient(90deg, #e22a2a, #e22a2a 80%, #e22a2a33 0)`
+
+        localStorage.setItem('soundEffectsVolume', 80)
+    }
 }

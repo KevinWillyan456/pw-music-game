@@ -685,6 +685,11 @@ song.addEventListener('timeupdate', function () {
     })
 })
 
+song.addEventListener('canplaythrough', () => {
+    createNotes()
+    startCounting(songPreviewData)
+})
+
 function loadSong(songChange) {
     counterToStart.style.display = 'flex'
     counterToStart.textContent = 'Loading...'
@@ -702,11 +707,8 @@ function loadSong(songChange) {
                     containerGame.classList.remove('before')
                     body.style.overflow = 'auto'
 
+                    songPreviewData = songChange
                     song.src = songChange.songUrl
-                    song.addEventListener('canplaythrough', () => {
-                        createNotes()
-                        startCounting(songChange)
-                    })
 
                     setScreenFlashlight()
                 }

@@ -397,23 +397,25 @@ function createNotes() {
 }
 
 function allEventsListeners() {
+    containerHome.addEventListener('animationend', (event) => {
+        if (event.animationName === 'animation-containers-after-exit') {
+            containerHome.style.display = 'none'
+            containerHome.classList.remove('after-exit')
+            containerSelect.style.display = 'flex'
+            containerSelect.classList.add('before')
+        }
+    })
+
+    containerSelect.addEventListener('animationend', (event) => {
+        if (event.animationName === 'animation-containers-before') {
+            containerSelect.classList.remove('before')
+            body.style.overflow = 'auto'
+        }
+    })
+
     containerHomeLogo.addEventListener('click', () => {
         body.style.overflow = 'hidden'
         containerHome.classList.add('after-exit')
-        containerHome.addEventListener('animationend', (event) => {
-            if (event.animationName === 'animation-containers-after-exit') {
-                containerHome.style.display = 'none'
-                containerHome.classList.remove('after-exit')
-                containerSelect.style.display = 'flex'
-                containerSelect.classList.add('before')
-                containerSelect.addEventListener('animationend', (event) => {
-                    if (event.animationName === 'animation-containers-before') {
-                        containerSelect.classList.remove('before')
-                        body.style.overflow = 'auto'
-                    }
-                })
-            }
-        })
 
         setScreenFlashlight()
         setPreviewDifficulty(selectDifficulty)
@@ -431,24 +433,26 @@ function allEventsListeners() {
 
     containerGamePausedResumeBtn.addEventListener('click', gamePause)
 
+    containerSongs.addEventListener('animationend', (event) => {
+        if (event.animationName === 'animation-containers-before-exit') {
+            containerSongs.style.display = 'none'
+            containerSongs.classList.remove('before-exit')
+            containerSelect.style.display = 'flex'
+            containerSelect.classList.add('after')
+        }
+    })
+
+    containerSelect.addEventListener('animationend', (event) => {
+        if (event.animationName === 'animation-containers-after') {
+            containerSelect.classList.remove('after')
+            body.style.overflow = 'auto'
+        }
+    })
+
     containerSongsBackBtn.addEventListener('click', () => {
         screenIndex.config = true
         body.style.overflow = 'hidden'
         containerSongs.classList.add('before-exit')
-        containerSongs.addEventListener('animationend', (event) => {
-            if (event.animationName === 'animation-containers-before-exit') {
-                containerSongs.style.display = 'none'
-                containerSongs.classList.remove('before-exit')
-                containerSelect.style.display = 'flex'
-                containerSelect.classList.add('after')
-                containerSelect.addEventListener('animationend', (event) => {
-                    if (event.animationName === 'animation-containers-after') {
-                        containerSelect.classList.remove('after')
-                        body.style.overflow = 'auto'
-                    }
-                })
-            }
-        })
 
         setScreenFlashlight()
         songEffectClick()
@@ -456,56 +460,80 @@ function allEventsListeners() {
     songPreviewDetailsStopBtn.addEventListener('click', gameSongPreviewStop)
     songPreviewDetailsPlayBtn.addEventListener('click', gameSongPreviewPlay)
     containerGamePauseBtn.addEventListener('click', gamePause)
+
+    containerSelect.addEventListener('animationend', (event) => {
+        if (event.animationName === 'animation-containers-before-exit') {
+            containerSelect.style.display = 'none'
+            containerSelect.classList.remove('before-exit')
+            containerHome.style.display = 'flex'
+            containerHome.classList.add('after')
+        }
+    })
+
+    containerHome.addEventListener('animationend', (event) => {
+        if (event.animationName === 'animation-containers-after') {
+            containerHome.classList.remove('after')
+            body.style.overflow = 'auto'
+        }
+    })
+
     containerSelectBackBtn.addEventListener('click', () => {
         body.style.overflow = 'hidden'
         containerSelect.classList.add('before-exit')
-        containerSelect.addEventListener('animationend', (event) => {
-            if (event.animationName === 'animation-containers-before-exit') {
-                containerSelect.style.display = 'none'
-                containerSelect.classList.remove('before-exit')
-                containerHome.style.display = 'flex'
-                containerHome.classList.add('after')
-                containerHome.addEventListener('animationend', (event) => {
-                    if (event.animationName === 'animation-containers-after') {
-                        containerHome.classList.remove('after')
-                        body.style.overflow = 'auto'
-                    }
-                })
-            }
-        })
 
         setScreenFlashlight()
         songEffectClick()
     })
+
+    containerSelect.addEventListener('animationend', (event) => {
+        if (screenIndex.songs === false) return
+
+        if (event.animationName === 'animation-containers-after-exit') {
+            containerSelect.style.display = 'none'
+            containerSelect.classList.remove('after-exit')
+            containerSongs.style.display = 'block'
+            containerSongs.classList.add('before')
+        }
+    })
+
+    containerSongs.addEventListener('animationend', (event) => {
+        if (event.animationName === 'animation-containers-before') {
+            containerSongs.classList.remove('before')
+            body.style.overflow = 'auto'
+            screenIndex.config = true
+        }
+    })
+
     containerSelectPlayBtn.addEventListener('click', () => {
         screenIndex.config = false
 
         body.style.overflow = 'hidden'
         containerHome.style.display = 'none'
         containerSelect.classList.add('after-exit')
-        containerSelect.addEventListener('animationend', (event) => {
-            if (screenIndex.songs === false) {
-                return
-            }
-
-            if (event.animationName === 'animation-containers-after-exit') {
-                containerSelect.style.display = 'none'
-                containerSelect.classList.remove('after-exit')
-                containerSongs.style.display = 'block'
-                containerSongs.classList.add('before')
-                containerSongs.addEventListener('animationend', (event) => {
-                    if (event.animationName === 'animation-containers-before') {
-                        containerSongs.classList.remove('before')
-                        body.style.overflow = 'auto'
-                        screenIndex.config = true
-                    }
-                })
-            }
-        })
 
         setScreenFlashlight()
         songEffectClick()
     })
+
+    containerSelect.addEventListener('animationend', (event) => {
+        if (screenIndex.config === false) return
+
+        if (event.animationName === 'animation-containers-after-exit') {
+            containerSelect.style.display = 'none'
+            containerSelect.classList.remove('after-exit')
+            containerConfig.style.display = 'block'
+            containerConfig.classList.add('before')
+        }
+    })
+
+    containerConfig.addEventListener('animationend', (event) => {
+        if (event.animationName === 'animation-containers-before') {
+            containerConfig.classList.remove('before')
+            body.style.overflow = 'auto'
+            screenIndex.songs = true
+        }
+    })
+
     containerSelectOptionsBtn.addEventListener('click', () => {
         screenIndex.songs = false
 
@@ -513,45 +541,30 @@ function allEventsListeners() {
         containerHome.style.display = 'none'
 
         containerSelect.classList.add('after-exit')
-        containerSelect.addEventListener('animationend', (event) => {
-            if (screenIndex.config === false) {
-                return
-            }
-            if (event.animationName === 'animation-containers-after-exit') {
-                containerSelect.style.display = 'none'
-                containerSelect.classList.remove('after-exit')
-                containerConfig.style.display = 'block'
-                containerConfig.classList.add('before')
-                containerConfig.addEventListener('animationend', (event) => {
-                    if (event.animationName === 'animation-containers-before') {
-                        containerConfig.classList.remove('before')
-                        body.style.overflow = 'auto'
-                        screenIndex.songs = true
-                    }
-                })
-            }
-        })
 
         setScreenFlashlight()
         songEffectClick()
     })
+
+    containerConfig.addEventListener('animationend', (event) => {
+        if (event.animationName === 'animation-containers-before-exit') {
+            containerConfig.style.display = 'none'
+            containerConfig.classList.remove('before-exit')
+            containerSelect.style.display = 'flex'
+            containerSelect.classList.add('after')
+        }
+    })
+
+    containerSelect.addEventListener('animationend', (event) => {
+        if (event.animationName === 'animation-containers-after') {
+            containerSelect.classList.remove('after')
+            body.style.overflow = 'auto'
+        }
+    })
+
     containerConfigBackBtn.addEventListener('click', () => {
         body.style.overflow = 'hidden'
         containerConfig.classList.add('before-exit')
-        containerConfig.addEventListener('animationend', (event) => {
-            if (event.animationName === 'animation-containers-before-exit') {
-                containerConfig.style.display = 'none'
-                containerConfig.classList.remove('before-exit')
-                containerSelect.style.display = 'flex'
-                containerSelect.classList.add('after')
-                containerSelect.addEventListener('animationend', (event) => {
-                    if (event.animationName === 'animation-containers-after') {
-                        containerSelect.classList.remove('after')
-                        body.style.overflow = 'auto'
-                    }
-                })
-            }
-        })
 
         setScreenFlashlight()
         songEffectClick()

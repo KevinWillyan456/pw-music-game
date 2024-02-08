@@ -204,6 +204,37 @@ let data = [
             'https://pw-music-game-db.netlify.app/resources/vivid%20strike!%20[rinne%20berlinetta]%20-%20leave%20it%20all%20behind.mp3',
         songCover: 'https://i3.ytimg.com/vi/CvYqdIMthjU/hqdefault.jpg',
     },
+    {
+        songTitle: '「Nightcore」→ Neoni - Notorious (Lyrics)',
+        songUrl:
+            'https://pw-music-game-db.netlify.app/resources/nightcore%20-%20neoni%20-%20notorious%20(lyrics).mp3',
+        songCover: 'https://img.youtube.com/vi/R81oRptkQ58/maxresdefault.jpg',
+    },
+    {
+        songTitle: 'Nightcore - GODS (Rock Version) (Lyrics)',
+        songUrl:
+            'https://pw-music-game-db.netlify.app/resources/nightcore%20-%20gods%20(rock%20version)%20(lyrics).mp3',
+        songCover: 'https://img.youtube.com/vi/i5NE5Vtlj98/maxresdefault.jpg',
+    },
+    {
+        songTitle:
+            'Loli God Requiem Shigure UI / Astronaut in the ocean (Bemax Cover Remix) [AMV]',
+        songUrl:
+            'https://pw-music-game-db.netlify.app/resources/loli%20god%20requiem%20shigure%20ui%20-%20astronaut%20in%20the%20ocean%20(bemax%20cover%20remix)%20[amv].mp3',
+        songCover: 'https://img.youtube.com/vi/5PPLv9wAz54/maxresdefault.jpg',
+    },
+    {
+        songTitle: 'Gate AMV - Cocaine loli',
+        songUrl:
+            'https://pw-music-game-db.netlify.app/resources/gate%20amv%20-%20cocaine%20loli.mp3',
+        songCover: 'https://img.youtube.com/vi/YiIhiDjrAWc/maxresdefault.jpg',
+    },
+    {
+        songTitle: 'Nightcore - Stay (Rock Version) (Lyrics)',
+        songUrl:
+            'https://pw-music-game-db.netlify.app/resources/nightcore%20-%20stay%20(rock%20version)%20(lyrics).mp3',
+        songCover: 'https://img.youtube.com/vi/YYlHIotqEQc/maxresdefault.jpg',
+    },
 ]
 let songNotes = []
 

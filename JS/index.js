@@ -685,7 +685,12 @@ song.addEventListener('timeupdate', function () {
     })
 })
 
+let songHandleLoad = false
+
 song.addEventListener('canplaythrough', () => {
+    if (songHandleLoad) return
+
+    songHandleLoad = true
     createNotes()
     startCounting(songPreviewData)
 })
@@ -1228,7 +1233,7 @@ function gamePause() {
     }
     gamePausedDelay = setTimeout(() => {
         gamePausedDelay = null
-    }, 1000)
+    }, 3000)
 
     if (gamePaused === false) {
         gamePaused = true
@@ -1388,6 +1393,7 @@ function gameExit() {
     controllerRateBarsMissed()
     gamePaused = false
     canPause = false
+    songHandleLoad = false
 
     for (let i = 0; i < songNotes.length; i++) {
         delete songNotes[i].created
@@ -1421,6 +1427,7 @@ function gamePostExit() {
     totalPointsEvents()
     controllerRateBarsMissed()
     canPause = false
+    songHandleLoad = false
 
     for (let i = 0; i < songNotes.length; i++) {
         delete songNotes[i].created

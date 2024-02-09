@@ -1,0 +1,115 @@
+.main-container .container-home .logo {
+    width: calc(100% - 60px);
+    max-width: 520px;
+}
+.container-config .content-config {
+    width: calc(100% - 40px);
+    margin: 0 auto;
+}
+.main-container .container-songs .content-songs .song {
+    width: calc(100% - 40px);
+    position: relative;
+}
+.main-container .container-songs .content-songs .song .division .title {
+    font-size: 20px;
+}
+.main-container .container-songs .content-songs .song .division {
+    padding: 10px;
+    width: 100%;
+}
+.main-container .container-songs .content-songs .song .preview {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50%;
+    height: 30px;
+    z-index: 1;
+}
+.main-container .container-songs .content-songs .song .song-play {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 50%;
+    height: 30px;
+    font-size: 20px;
+}
+.main-container
+    .container-songs
+    .content-songs
+    .song
+    .division
+    .content-difficulty {
+    transform: translateY(60px);
+    margin: 13px auto 0 auto;
+}
+.main-container
+    .container-songs
+    .content-songs
+    .song
+    .division
+    .content-difficulty
+    .difficulty-easy,
+.main-container
+    .container-songs
+    .content-songs
+    .song
+    .division
+    .content-difficulty
+    .difficulty-medium,
+.main-container
+    .container-songs
+    .content-songs
+    .song
+    .division
+    .content-difficulty
+    .difficulty-hard,
+.main-container
+    .container-songs
+    .content-songs
+    .song
+    .division
+    .content-difficulty
+    .difficulty-expert {
+    width: 60px;
+    height: 20px;
+    font-size: 12px;
+}
+.main-container .container-songs .content-songs .select-song {
+    font-size: 32px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+.main-container .container-songs .content-songs .select-song-search {
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    font-size: 18px;
+}
+.main-container
+    .container-songs
+    .content-songs
+    .select-song-search::placeholder {
+    font-size: 18px;
+}
+.song-not-found {
+    font-size: 32px;
+}
+.song-preview-details {
+    max-width: calc(100% - 18px);
+}
+.song-preview-details-title {
+    font-size: 24px;
+}
+.song-preview-details-play-btn {
+    right: 98px;
+}
+.song-preview-details-title-song {
+    font-size: 14px;
+}
+.song-preview-details-difficulty {
+    font-size: 14px;
+}
+.song-preview-details-duration {
+    font-size: 14px;
+}

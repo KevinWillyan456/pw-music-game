@@ -67,8 +67,7 @@ body::-webkit-scrollbar-thumb {
     min-height: 40px;
     max-width: 40px;
     max-height: 40px;
-    background-color: transparent;
-    filter: hue-rotate(200deg);
+    background-color: #e7eb21;
     border: none;
     font-size: 40px;
     cursor: pointer;
@@ -83,9 +82,6 @@ body::-webkit-scrollbar-thumb {
 .container-game-pause:hover,
 .container-game-pause:focus {
     transform: scale(1.1);
-}
-.container-game-pause div {
-    transform: translateY(-2.8px);
 }
 .main-container .screen-flashlight {
     animation: animation-screen-flashlight 400ms linear;
@@ -1594,4 +1590,8 @@ body::-webkit-scrollbar-thumb {
     cursor: pointer;
     border-radius: 10px;
     border: 2px solid #fff;
+}
+.live-mobile,
+.rate-mobile {
+    display: none;
 }

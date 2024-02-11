@@ -140,6 +140,18 @@
     width: 60px;
     height: 42px;
 }
+.main-container .container .trails .trail-1 .trail-children-1.pressed {
+    border: 4px solid #000;
+}
+.main-container .container .trails .trail-2 .trail-children-2.pressed {
+    border: 4px solid #000;
+}
+.main-container .container .trails .trail-3 .trail-children-3.pressed {
+    border: 4px solid #000;
+}
+.main-container .container .trails .trail-4 .trail-children-4.pressed {
+    border: 4px solid #000;
+}
 .live-mobile {
     position: absolute;
     bottom: 40px;
@@ -148,6 +160,7 @@
     height: 270px;
     border-radius: 15px;
     overflow: hidden;
+    display: block;
 }
 .live-mobile .live-part-red-mobile {
     transition: 200ms;
@@ -195,6 +208,7 @@
     height: 270px;
     border-radius: 5px;
     overflow: hidden;
+    display: block;
 
     background-color: #0d0e26;
     border: 2px solid #c3c3c3;
@@ -256,4 +270,84 @@
     color: white;
     font-size: 12px;
     text-align: center;
+}
+.container-game-pause {
+    bottom: 330px;
+    top: auto;
+    left: 5px;
+    min-width: 30px;
+    min-height: 30px;
+    max-width: 30px;
+    max-height: 30px;
+}
+.container-game-pause svg {
+    width: 20px;
+    height: 20px;
+}
+.container-game-pause:hover,
+.container-game-pause:focus {
+    transform: scale(1);
+}
+.main-container .container-failed .box {
+    width: 100%;
+    max-width: 280px;
+}
+.container-paused .box {
+    width: 100%;
+    max-width: 280px;
+}
+.main-container .container-song-completed {
+    padding: 90px 0 0 0;
+}
+.main-container .container-song-completed .title {
+    font-size: 32px;
+    text-align: center;
+}
+.main-container .container-song-completed .points,
+.main-container .container-song-completed .difficulty,
+.main-container .container-song-completed .accuracy {
+    font-size: 24px;
+    text-align: center;
+}
+.main-container .container-song-completed .perfect {
+    font-size: 32px;
+    text-align: center;
+}
+.main-container .container-song-completed .exit {
+    font-size: 24px;
+    left: 50%;
+    transform: translateX(10%);
+    transform-origin: left;
+    width: 140px;
+}
+.main-container .container-song-completed .retry {
+    font-size: 24px;
+    right: 50%;
+    transform: translateX(-10%);
+    transform-origin: right;
+    width: 140px;
+}
+.main-container .counter-to-start {
+    font-size: 40px;
+}
+.main-container .container .target {
+    width: 60px;
+    height: 42px;
+    top: -42px;
+}
+.main-container .container .target.target-1 {
+    background: #4be951;
+    left: 4.2px;
+}
+.main-container .container .target.target-2 {
+    background: #f54141;
+    left: 71.4px;
+}
+.main-container .container .target.target-3 {
+    background: #e6f445;
+    left: 140px;
+}
+.main-container .container .target.target-4 {
+    background: #5c43f8;
+    left: 205px;
 }

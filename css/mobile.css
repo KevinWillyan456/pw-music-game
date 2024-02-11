@@ -131,8 +131,6 @@
 .main-container .container .trails .trail-3,
 .main-container .container .trails .trail-4 {
     width: 60px;
-    height: 30vh;
-    max-height: 200px;
 }
 .main-container .container .trails .trail-1 .trail-children-1,
 .main-container .container .trails .trail-2 .trail-children-2,
@@ -201,6 +199,17 @@
     box-shadow: 0 0 2px 1px black;
     transform: translateY(6px);
 }
+.live-mobile .pointer-live-mobile.almost-failing {
+    animation: animation-almost-failing-mobile 80ms infinite alternate linear;
+}
+@keyframes animation-almost-failing-mobile {
+    0% {
+        background: white;
+    }
+    100% {
+        background: #e22a2a;
+    }
+}
 .rate-mobile {
     position: absolute;
     bottom: 40px;
@@ -233,11 +242,11 @@
     text-align: center;
 }
 
-.rate-mobile .bars {
+.rate-mobile .bars-mobile {
     position: absolute;
     top: 75px;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%) rotate(180deg);
     width: 20px;
     display: flex;
     flex-direction: column;
@@ -245,22 +254,22 @@
     justify-content: space-between;
     gap: 4px;
 }
-.rate-mobile .bars .bar {
+.rate-mobile .bars-mobile .bar {
     transition: 200ms;
     width: 100%;
     height: 12px;
     background-color: #d3d8ff;
 }
-.rate-mobile .bars .bar.form-1 {
+.rate-mobile .bars-mobile .bar.form-1 {
     background-color: #5c43f8;
 }
-.rate-mobile .bars .bar.form-2 {
+.rate-mobile .bars-mobile .bar.form-2 {
     background-color: #11c718;
 }
-.rate-mobile .bars .bar.form-3 {
+.rate-mobile .bars-mobile .bar.form-3 {
     background-color: #d4e22a;
 }
-.rate-mobile .bars .bar.form-4 {
+.rate-mobile .bars-mobile .bar.form-4 {
     background-color: #e22a2a;
 }
 .rate-mobile .notes-count {

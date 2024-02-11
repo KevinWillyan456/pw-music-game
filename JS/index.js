@@ -40,6 +40,9 @@ const containerTarget = document.querySelector(
 const livePointer = document.querySelector(
     '.content-info .box .live .pointer-live'
 )
+const livePointerMobile = document.querySelector(
+    '.live-mobile .pointer-live-mobile'
+)
 const songTitle = document.querySelector('.content-info .box .name')
 const contentSongs = document.querySelector('.content-songs')
 const counterToStart = document.querySelector('.counter-to-start')
@@ -578,6 +581,23 @@ function allEventsListeners() {
     containerSongsSearchInput.addEventListener('input', (e) => {
         searchSong(e.target.value)
     })
+    trail1.addEventListener('touchstart', actionTrail1)
+    trail2.addEventListener('touchstart', actionTrail2)
+    trail3.addEventListener('touchstart', actionTrail3)
+    trail4.addEventListener('touchstart', actionTrail4)
+
+    trail1.addEventListener('touchend', () => {
+        trail1.children[0].classList.remove('pressed')
+    })
+    trail2.addEventListener('touchend', () => {
+        trail2.children[0].classList.remove('pressed')
+    })
+    trail3.addEventListener('touchend', () => {
+        trail3.children[0].classList.remove('pressed')
+    })
+    trail4.addEventListener('touchend', () => {
+        trail4.children[0].classList.remove('pressed')
+    })
 }
 
 function isElementOverlapping(element1, element2) {
@@ -764,6 +784,7 @@ function setSong(songChange) {
     livePointerEvents()
     totalNotesEvents()
     totalPointsEvents()
+    prepareActionTrailsForMobile()
 
     containerSongCompleted.style.setProperty(
         'background-image',
@@ -843,66 +864,128 @@ document.addEventListener('keydown', function (event) {
     ) {
         // Coloque aqui o código que você deseja executar quando uma das teclas for pressionada.
         if (teclaPressionada == 'd') {
-            trail1.children[0].classList.add('pressed')
-            if (!isElementOverlapping(trail1, target1)) {
-                livePoints =
-                    selectDifficulty === 1
-                        ? (livePoints -= 1)
-                        : selectDifficulty === 2
-                        ? (livePoints -= 2)
-                        : (livePoints -= 3)
-
-                livePointerEvents()
-                controllerRateBarsMissed()
-                songEffectMissed()
-            }
+            actionTrail1()
         }
         if (teclaPressionada == 'f') {
-            trail2.children[0].classList.add('pressed')
-            if (!isElementOverlapping(trail2, target2)) {
-                livePoints =
-                    selectDifficulty === 1
-                        ? (livePoints -= 1)
-                        : selectDifficulty === 2
-                        ? (livePoints -= 2)
-                        : (livePoints -= 3)
-                livePointerEvents()
-                controllerRateBarsMissed()
-                songEffectMissed()
-            }
+            actionTrail2()
         }
         if (teclaPressionada == 'j') {
-            trail3.children[0].classList.add('pressed')
-            if (!isElementOverlapping(trail3, target3)) {
-                livePoints =
-                    selectDifficulty === 1
-                        ? (livePoints -= 1)
-                        : selectDifficulty === 2
-                        ? (livePoints -= 2)
-                        : (livePoints -= 3)
-                livePointerEvents()
-                controllerRateBarsMissed()
-                songEffectMissed()
-            }
+            actionTrail3()
         }
         if (teclaPressionada == 'k') {
-            trail4.children[0].classList.add('pressed')
-            if (!isElementOverlapping(trail4, target4)) {
-                livePoints =
-                    selectDifficulty === 1
-                        ? (livePoints -= 1)
-                        : selectDifficulty === 2
-                        ? (livePoints -= 2)
-                        : (livePoints -= 3)
-                livePointerEvents()
-                controllerRateBarsMissed()
-                songEffectMissed()
-            }
+            actionTrail4()
         }
 
         teclaJaPressionada[teclaPressionada] = true
     }
 })
+
+function actionTrail1() {
+    trail1.children[0].classList.add('pressed')
+    if (!isElementOverlapping(trail1, target1)) {
+        livePoints =
+            selectDifficulty === 1
+                ? (livePoints -= 1)
+                : selectDifficulty === 2
+                ? (livePoints -= 2)
+                : (livePoints -= 3)
+
+        livePointerEvents()
+        controllerRateBarsMissed()
+        songEffectMissed()
+    }
+}
+
+function actionTrail2() {
+    trail2.children[0].classList.add('pressed')
+    if (!isElementOverlapping(trail2, target2)) {
+        livePoints =
+            selectDifficulty === 1
+                ? (livePoints -= 1)
+                : selectDifficulty === 2
+                ? (livePoints -= 2)
+                : (livePoints -= 3)
+        livePointerEvents()
+        controllerRateBarsMissed()
+        songEffectMissed()
+    }
+}
+
+function actionTrail3() {
+    trail3.children[0].classList.add('pressed')
+    if (!isElementOverlapping(trail3, target3)) {
+        livePoints =
+            selectDifficulty === 1
+                ? (livePoints -= 1)
+                : selectDifficulty === 2
+                ? (livePoints -= 2)
+                : (livePoints -= 3)
+        livePointerEvents()
+        controllerRateBarsMissed()
+        songEffectMissed()
+    }
+}
+
+function actionTrail4() {
+    trail4.children[0].classList.add('pressed')
+    if (!isElementOverlapping(trail4, target4)) {
+        livePoints =
+            selectDifficulty === 1
+                ? (livePoints -= 1)
+                : selectDifficulty === 2
+                ? (livePoints -= 2)
+                : (livePoints -= 3)
+        livePointerEvents()
+        controllerRateBarsMissed()
+        songEffectMissed()
+    }
+}
+
+function prepareActionTrailsForMobile() {
+    if (window.innerWidth > 900) return
+
+    function getDifficulty(selectDifficulty) {
+        if (selectDifficulty === 1) {
+            return 'Easy'
+        } else if (selectDifficulty === 2) {
+            return 'Medium'
+        } else if (selectDifficulty === 3) {
+            return 'Hard'
+        } else {
+            return 'Expert'
+        }
+    }
+
+    const difficulty = getDifficulty(selectDifficulty)
+
+    if (difficulty === 'Easy' || difficulty === 'Medium') {
+        document.querySelector(
+            '.main-container .container .trails .trail-1'
+        ).style.height = '50vh'
+        document.querySelector(
+            '.main-container .container .trails .trail-2'
+        ).style.height = '50vh'
+        document.querySelector(
+            '.main-container .container .trails .trail-3'
+        ).style.height = '50vh'
+        document.querySelector(
+            '.main-container .container .trails .trail-4'
+        ).style.height = '50vh'
+    } else {
+        document.querySelector(
+            '.main-container .container .trails .trail-1'
+        ).style.height = '100vh'
+        document.querySelector(
+            '.main-container .container .trails .trail-2'
+        ).style.height = '100vh'
+        document.querySelector(
+            '.main-container .container .trails .trail-3'
+        ).style.height = '100vh'
+        document.querySelector(
+            '.main-container .container .trails .trail-4'
+        ).style.height = '100vh'
+    }
+}
 
 document.addEventListener('keyup', function (event) {
     const teclaPressionada = event.key.toLowerCase()
@@ -934,6 +1017,7 @@ function livePointerEvents() {
         livePoints = 100
     }
     livePointer.style.left = livePoints + '%'
+    livePointerMobile.style.bottom = livePoints + '%'
 
     if (livePoints <= 33) {
         document
@@ -945,6 +1029,16 @@ function livePointerEvents() {
         document
             .querySelector('.content-info .box .live .live-part-red')
             .classList.add('hovered')
+
+        document
+            .querySelector('.live-mobile .live-part-green-mobile')
+            .classList.remove('hovered')
+        document
+            .querySelector('.live-mobile .live-part-yellow-mobile')
+            .classList.remove('hovered')
+        document
+            .querySelector('.live-mobile .live-part-red-mobile')
+            .classList.add('hovered')
     } else if (livePoints >= 66) {
         document
             .querySelector('.content-info .box .live .live-part-red')
@@ -955,6 +1049,16 @@ function livePointerEvents() {
         document
             .querySelector('.content-info .box .live .live-part-green')
             .classList.add('hovered')
+
+        document
+            .querySelector('.live-mobile .live-part-red-mobile')
+            .classList.remove('hovered')
+        document
+            .querySelector('.live-mobile .live-part-yellow-mobile')
+            .classList.remove('hovered')
+        document
+            .querySelector('.live-mobile .live-part-green-mobile')
+            .classList.add('hovered')
     } else {
         document
             .querySelector('.content-info .box .live .live-part-red')
@@ -965,11 +1069,23 @@ function livePointerEvents() {
         document
             .querySelector('.content-info .box .live .live-part-yellow')
             .classList.add('hovered')
+
+        document
+            .querySelector('.live-mobile .live-part-red-mobile')
+            .classList.remove('hovered')
+        document
+            .querySelector('.live-mobile .live-part-green-mobile')
+            .classList.remove('hovered')
+        document
+            .querySelector('.live-mobile .live-part-yellow-mobile')
+            .classList.add('hovered')
     }
     if (livePoints <= 20) {
         livePointer.classList.add('almost-failing')
+        livePointerMobile.classList.add('almost-failing')
     } else {
         livePointer.classList.remove('almost-failing')
+        livePointerMobile.classList.remove('almost-failing')
     }
     if (livePoints <= 0) {
         controllerFailed()
@@ -983,6 +1099,8 @@ function totalPointsEvents() {
 function totalNotesEvents() {
     const formattedTotalNotes = String(totalNotes).padStart(3, '0')
     document.querySelector('.content-info-2 .box .notes-count').textContent =
+        formattedTotalNotes
+    document.querySelector('.rate-mobile .notes-count').textContent =
         formattedTotalNotes
 }
 
@@ -1162,6 +1280,7 @@ function generatorContentSongs() {
 }
 function controllerRateBars() {
     const bars = document.querySelectorAll('.bars .bar')
+    const barsMobile = document.querySelectorAll('.bars-mobile .bar')
 
     function divideAndExecute(num) {
         let numString = String(num)
@@ -1196,47 +1315,61 @@ function controllerRateBars() {
 
     function functionForZeroLeftPart(rightPart) {
         bars[rightPart].classList.add('form-1')
+        barsMobile[rightPart].classList.add('form-1')
         multiplicatorPoints = 1
         document.querySelector(
             '.content-info-2 .box .multiplicator-n'
         ).textContent = 1
+        document.querySelector('.rate-mobile .multiplicator-n').textContent = 1
     }
 
     function functionForOneLeftPart(rightPart) {
         bars[rightPart].classList.add('form-2')
+        barsMobile[rightPart].classList.add('form-2')
         multiplicatorPoints = 2
         document.querySelector(
             '.content-info-2 .box .multiplicator-n'
         ).textContent = 2
+        document.querySelector('.rate-mobile .multiplicator-n').textContent = 2
     }
 
     function functionForTwoLeftPart(rightPart) {
         bars[rightPart].classList.add('form-3')
+        barsMobile[rightPart].classList.add('form-3')
         multiplicatorPoints = 4
         document.querySelector(
             '.content-info-2 .box .multiplicator-n'
         ).textContent = 4
+        document.querySelector('.rate-mobile .multiplicator-n').textContent = 4
     }
 
     function functionForThreeLeftPart(rightPart) {
         bars[rightPart].classList.add('form-4')
+        barsMobile[rightPart].classList.add('form-4')
         multiplicatorPoints = 8
         document.querySelector(
             '.content-info-2 .box .multiplicator-n'
         ).textContent = 8
+        document.querySelector('.rate-mobile .multiplicator-n').textContent = 8
     }
 
     divideAndExecute(consecutiveHits)
 }
 function controllerRateBarsMissed() {
     const bars = document.querySelectorAll('.bars .bar')
+    const barsMobile = document.querySelectorAll('.bars-mobile .bar')
+
     consecutiveHits = 0
     multiplicatorPoints = 1
     document.querySelector(
         '.content-info-2 .box .multiplicator-n'
     ).textContent = 1
+    document.querySelector('.rate-mobile .multiplicator-n').textContent = 1
 
     bars.forEach((bar) => {
+        bar.classList.remove('form-1', 'form-2', 'form-3', 'form-4')
+    })
+    barsMobile.forEach((bar) => {
         bar.classList.remove('form-1', 'form-2', 'form-3', 'form-4')
     })
 }

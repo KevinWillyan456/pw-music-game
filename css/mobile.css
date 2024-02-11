@@ -131,7 +131,8 @@
 .main-container .container .trails .trail-3,
 .main-container .container .trails .trail-4 {
     width: 60px;
-    height: 84px;
+    height: 30vh;
+    max-height: 200px;
 }
 .main-container .container .trails .trail-1 .trail-children-1,
 .main-container .container .trails .trail-2 .trail-children-2,
@@ -349,5 +350,14 @@
 }
 .main-container .container .target.target-4 {
     background: #5c43f8;
-    left: 205px;
+    left: 208px;
+}
+.content-level {
+    width: 240px;
+}
+.content-config .song-volume .title {
+    font-size: 32px;
+}
+.consecutive-hits {
+    font-size: 32px;
 }

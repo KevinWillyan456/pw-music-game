@@ -187,3 +187,73 @@
     box-shadow: 0 0 2px 1px black;
     transform: translateY(6px);
 }
+.rate-mobile {
+    position: absolute;
+    bottom: 40px;
+    right: 5px;
+    width: 30px;
+    height: 270px;
+    border-radius: 5px;
+    overflow: hidden;
+
+    background-color: #0d0e26;
+    border: 2px solid #c3c3c3;
+}
+.rate-mobile .multiplicator-n {
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 36px;
+    text-align: center;
+}
+.rate-mobile .multiplicator-x {
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 24px;
+    text-align: center;
+}
+
+.rate-mobile .bars {
+    position: absolute;
+    top: 75px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4px;
+}
+.rate-mobile .bars .bar {
+    transition: 200ms;
+    width: 100%;
+    height: 12px;
+    background-color: #d3d8ff;
+}
+.rate-mobile .bars .bar.form-1 {
+    background-color: #5c43f8;
+}
+.rate-mobile .bars .bar.form-2 {
+    background-color: #11c718;
+}
+.rate-mobile .bars .bar.form-3 {
+    background-color: #d4e22a;
+}
+.rate-mobile .bars .bar.form-4 {
+    background-color: #e22a2a;
+}
+.rate-mobile .notes-count {
+    position: absolute;
+    bottom: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 12px;
+    text-align: center;
+}

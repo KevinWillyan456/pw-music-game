@@ -606,15 +606,12 @@ function isElementOverlapping(element1, element2) {
     for (let i = 0; i < element2.length; i++) {
         const rect2 = element2[i].getBoundingClientRect()
 
-        // Verificar a sobreposição horizontal
         const horizontalOverlap =
             rect1.left < rect2.right && rect1.right > rect2.left
 
-        // Verificar a sobreposição vertical
         const verticalOverlap =
             rect1.top < rect2.bottom && rect1.bottom > rect2.top
 
-        // Retorna true se houver sobreposição tanto na horizontal quanto na vertical
         if (horizontalOverlap && verticalOverlap) {
             element2[i].remove()
             element1.children[0].classList.add('hit')
@@ -642,7 +639,6 @@ function isElementOverlapping(element1, element2) {
         }
     }
 
-    // Se não houver sobreposição com nenhum dos elementos em element2, retornamos false
     return false
 }
 
@@ -851,18 +847,16 @@ song.addEventListener('ended', () => {
 })
 
 const teclasPermitidas = ['d', 'f', 'j', 'k', 'p', 'escape']
-let teclaJaPressionada = {} // Armazenar o estado de cada tecla
+let teclaJaPressionada = {}
 
 document.addEventListener('keydown', function (event) {
     const teclaPressionada = event.key.toLowerCase()
 
-    // Verifica se a tecla pressionada está na lista de teclas permitidas e se já não foi pressionada antes
     if (
         teclasPermitidas.includes(teclaPressionada) &&
         !teclaJaPressionada[teclaPressionada] &&
         canActions
     ) {
-        // Coloque aqui o código que você deseja executar quando uma das teclas for pressionada.
         if (teclaPressionada == 'd') {
             actionTrail1()
         }

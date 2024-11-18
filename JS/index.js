@@ -239,6 +239,7 @@ let data = [
         songCover: 'https://img.youtube.com/vi/YYlHIotqEQc/maxresdefault.jpg',
     },
 ]
+
 let songNotes = []
 
 const body = document.querySelector('body')
@@ -366,7 +367,7 @@ function init() {
 init()
 
 function createNotes() {
-    const totalTime = song.duration
+    const totalTime = song.duration - 5
     let currentTime = 2
     let aux = 1
     songNotes = []
@@ -1180,6 +1181,11 @@ function consecutiveHitsEvents() {
 }
 
 function generatorContentSongs() {
+    if (data.length === 0) {
+        containerSongsSearchNoFound.style.display = 'block'
+        return
+    }
+
     data.forEach((song) => {
         const songDiv = document.createElement('div')
         songDiv.classList.add('song')

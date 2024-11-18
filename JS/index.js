@@ -238,6 +238,37 @@ let data = [
             'https://pw-music-game-db.netlify.app/resources/nightcore%20-%20stay%20(rock%20version)%20(lyrics).mp3',
         songCover: 'https://img.youtube.com/vi/YYlHIotqEQc/maxresdefault.jpg',
     },
+    {
+        songTitle: 'Nightcore - MORE (Rock Version) (Lyrics)',
+        songUrl:
+            'https://pw-music-game-db.netlify.app/resources/nightcore%20-%20more%20(rock%20version)%20(lyrics).mp3',
+        songCover: 'https://img.youtube.com/vi/W6M5I_baD4g/maxresdefault.jpg',
+    },
+    {
+        songTitle:
+            'Nightcore - Can You Feel My Heart (Female Version) (Lyrics)',
+        songUrl:
+            'https://pw-music-game-db.netlify.app/resources/nightcore%20-%20can%20you%20feel%20my%20heart%20(female%20version)%20(lyrics).mp3',
+        songCover: 'https://img.youtube.com/vi/FZEbAKvQvUU/maxresdefault.jpg',
+    },
+    {
+        songTitle: 'Nightcore - Fallen Angel (Soft Rock Version) (Lyrics)',
+        songUrl:
+            'https://pw-music-game-db.netlify.app/resources/nightcore%20-%20fallen%20angel%20(soft%20rock%20version)%20(lyrics).mp3',
+        songCover: 'https://img.youtube.com/vi/2GSrj1JGnKo/maxresdefault.jpg',
+    },
+    {
+        songTitle: 'blueberry, PiNKII - Drift Barbie (Zenless Zone Zero Edit)',
+        songUrl:
+            'https://pw-music-game-db.netlify.app/resources/blueberry,%20pinkii%20-%20drift%20barbie%20(zenless%20zone%20zero%20edit).mp3',
+        songCover: 'https://img.youtube.com/vi/TNqw1ayK56Y/maxresdefault.jpg',
+    },
+    {
+        songTitle: 'Nightcore - Señorita (Rock Version) (Lyrics)',
+        songUrl:
+            'https://pw-music-game-db.netlify.app/resources/nightcore%20-%20se%C3%B1orita%20(rock%20version)%20(lyrics).mp3',
+        songCover: 'https://img.youtube.com/vi/952KWFaqwU0/maxresdefault.jpg',
+    },
 ]
 
 let songNotes = []

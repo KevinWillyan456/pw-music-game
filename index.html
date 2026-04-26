@@ -1,279 +1,254 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br">
-    <head>
-        <meta charset="UTF-8" />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-        />
-        <title>Pw Music Game</title>
-        <link rel="stylesheet" href="css/index.css" />
-        <link
-            rel="stylesheet"
-            href="css/mobile.css"
-            media="(max-width: 900px)"
-        />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Hind+Vadodara:wght@400;500;700&display=swap"
-            rel="stylesheet"
-        />
-        <link
-            rel="shortcut icon"
-            href="https://i.ibb.co/N6BYtqS/favicon-pw-music-game.png"
-            type="image/x-icon"
-        />
-    </head>
-    <body>
-        <audio id="song"></audio>
-        <audio id="song-preview"></audio>
-        <main class="main-container">
-            <section class="container-home">
-                <button class="logo">
-                    <img
-                        src="https://i.ibb.co/f9Q0h3r/logo-pw-music-game.png"
-                        alt="Logo Pw Music"
-                    />
-                </button>
-                <div class="container-home-touch">Touch to start</div>
-            </section>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Pw Music Game</title>
+    <link rel="stylesheet" href="src/index.css" />
+    <link rel="stylesheet" href="src/mobile.css" media="(max-width: 900px)" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hind+Vadodara:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="shortcut icon"
+      href="https://i.ibb.co/N6BYtqS/favicon-pw-music-game.png"
+      type="image/x-icon"
+    />
+  </head>
+  <body>
+    <audio id="song"></audio>
+    <audio id="song-preview"></audio>
+    <main class="main-container">
+      <section class="container-home">
+        <button class="logo">
+          <img src="https://i.ibb.co/f9Q0h3r/logo-pw-music-game.png" alt="Logo Pw Music" />
+        </button>
+        <div class="container-home-touch">Touch to start</div>
+      </section>
 
-            <section class="container-select">
-                <button class="btn-back-select">&lt</button>
-                <div class="content-select">
-                    <button class="btn-select-play">Play</button>
-                    <button class="btn-select-options">Options</button>
-                </div>
-            </section>
+      <section class="container-select">
+        <button class="btn-back-select">&lt</button>
+        <div class="content-select">
+          <button class="btn-select-play">Play</button>
+          <button class="btn-select-options">Options</button>
+        </div>
+      </section>
 
-            <section class="container-songs">
-                <button class="btn-back-songs">&lt</button>
-                <div class="content-songs">
-                    <div class="select-song">Select a song</div>
-                    <input
-                        class="select-song-search"
-                        id="select-song-search"
-                        type="text"
-                        placeholder="Search for a song..."
-                    />
-                    <div class="song-not-found">No songs found</div>
-                </div>
+      <section class="container-songs">
+        <button class="btn-back-songs">&lt</button>
+        <div class="content-songs">
+          <div class="select-song">Select a song</div>
+          <input
+            class="select-song-search"
+            id="select-song-search"
+            type="text"
+            placeholder="Search for a song..."
+          />
+          <div class="song-not-found">No songs found</div>
+        </div>
 
-                <div class="song-preview-details">
-                    <button class="song-preview-details-stop-btn">Stop</button>
-                    <button class="song-preview-details-play-btn">Play</button>
-                    <div class="song-preview-details-title">Playing now</div>
-                    <div class="song-preview-details-title-song"></div>
-                    <div class="song-preview-details-difficulty"></div>
-                    <div class="song-preview-details-duration"></div>
-                </div>
-            </section>
+        <div class="song-preview-details">
+          <button class="song-preview-details-stop-btn">Stop</button>
+          <button class="song-preview-details-play-btn">Play</button>
+          <div class="song-preview-details-title">Playing now</div>
+          <div class="song-preview-details-title-song"></div>
+          <div class="song-preview-details-difficulty"></div>
+          <div class="song-preview-details-duration"></div>
+        </div>
+      </section>
 
-            <section class="container-config">
-                <button class="btn-back-config">&lt</button>
-                <div class="content-config">
-                    <div class="song-volume">
-                        <div class="title">Song</div>
-                        <input
-                            type="range"
-                            min="0"
-                            max="100"
-                            value="80"
-                            step="5"
-                            class="volume"
-                            id="volume-song"
-                        />
-                    </div>
-                    <div class="song-volume">
-                        <div class="title">Sound Effects</div>
-                        <input
-                            type="range"
-                            min="0"
-                            max="100"
-                            value="80"
-                            step="5"
-                            class="volume"
-                            id="volume-sound-effects"
-                        />
-                    </div>
-                </div>
-            </section>
+      <section class="container-config">
+        <button class="btn-back-config">&lt</button>
+        <div class="content-config">
+          <div class="song-volume">
+            <div class="title">Song</div>
+            <input
+              type="range"
+              min="0"
+              max="100"
+              value="80"
+              step="5"
+              class="volume"
+              id="volume-song"
+            />
+          </div>
+          <div class="song-volume">
+            <div class="title">Sound Effects</div>
+            <input
+              type="range"
+              min="0"
+              max="100"
+              value="80"
+              step="5"
+              class="volume"
+              id="volume-sound-effects"
+            />
+          </div>
+        </div>
+      </section>
 
-            <section class="container-game">
-                <div class="container-game-cover"></div>
-                <button class="container-game-pause">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        xmlns:xlink="http://www.w3.org/1999/xlink"
-                        width="20px"
-                        height="20px"
-                        viewBox="-1 0 8 8"
-                        version="1.1"
-                    >
-                        <title>pause [#1010]</title>
-                        <desc>Created with Sketch.</desc>
-                        <defs></defs>
-                        <g
-                            id="Page-1"
-                            stroke="none"
-                            stroke-width="1"
-                            fill="none"
-                            fill-rule="evenodd"
-                        >
-                            <g
-                                id="Dribbble-Light-Preview"
-                                transform="translate(-67.000000, -3765.000000)"
-                                fill="#000000"
-                            >
-                                <g
-                                    id="icons"
-                                    transform="translate(56.000000, 160.000000)"
-                                >
-                                    <path
-                                        d="M11,3613 L13,3613 L13,3605 L11,3605 L11,3613 Z M15,3613 L17,3613 L17,3605 L15,3605 L15,3613 Z"
-                                        id="pause-[#1010]"
-                                    ></path>
-                                </g>
-                            </g>
-                        </g>
-                    </svg>
-                </button>
-                <div class="content-info">
-                    <div class="box">
-                        <div class="title">SONG</div>
-                        <div class="name"></div>
-                    </div>
-                    <div class="box">
-                        <div class="title">POINTS</div>
-                        <div class="score">0</div>
-                        <div class="title-big">LIVE</div>
-                        <div class="live">
-                            <div class="live-part-red"></div>
-                            <div class="live-part-yellow"></div>
-                            <div class="live-part-green"></div>
-                            <div class="pointer-live"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="live-mobile">
-                    <div class="live-part-green-mobile"></div>
-                    <div class="live-part-yellow-mobile"></div>
-                    <div class="live-part-red-mobile"></div>
-                    <div class="pointer-live-mobile"></div>
-                </div>
-
-                <div class="content-info-2">
-                    <div class="box">
-                        <div class="title">RATE</div>
-                        <div class="notes-count">000</div>
-                        <div class="multiplicator-x">x</div>
-                        <div class="multiplicator-n">1</div>
-                        <div class="bars">
-                            <div class="bar"></div>
-                            <div class="bar"></div>
-                            <div class="bar"></div>
-                            <div class="bar"></div>
-                            <div class="bar"></div>
-                            <div class="bar"></div>
-                            <div class="bar"></div>
-                            <div class="bar"></div>
-                            <div class="bar"></div>
-                            <div class="bar"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="rate-mobile">
-                    <div class="multiplicator-n">1</div>
-                    <div class="multiplicator-x">x</div>
-                    <div class="bars-mobile">
-                        <div class="bar"></div>
-                        <div class="bar"></div>
-                        <div class="bar"></div>
-                        <div class="bar"></div>
-                        <div class="bar"></div>
-                        <div class="bar"></div>
-                        <div class="bar"></div>
-                        <div class="bar"></div>
-                        <div class="bar"></div>
-                        <div class="bar"></div>
-                    </div>
-                    <div class="notes-count">000</div>
-                </div>
-
-                <div class="container">
-                    <div class="trails">
-                        <div class="trail-1">
-                            <div class="trail-children-1"></div>
-                        </div>
-                        <div class="trail-2">
-                            <div class="trail-children-2"></div>
-                        </div>
-                        <div class="trail-3">
-                            <div class="trail-children-3"></div>
-                        </div>
-                        <div class="trail-4">
-                            <div class="trail-children-4"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="progress-bar"></div>
-
-                <div class="counter-to-start"></div>
-
-                <section class="container-failed">
-                    <div class="box">
-                        <div class="title">Failed</div>
-                        <button class="retry">Retry</button>
-                        <button class="exit">Exit</button>
-                    </div>
-                </section>
-
-                <section class="container-paused">
-                    <div class="box">
-                        <div class="container-paused-title">Paused</div>
-                        <button class="container-paused-option-resume">
-                            Resume
-                        </button>
-                        <button class="container-paused-option-retry">
-                            Retry
-                        </button>
-                        <button class="container-paused-option-exit">
-                            Exit
-                        </button>
-                    </div>
-                </section>
-
-                <div class="consecutive-hits"></div>
-            </section>
-
-            <section class="container-song-completed">
-                <div class="title">Song Completed Successfully!</div>
-                <div class="points"></div>
-                <div class="difficulty"></div>
-                <div class="accuracy"></div>
-                <div class="perfect">PERFECT!</div>
-                <button class="retry">Retry</button>
-                <button class="exit">Exit</button>
-            </section>
-
-            <div class="content-level">
-                <div class="level-bar">
-                    <div class="level-bar-fill" id="level-bar-fill"></div>
-                    <div
-                        class="level-bar-progress"
-                        id="level-bar-progress"
-                    ></div>
-                </div>
-                <div class="level-actual" id="level-actual"></div>
+      <section class="container-game">
+        <div class="container-game-cover"></div>
+        <button class="container-game-pause">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            width="20px"
+            height="20px"
+            viewBox="-1 0 8 8"
+            version="1.1"
+          >
+            <title>pause [#1010]</title>
+            <desc>Created with Sketch.</desc>
+            <defs></defs>
+            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+              <g
+                id="Dribbble-Light-Preview"
+                transform="translate(-67.000000, -3765.000000)"
+                fill="#000000"
+              >
+                <g id="icons" transform="translate(56.000000, 160.000000)">
+                  <path
+                    d="M11,3613 L13,3613 L13,3605 L11,3605 L11,3613 Z M15,3613 L17,3613 L17,3605 L15,3605 L15,3613 Z"
+                    id="pause-[#1010]"
+                  ></path>
+                </g>
+              </g>
+            </g>
+          </svg>
+        </button>
+        <div class="content-info">
+          <div class="box">
+            <div class="title">SONG</div>
+            <div class="name"></div>
+          </div>
+          <div class="box">
+            <div class="title">POINTS</div>
+            <div class="score">0</div>
+            <div class="title-big">LIVE</div>
+            <div class="live">
+              <div class="live-part-red"></div>
+              <div class="live-part-yellow"></div>
+              <div class="live-part-green"></div>
+              <div class="pointer-live"></div>
             </div>
+          </div>
+        </div>
 
-            <div class="screen-flashlight"></div>
-        </main>
+        <div class="live-mobile">
+          <div class="live-part-green-mobile"></div>
+          <div class="live-part-yellow-mobile"></div>
+          <div class="live-part-red-mobile"></div>
+          <div class="pointer-live-mobile"></div>
+        </div>
 
-        <script src="JS/index.js"></script>
-    </body>
+        <div class="content-info-2">
+          <div class="box">
+            <div class="title">RATE</div>
+            <div class="notes-count">000</div>
+            <div class="multiplicator-x">x</div>
+            <div class="multiplicator-n">1</div>
+            <div class="bars">
+              <div class="bar"></div>
+              <div class="bar"></div>
+              <div class="bar"></div>
+              <div class="bar"></div>
+              <div class="bar"></div>
+              <div class="bar"></div>
+              <div class="bar"></div>
+              <div class="bar"></div>
+              <div class="bar"></div>
+              <div class="bar"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rate-mobile">
+          <div class="multiplicator-n">1</div>
+          <div class="multiplicator-x">x</div>
+          <div class="bars-mobile">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+          </div>
+          <div class="notes-count">000</div>
+        </div>
+
+        <div class="container">
+          <div class="trails">
+            <div class="trail-1">
+              <div class="trail-children-1"></div>
+            </div>
+            <div class="trail-2">
+              <div class="trail-children-2"></div>
+            </div>
+            <div class="trail-3">
+              <div class="trail-children-3"></div>
+            </div>
+            <div class="trail-4">
+              <div class="trail-children-4"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="progress-bar"></div>
+
+        <div class="counter-to-start"></div>
+
+        <section class="container-failed">
+          <div class="box">
+            <div class="title">Failed</div>
+            <button class="retry">Retry</button>
+            <button class="exit">Exit</button>
+          </div>
+        </section>
+
+        <section class="container-paused">
+          <div class="box">
+            <div class="container-paused-title">Paused</div>
+            <button class="container-paused-option-resume">Resume</button>
+            <button class="container-paused-option-retry">Retry</button>
+            <button class="container-paused-option-exit">Exit</button>
+          </div>
+        </section>
+
+        <div class="consecutive-hits"></div>
+      </section>
+
+      <section class="container-song-completed">
+        <div class="title">Song Completed Successfully!</div>
+        <div class="points"></div>
+        <div class="difficulty"></div>
+        <div class="accuracy"></div>
+        <div class="perfect">PERFECT!</div>
+        <button class="retry">Retry</button>
+        <button class="exit">Exit</button>
+      </section>
+
+      <div class="content-level">
+        <div class="level-bar">
+          <div class="level-bar-fill" id="level-bar-fill"></div>
+          <div class="level-bar-progress" id="level-bar-progress"></div>
+        </div>
+        <div class="level-actual" id="level-actual"></div>
+      </div>
+
+      <div class="screen-flashlight"></div>
+    </main>
+
+    <script src="src/index.js"></script>
+  </body>
 </html>

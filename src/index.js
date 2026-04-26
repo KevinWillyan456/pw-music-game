@@ -26,10 +26,7 @@ let gamePaused = false
 let songPreviewData = {}
 let hasPerfect = true
 let totalNotesPassed = 0
-let screenIndex = {
-  songs: true,
-  config: true,
-}
+let nextScreen = null
 let level = 1
 let experience = 0
 let soundEffectsVolume = 0.8
@@ -285,6 +282,15 @@ const containerConfigBackBtn = document.querySelector('.container-config .btn-ba
 const containerConfigChangeVolumeSong = document.querySelector('#volume-song')
 const containerConfigChangeVolumeSoundEffects = document.querySelector('#volume-sound-effects')
 
+// elementos do container how to play
+const containerHowToPlay = document.querySelector('.main-container .container-how-to-play')
+const containerHowToPlayBackBtn = document.querySelector(
+  '.container-how-to-play .btn-back-how-to-play',
+)
+const containerSelectHowToPlayBtn = document.querySelector(
+  '.container-select .btn-select-how-to-play',
+)
+
 // elementos do container game
 const containerGame = document.querySelector('.main-container .container-game')
 const containerGameFailedRetryBtn = document.querySelector('.container-failed .box .retry')
@@ -426,7 +432,6 @@ function allEventsListeners() {
   })
 
   containerSongsBackBtn.addEventListener('click', () => {
-    screenIndex.config = true
     body.style.overflow = 'hidden'
     containerSongs.classList.add('before-exit')
 
@@ -462,13 +467,20 @@ function allEventsListeners() {
   })
 
   containerSelect.addEventListener('animationend', (event) => {
-    if (screenIndex.songs === false) return
-
     if (event.animationName === 'animation-containers-after-exit') {
       containerSelect.style.display = 'none'
       containerSelect.classList.remove('after-exit')
-      containerSongs.style.display = 'block'
-      containerSongs.classList.add('before')
+
+      if (nextScreen === 'config') {
+        containerConfig.style.display = 'block'
+        containerConfig.classList.add('before')
+      } else if (nextScreen === 'songs') {
+        containerSongs.style.display = 'block'
+        containerSongs.classList.add('before')
+      } else if (nextScreen === 'howToPlay') {
+        containerHowToPlay.style.display = 'flex'
+        containerHowToPlay.classList.add('before')
+      }
     }
   })
 
@@ -476,12 +488,11 @@ function allEventsListeners() {
     if (event.animationName === 'animation-containers-before') {
       containerSongs.classList.remove('before')
       body.style.overflow = 'auto'
-      screenIndex.config = true
     }
   })
 
   containerSelectPlayBtn.addEventListener('click', () => {
-    screenIndex.config = false
+    nextScreen = 'songs'
 
     body.style.overflow = 'hidden'
     containerHome.style.display = 'none'
@@ -491,27 +502,15 @@ function allEventsListeners() {
     songEffectClick()
   })
 
-  containerSelect.addEventListener('animationend', (event) => {
-    if (screenIndex.config === false) return
-
-    if (event.animationName === 'animation-containers-after-exit') {
-      containerSelect.style.display = 'none'
-      containerSelect.classList.remove('after-exit')
-      containerConfig.style.display = 'block'
-      containerConfig.classList.add('before')
-    }
-  })
-
   containerConfig.addEventListener('animationend', (event) => {
     if (event.animationName === 'animation-containers-before') {
       containerConfig.classList.remove('before')
       body.style.overflow = 'auto'
-      screenIndex.songs = true
     }
   })
 
   containerSelectOptionsBtn.addEventListener('click', () => {
-    screenIndex.songs = false
+    nextScreen = 'config'
 
     body.style.overflow = 'hidden'
     containerHome.style.display = 'none'
@@ -551,6 +550,37 @@ function allEventsListeners() {
   containerConfigChangeVolumeSoundEffects.addEventListener('input', (e) => {
     setSoundEffectsVolume(e.target.value)
   })
+
+  containerSelectHowToPlayBtn.addEventListener('click', () => {
+    nextScreen = 'howToPlay'
+
+    body.style.overflow = 'hidden'
+    containerHome.style.display = 'none'
+
+    containerSelect.classList.add('after-exit')
+
+    setScreenFlashlight()
+    songEffectClick()
+  })
+
+  containerHowToPlayBackBtn.addEventListener('click', () => {
+    body.style.overflow = 'hidden'
+    containerHowToPlay.classList.add('before-exit')
+
+    setScreenFlashlight()
+    songEffectClick()
+  })
+
+  containerHowToPlay.addEventListener('animationend', (event) => {
+    if (event.animationName === 'animation-containers-before-exit') {
+      containerHowToPlay.style.display = 'none'
+      containerHowToPlay.classList.remove('before-exit')
+      nextScreen = null
+      containerSelect.style.display = 'flex'
+      containerSelect.classList.add('after')
+    }
+  })
+
   containerSongsSearchInput.addEventListener('input', (e) => {
     searchSong(e.target.value)
   })

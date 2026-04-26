@@ -362,3 +362,28 @@
 .consecutive-hits {
   font-size: 32px;
 }
+.title-how-to-play {
+  font-size: 36px;
+}
+.instructions-grid {
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  max-width: 300px;
+}
+.key-display {
+  width: 70px;
+  height: 70px;
+  font-size: 32px;
+}
+.key-label {
+  font-size: 16px;
+}
+.instructions-text {
+  font-size: 16px;
+  max-width: 100%;
+  padding: 0 20px;
+}
+.container-how-to-play .content-how-to-play {
+  gap: 40px;
+  padding: 40px 20px;
+}

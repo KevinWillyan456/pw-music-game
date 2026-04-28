@@ -51,5 +51,4 @@ temp.*
 # locks
 yarn.lock
 package-lock.json
-pnpm-lock.yaml
-pnpm-workspace.yaml
+bun.lock
